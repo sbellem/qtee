@@ -18,6 +18,7 @@ limited family of computations, but has an impractical performance overhead [140
 designs, which aim to solve the secure remote computation problem by leveraging trusted hardware in the remote computer. The trusted hardware establishes a secure container, and the remote computation service user uploads the desired computation and data into the secure container. The trusted hardware protects the data’s confidentiality and integrity while the computation is being performed on it.
 
 ## Resources
+* [Intel SGX Explained](https://eprint.iacr.org/2016/086) by _Victor Costan and Srinivas Devadas_
 * [Black-Hole Radiation Decoding is Quantum Cryptography](https://arxiv.org/abs/2211.0549) by _Zvika Brakerski_ (Thanks to [@tyurek](https://github.com/tyurek) for sharing)
 * [On black holes, holography, the Quantum Extended Church-Turing Thesis, fully homomorphic encryption, and brain uploading](https://scottaaronson.blog/?p=6599) by _Scott Aaronson_
 * [Hayden–Preskill thought experiment](https://en.wikipedia.org/wiki/Hayden%E2%80%93Preskill_thought_experiment)
