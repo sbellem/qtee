@@ -32,6 +32,10 @@ designs, which aim to solve the secure remote computation problem by leveraging 
 * [Using Memory Errors to Attack a Virtual Machine](https://www.cs.princeton.edu/~appel/papers/memerr.pdf) by _Sudhakar Govindavajhala and Andrew W. Appel_ (thanks to [@intoverflow](https://github.com/intoverflow) for sharing)
 * [A2: Analog Malicious Hardware](http://static1.1.sqspcdn.com/static/f/543048/26931843/1464016046717/A2_SP_2016.pdf) by _Kaiyuan Yang, Matthew Hicks, Qing Dong, Todd Austin, Dennis Sylvester_ (thanks to [@intoverflow](https://github.com/intoverflow) for sharing)
 * https://quantumfrontiers.com/author/preskill/
+* [Search for microscopic black hole signatures at the large hadron colliderv](https://cms.cern/news/search-microscopic-black-hole-signatures-large-hadron-collider)
+* [Micro black hole](https://en.wikipedia.org/wiki/Micro_black_hole)
+*
+
 
 ## Contributing
 Please do! File issues & pull requests as you wish!. Don't hold back!
