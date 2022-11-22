@@ -1,5 +1,5 @@
 # qtee
-Repository to explore the limits of trusted hardware in the classical and quantum settings.
+Repository to explore the physical limits of trusted hardware in the classical and quantum settings.
 
 It may be helpful to first define what is meant by trusted hardware and more importantly what is the problem that trusted hardware aims to solve. In order to do so, we'll use the paper [Intel SGX Explained](https://eprint.iacr.org/2016/086) by _Victor Costan and Srinivas Devadas_, as it is an invaluable resource in explaining the various components of Intel SGX, which is arguably the most well-known and popular trusted hardware at the moment of this writing.
 
