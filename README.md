@@ -6,7 +6,7 @@ Repository to explore the physical limits of trusted hardware in the classical a
 > Said differently: [Here be dragons](https://en.wikipedia.org/wiki/Here_be_dragons) 🐉.
 
 ## Intuition
-The current leading intuition of the feeble mind of this repo's author is that trusted hardware (which can withstand physical attacks) is impossible in the classical setting, meaning that an adversary who can physically access the chip will be capable to break its security because of physics, regardless of whether the chip is perfectly designed, architected, manufactured, or of whether the manufacturer is honest etc. The claim or intuition is that as per our understanding of the laws of physics, an attacker will be able to read the secret information that has been encoded into the chip and therefore will break the security of the chip. If that claim or intuition holds, then what does that mean for trusted hardware? Is it a pipe dream? Can the quantum setting make a difference? Naively thinking, what if we "throw" the secret information into a black hole? Would that help? Could a chip be designed such that it uses nano black holes to store secret keys? How would key derivation work if the root keys are in a black hole? ETC.
+The current leading intuition of the feeble mind of this repo's author is that trusted hardware (which can withstand physical attacks) is impossible in the classical setting, meaning that an adversary who can physically access the chip will be capable to break its security because of physics, regardless of whether the chip is perfectly designed, architected, manufactured, or of whether the manufacturer is honest etc. The claim or intuition is that as per our understanding of the laws of physics, an attacker will be able to read the secret information that has been encoded into the chip and therefore will break the security of the chip. If that claim or intuition holds, then what does that mean for trusted hardware? Is it a pipe dream? Can the quantum setting make a difference? Naively thinking, what if we "throw" the secret information into a black hole? Would that help? Could a chip be designed such that it uses [nano black holes](https://en.wikipedia.org/wiki/Micro_black_hole) to store secret keys? How would key derivation work if the root keys are in a black hole? ETC.
 
 ## What's the Problem?
 It may be helpful to first define what is meant by trusted hardware and more importantly what is the problem that trusted hardware aims to solve. In order to do so, we'll use the paper [Intel SGX Explained](https://eprint.iacr.org/2016/086) by _Victor Costan and Srinivas Devadas_, as it is an invaluable resource in explaining the various components of Intel SGX, which is arguably the most well-known and popular trusted hardware at the moment of this writing.
@@ -32,9 +32,15 @@ designs, which aim to solve the secure remote computation problem by leveraging 
 * [Using Memory Errors to Attack a Virtual Machine](https://www.cs.princeton.edu/~appel/papers/memerr.pdf) by _Sudhakar Govindavajhala and Andrew W. Appel_ (thanks to [@intoverflow](https://github.com/intoverflow) for sharing)
 * [A2: Analog Malicious Hardware](http://static1.1.sqspcdn.com/static/f/543048/26931843/1464016046717/A2_SP_2016.pdf) by _Kaiyuan Yang, Matthew Hicks, Qing Dong, Todd Austin, Dennis Sylvester_ (thanks to [@intoverflow](https://github.com/intoverflow) for sharing)
 * https://quantumfrontiers.com/author/preskill/
-* [Search for microscopic black hole signatures at the large hadron colliderv](https://cms.cern/news/search-microscopic-black-hole-signatures-large-hadron-collider)
+
+### About Black Holes
+* [Search for microscopic black hole signatures at the large hadron collider](https://cms.cern/news/search-microscopic-black-hole-signatures-large-hadron-collider)
 * [Micro black hole](https://en.wikipedia.org/wiki/Micro_black_hole)
-*
+* [Extra dimensions, gravitons, and tiny black holes](https://home.cern/science/physics/extra-dimensions-gravitons-and-tiny-black-holes)
+* [Mini Black Holes Easier To Make Than Thought](https://www.livescience.com/27811-creating-mini-black-holes.html)
+* [Information encoded on the surface of a black hole](Information encoded on the surface of a black hole)
+* [A spiderweb of wormholes could solve a fundamental paradox first proposed by Stephen Hawking](https://www.livescience.com/black-hole-paradox-solution)
+* [Black hole information paradox](https://en.wikipedia.org/wiki/Black_hole_information_paradox)
 
 
 ## Contributing
