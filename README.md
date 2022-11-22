@@ -5,6 +5,10 @@ Repository to explore the physical limits of trusted hardware in the classical a
 >
 > Said differently: [Here be dragons](https://en.wikipedia.org/wiki/Here_be_dragons) 🐉.
 
+## Intuition
+The current leading intuition of the feeble mind of this repo's author is that trusted hardware (which can withstand physical attacks) is impossible in the classical setting, meaning that an adversary who can physically access the chip will be capable to break its security because of physics, regardless of whether the chip is perfectly designed, architected, manufactured, of whether the manufacturer is honest etc. The claim or intuition is that as per our understanding of the laws of physics, an attacker will be able to read the secret information that has been encoded into the chip and therefore will break the security of the chip. If that claim or intuition is hold, then what does that mean for trusted hardware? Is it a pipe dream? Can the quantum setting make a difference? Naively thinking, what if we "throw" the secret information into a black hole? Would that help? Could a chip be designed such that it uses nano black holes to store secret keys? Ho wis going to derive keys if the root keys are in black holes? ETC.
+
+## What's the Problem?
 It may be helpful to first define what is meant by trusted hardware and more importantly what is the problem that trusted hardware aims to solve. In order to do so, we'll use the paper [Intel SGX Explained](https://eprint.iacr.org/2016/086) by _Victor Costan and Srinivas Devadas_, as it is an invaluable resource in explaining the various components of Intel SGX, which is arguably the most well-known and popular trusted hardware at the moment of this writing.
 
 Victor Costan and Srinivas Devadas set the stage like so:
