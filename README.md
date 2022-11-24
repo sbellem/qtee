@@ -25,7 +25,7 @@ designs, which aim to solve the secure remote computation problem by leveraging 
 * [Intel SGX Explained](https://eprint.iacr.org/2016/086) by _Victor Costan and Srinivas Devadas_
 * [The Laws of Physics and Cryptographic Security](https://arxiv.org/abs/quant-ph/0202143) by _Terry Rudolph_
 * [Is the security of quantum cryptography guaranteed by the laws of physics?](https://arxiv.org/abs/1803.04520) by _Daniel J. Bernstein_
-* [Black-Hole Radiation Decoding is Quantum Cryptography](https://arxiv.org/abs/2211.0549) by _Zvika Brakerski_ (Thanks to [@tyurek](https://github.com/tyurek) for sharing)
+* [Black-Hole Radiation Decoding is Quantum Cryptography](https://arxiv.org/abs/2211.05491) by _Zvika Brakerski_ (Thanks to [@tyurek](https://github.com/tyurek) for sharing)
 * [On black holes, holography, the Quantum Extended Church-Turing Thesis, fully homomorphic encryption, and brain uploading](https://scottaaronson.blog/?p=6599) by _Scott Aaronson_
 * [Hayden–Preskill thought experiment](https://en.wikipedia.org/wiki/Hayden%E2%80%93Preskill_thought_experiment)
 * [Here’s one way to get out of a black hole!](https://quantumfrontiers.com/2017/04/03/heres-one-way-to-get-out-of-a-black-hole/) by _John Preskill_
