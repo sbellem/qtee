@@ -42,6 +42,14 @@ designs, which aim to solve the secure remote computation problem by leveraging 
 * [A spiderweb of wormholes could solve a fundamental paradox first proposed by Stephen Hawking](https://www.livescience.com/black-hole-paradox-solution)
 * [Black hole information paradox](https://en.wikipedia.org/wiki/Black_hole_information_paradox)
 
+### PUFs: Physical Unclonable Functions
+* Nature Electronics: https://www.nature.com/articles/s41928-020-0372-5?proof=t
+* Wikipedia: https://en.wikipedia.org/wiki/Physical_unclonable_function
+
+* [On the Physical Security of Physically Unclonable Functions](https://d-nb.info/1156184150/34Security%20Analysis%20of%20Physically%20Unclonable%20Functions%20against%20Physical%20Attacks)
+* [A Fourier Analysis Based Attack against Physically Unclonable Functions](https://eprint.iacr.org/2017/551.pdf)
+
+
 
 ## Contributing
 Please do! File issues & pull requests as you wish!. Don't hold back!
