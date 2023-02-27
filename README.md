@@ -38,7 +38,7 @@ designs, which aim to solve the secure remote computation problem by leveraging 
 * [Micro black hole](https://en.wikipedia.org/wiki/Micro_black_hole)
 * [Extra dimensions, gravitons, and tiny black holes](https://home.cern/science/physics/extra-dimensions-gravitons-and-tiny-black-holes)
 * [Mini Black Holes Easier To Make Than Thought](https://www.livescience.com/27811-creating-mini-black-holes.html)
-* [Information encoded on the surface of a black hole](Information encoded on the surface of a black hole)
+* [Information encoded on the surface of a black hole](https://physics.stackexchange.com/questions/17338/information-encoded-on-the-surface-of-a-black-hole)
 * [A spiderweb of wormholes could solve a fundamental paradox first proposed by Stephen Hawking](https://www.livescience.com/black-hole-paradox-solution)
 * [Black hole information paradox](https://en.wikipedia.org/wiki/Black_hole_information_paradox)
 
