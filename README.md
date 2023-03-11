@@ -1,4 +1,4 @@
-# qtee
+# qtee: Searching for Security through Physics
 Repository to explore the physical limits of trusted hardware in the classical and quantum settings.
 
 > **Warning**: This repository may never reach its final form, and may best be viewed as an asynchronous intergalactic brainstorming time-space independent session.
