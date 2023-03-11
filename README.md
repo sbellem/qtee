@@ -43,6 +43,7 @@ designs, which aim to solve the secure remote computation problem by leveraging 
 * [Black hole information paradox](https://en.wikipedia.org/wiki/Black_hole_information_paradox)
 * [Black Hole Encryption](https://www.science.org/doi/10.1126/science.311.5767.1525a)
 * [Hayden-Preskill thought experiment](https://youtu.be/lV1ePoCeOdQ) (fun video)
+* [Hairy BTZ black hole and its analogue model in graphene](https://www.sciencedirect.com/science/article/abs/pii/S0003491619303197)
 
 ### PUFs: Physical Unclonable Functions
 * Nature Electronics: https://www.nature.com/articles/s41928-020-0372-5?proof=t
