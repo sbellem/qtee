@@ -51,6 +51,7 @@ designs, which aim to solve the secure remote computation problem by leveraging 
 * [Production and evaporation of micro black holes as a link between mirror universes](https://arxiv.org/abs/2102.03028)
 * [Information in Black Hole Radiation](https://arxiv.org/abs/hep-th/9306083)
 * [Holographic measurement and quantum teleportation in the SYK thermofield double](https://arxiv.org/abs/2211.07658)
+* [Matrix-Model Simulations Using Quantum Computing, Deep Learning, and Lattice Monte Carlo](https://journals.aps.org/prxquantum/abstract/10.1103/PRXQuantum.3.010324)
 
 ### PUFs: Physical Unclonable Functions
 * Nature Electronics: https://www.nature.com/articles/s41928-020-0372-5?proof=t
