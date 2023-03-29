@@ -43,7 +43,14 @@ designs, which aim to solve the secure remote computation problem by leveraging 
 * [Black hole information paradox](https://en.wikipedia.org/wiki/Black_hole_information_paradox)
 * [Black Hole Encryption](https://www.science.org/doi/10.1126/science.311.5767.1525a)
 * [Hayden-Preskill thought experiment](https://youtu.be/lV1ePoCeOdQ) (fun video)
-* [Hairy BTZ black hole and its analogue model in graphene](https://www.sciencedirect.com/science/article/abs/pii/S0003491619303197)
+* [Hairy BTZ black hole and its analogue model in graphene](https://www.sciencedirect.com/science/article/abs/pii/S0003491619303197) ([arxiv](https://arxiv.org/abs/1907.03509))
+* [Black Hole complexity, unscrambling, and stabilizer thermal machines](https://arxiv.org/abs/2212.11337)
+* [Scrambling in the Black Hole Portrait](https://arxiv.org/abs/1307.3458)
+* [Black Hole Based Quantum Computing in Labs and in the Sky](https://arxiv.org/abs/1601.01329)
+* [Universality of Black Hole Quantum Computing](https://arxiv.org/abs/1605.01407)
+* [Production and evaporation of micro black holes as a link between mirror universes](https://arxiv.org/abs/2102.03028)
+* [Information in Black Hole Radiation](https://arxiv.org/abs/hep-th/9306083)
+* [Holographic measurement and quantum teleportation in the SYK thermofield double](https://arxiv.org/abs/2211.07658)
 
 ### PUFs: Physical Unclonable Functions
 * Nature Electronics: https://www.nature.com/articles/s41928-020-0372-5?proof=t
