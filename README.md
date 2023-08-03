@@ -21,6 +21,13 @@ limited family of computations, but has an impractical performance overhead [140
 > Intel’s Software Guard Extensions (SGX) is the latest iteration in a long line of trusted computing (Figure 2)
 designs, which aim to solve the secure remote computation problem by leveraging trusted hardware in the remote computer. The trusted hardware establishes a secure container, and the remote computation service user uploads the desired computation and data into the secure container. The trusted hardware protects the data’s confidentiality and integrity while the computation is being performed on it.
 
+## Key Work: Black-Hole Radiation Decoding is Quantum Cryptography 
+[Black-Hole Radiation Decoding is Quantum Cryptography](https://arxiv.org/abs/2211.05491) by _Zvika Brakerski_ (Thanks to [@tyurek](https://github.com/tyurek) for sharing)
+
+### Talks
+* [Black-Hole Radiation Decoding as a Cryptographic Assumption](https://simons.berkeley.edu/talks/zvika-brakerski-weizmann-institute-science-2023-05-05) by _Zvika Brakerski at the [Minimal Complexity Assumptions for Cryptography](https://simons.berkeley.edu/workshops/minimal-complexity-assumptions-cryptography) workshop at the Simons Institute for the Theory of Computing_
+* [Quantum Commitments and Black Hole Radiation Decoding](https://simons.berkeley.edu/talks/fermi-ma-uc-berkeley-2023-07-13) by _Fermi Ma at the [Quantum Summer Cluster Workshop](https://simons.berkeley.edu/workshops/quantum-summer-cluster-workshop) at the Simons Institute for the Theory of Computing_
+
 ## Resources
 * [Intel SGX Explained](https://eprint.iacr.org/2016/086) by _Victor Costan and Srinivas Devadas_
 * [The Laws of Physics and Cryptographic Security](https://arxiv.org/abs/quant-ph/0202143) by _Terry Rudolph_
