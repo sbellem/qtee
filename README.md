@@ -25,7 +25,7 @@ designs, which aim to solve the secure remote computation problem by leveraging 
 [Black-Hole Radiation Decoding is Quantum Cryptography](https://arxiv.org/abs/2211.05491) by _Zvika Brakerski_ (Thanks to [@tyurek](https://github.com/tyurek) for sharing)
 
 ### Talks
-* [Black-Hole Radiation Decoding as a Cryptographic Assumption](https://simons.berkeley.edu/talks/zvika-brakerski-weizmann-institute-science-2023-05-05) by _Zvika Brakerski at the [Minimal Complexity Assumptions for Cryptography](https://simons.berkeley.edu/workshops/minimal-complexity-assumptions-cryptography) workshop at the Simons Institute for the Theory of Computing_
+* [Black-Hole Radiation Decoding as a Cryptographic Assumption](https://simons.berkeley.edu/talks/zvika-brakerski-weizmann-institute-science-2023-05-05) by _Zvika Brakerski at the [Minimal Complexity Assumptions for Cryptography](https://simons.berkeley.edu/workshops/minimal-complexity-assumptions-cryptography) workshop at the Simons Institute for the Theory of Computing_ (Thanks to [Alex Obadia](https://alexobadia.com/) for sharing.)
 * [Quantum Commitments and Black Hole Radiation Decoding](https://simons.berkeley.edu/talks/fermi-ma-uc-berkeley-2023-07-13) by _Fermi Ma at the [Quantum Summer Cluster Workshop](https://simons.berkeley.edu/workshops/quantum-summer-cluster-workshop) at the Simons Institute for the Theory of Computing_
 
 ## Resources
