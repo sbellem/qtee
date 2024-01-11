@@ -67,8 +67,7 @@ designs, which aim to solve the secure remote computation problem by leveraging 
 * Wikipedia: https://en.wikipedia.org/wiki/Physical_unclonable_function
 * [On the Physical Security of Physically Unclonable Functions](https://d-nb.info/1156184150/34Security%20Analysis%20of%20Physically%20Unclonable%20Functions%20against%20Physical%20Attacks)
 * [A Fourier Analysis Based Attack against Physically Unclonable Functions](https://eprint.iacr.org/2017/551.pdf)
-
-
+* [Feasibility and Infeasibility of Secure Computation with Malicious PUFs](https://eprint.iacr.org/2015/405)
 
 ## Contributing
 Please do! File issues & pull requests as you wish!. Don't hold back!
