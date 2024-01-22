@@ -52,6 +52,10 @@ This seems to be relating to what is called remote attestation in the context of
 * https://github.com/stnolting/fpga_puf
 * https://www.crypto.ruhr-uni-bochum.de/imperia/md/crypto/kiltz/ulrich_paper_47.pdf
 
+# Specifications in Chip Designs
+* https://github.com/chipsalliance/Caliptra/blob/main/doc/Caliptra.md#future-effort-caliptra-security-subsystem
+* https://github.com/chipsalliance/caliptra-rtl/blob/main/docs/CaliptraIntegrationSpecification.md
+
 # References
 [Physical Unclonable Functions for Device Authentication and Secret Key Generation](https://people.csail.mit.edu/devadas/pubs/puf-dac07.pdf)
 [Feasibility and Infeasibility of Secure Computation with Malicious PUFs](https://eprint.iacr.org/2015/405)
