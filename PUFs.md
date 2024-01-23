@@ -2,7 +2,9 @@
 Not sure where it's best to start, but perhaps this article (if you have access):  
 [Physical unclonable functions](https://www.nature.com/articles/s41928-020-0372-5) by [Yansong Gao](https://www.nature.com/articles/s41928-020-0372-5#auth-Yansong-Gao-Aff1-Aff2), [Said F. Al-Sarawi](https://www.nature.com/articles/s41928-020-0372-5#auth-Said_F_-Al_Sarawi-Aff3) & [Derek Abbott](https://www.nature.com/articles/s41928-020-0372-5#auth-Derek-Abbott-Aff4)
 
-OR: [Physical Unclonable Functions for Device Authentication and Secret Key Generation](https://people.csail.mit.edu/devadas/pubs/puf-dac07.pdf)
+OR:
+
+[Physical Unclonable Functions for Device Authentication and Secret Key Generation](https://people.csail.mit.edu/devadas/pubs/puf-dac07.pdf)
 
 > Because the PUF circuit is rather simple, attackers can try to construct a precise timing model and learn the parameters from many input-output pairs [8]. To prevent these model-building attacks, the PUF circuit output can be obfuscated by XOR’ing multiple outputs or a PUF output can be used as one of the MUX control signals. **Note that the model building attack is irrelevant for the cryptographic key generation where the PUF output is never directly exposed.** [G. Edward Suh, Srinivas Devadas](https://people.csail.mit.edu/devadas/pubs/puf-dac07.pdf)
 
@@ -57,5 +59,6 @@ This seems to be relating to what is called remote attestation in the context of
 * https://github.com/chipsalliance/caliptra-rtl/blob/main/docs/CaliptraIntegrationSpecification.md
 
 # References
-[Physical Unclonable Functions for Device Authentication and Secret Key Generation](https://people.csail.mit.edu/devadas/pubs/puf-dac07.pdf)
-[Feasibility and Infeasibility of Secure Computation with Malicious PUFs](https://eprint.iacr.org/2015/405)
+* [Physical Unclonable Functions for Device Authentication and Secret Key Generation](https://people.csail.mit.edu/devadas/pubs/puf-dac07.pdf)
+* [Feasibility and Infeasibility of Secure Computation with Malicious PUFs](https://eprint.iacr.org/2015/405)
+* [Providing Root of Trust for ARM TrustZone using On-Chip SRAM](https://eprint.iacr.org/2014/464)
