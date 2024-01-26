@@ -20,8 +20,8 @@ https://nbviewer.org/github/rpappu/pdf-publications/blob/master/Pappu-Science-20
 [Feasibility and Infeasibility of Secure Computation with Malicious PUFs](https://eprint.iacr.org/2015/405)
 
 ## New PUFs
-https://arxiv.org/abs/2310.19587
-https://pubs.aip.org/aip/sci/article/2019/29/290009/360043/Fingerprinting-silicon-chips-just-got-easier
+* https://arxiv.org/abs/2310.19587
+* https://pubs.aip.org/aip/sci/article/2019/29/290009/360043/Fingerprinting-silicon-chips-just-got-easier
 
 ## Applications
 ### [PUF-derived IoT identities in a zero-knowledge protocol for blockchain](https://www.sciencedirect.com/science/article/abs/pii/S2542660518301124)
