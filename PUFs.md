@@ -18,11 +18,13 @@ https://nbviewer.org/github/rpappu/pdf-publications/blob/master/Pappu-Science-20
 
 ## Malicious PUFs
 * [Feasibility and Infeasibility of Secure Computation with Malicious PUFs](https://eprint.iacr.org/2015/405)
+* [On the Security of PUF Protocols under Bad PUFs and PUFs-inside-PUFs Attacks](https://eprint.iacr.org/2016/322)
 * [Everlasting UC Commitments from Fully Malicious PUFs](https://eprint.iacr.org/2021/248)
 
 ## New PUFs
 * https://arxiv.org/abs/2310.19587
 * https://pubs.aip.org/aip/sci/article/2019/29/290009/360043/Fingerprinting-silicon-chips-just-got-easier
+* [Spectral sensitivity near exceptional points as a resource for hardware encryption](https://www.nature.com/articles/s41467-023-36508-x)
 
 ## Applications
 ### [PUF-derived IoT identities in a zero-knowledge protocol for blockchain](https://www.sciencedirect.com/science/article/abs/pii/S2542660518301124)
