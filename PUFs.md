@@ -17,7 +17,8 @@ https://nbviewer.org/github/rpappu/pdf-publications/blob/master/Pappu-Science-20
 * [SMART: Secure and Minimal Architecture for (Establishing a Dynamic) Root of Trust](https://ics.uci.edu/~gts/paps/smart.pdf)
 
 ## Malicious PUFs
-[Feasibility and Infeasibility of Secure Computation with Malicious PUFs](https://eprint.iacr.org/2015/405)
+* [Feasibility and Infeasibility of Secure Computation with Malicious PUFs](https://eprint.iacr.org/2015/405)
+* [Everlasting UC Commitments from Fully Malicious PUFs](https://eprint.iacr.org/2021/248)
 
 ## New PUFs
 * https://arxiv.org/abs/2310.19587
