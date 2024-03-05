@@ -4,10 +4,16 @@ Not sure where it's best to start, but perhaps this article (if you have access)
 
 OR:
 
-[Physical Unclonable Functions for Device Authentication and Secret Key Generation](https://people.csail.mit.edu/devadas/pubs/puf-dac07.pdf)
+* [Physical Unclonable Functions for Device Authentication and Secret Key Generation](https://people.csail.mit.edu/devadas/pubs/puf-dac07.pdf)
 
-> Because the PUF circuit is rather simple, attackers can try to construct a precise timing model and learn the parameters from many input-output pairs [8]. To prevent these model-building attacks, the PUF circuit output can be obfuscated by XOR’ing multiple outputs or a PUF output can be used as one of the MUX control signals. **Note that the model building attack is irrelevant for the cryptographic key generation where the PUF output is never directly exposed.** [G. Edward Suh, Srinivas Devadas](https://people.csail.mit.edu/devadas/pubs/puf-dac07.pdf)
+  > Because the PUF circuit is rather simple, attackers can try to construct a precise timing model and learn the parameters from many input-output pairs [8]. To prevent these model-building attacks, the PUF circuit output can be obfuscated by XOR’ing multiple outputs or a PUF output can be used as one of the MUX control signals. **Note that the model building attack is irrelevant for the cryptographic key generation where the PUF output is never directly exposed.** [G. Edward Suh, Srinivas Devadas](https://people.csail.mit.edu/devadas/pubs/puf-dac07.pdf)
 
+* [An Introduction to Physically Unclonable Functions](https://www.allaboutcircuits.com/technical-articles/an-introduction-to-physically-unclonable-functions/)
+
+  > When manufactured, the PUF will be fed a series of different challenges and have its responses recorded. Through this exercise, the designers know each PUF's unique response to a given challenge and can use this information to prevent counterfeiting, create and store cryptographic keys, and many other security feats.
+  
+  TODO: figure out if the set of CRPs is not needed for signing keys. Also, out of curiosity could there be oblivious (or zk) CRPs, meaning that no one knows the challenge response pairs, but yet, they can be used.
+  
 
 ## First well-known PUF: Physical One-Way Functions
 https://nbviewer.org/github/rpappu/pdf-publications/blob/master/Pappu-Science-2002.pdf
