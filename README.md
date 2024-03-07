@@ -75,3 +75,8 @@ Please do! File issues & pull requests as you wish!. Don't hold back!
 Loosely will attempt to follow the [ZeroMQ RFC 42/C4: Collective Code Construction Contract](https://rfc.zeromq.org/spec/42/).
 
 But don't worry about it! Just write your mind in the form of issues and pull requests!
+
+## Origins of this Repository
+As I started to learn about Intel SGX, I eventually became very much concerned about chip attacks. Eventually, a small set of slides {Can we Hide Atoms?](https://docs.google.com/presentation/d/1CcVM_0AFCBOpXGiDFtvf2wGz3KBG0EaoxyMXaITEWl0) was put together to convey the concerns at the IC3 Summer Camp 2021, in the context of a Rump Session. The intuition has been that trusted hardware (e.g. Intel SGX), as of now, would require us to be capable to hide atoms, (or subatomic particles, such as electrons), from an attacker who has physical access to the chip.
+
+In other words a secret key, is information, and information is encoded in matter. Hence, the leading question is: "Can we hide information encoded in matter from an observer, who has access to the matter?" Intuitivaly, it seems like this is not possible, at least in the classical setting, although PUFs appear to offer a solution. The quantum setting is probably very much different, as the very act of observing may destroy or change what is attempted to be observed.
