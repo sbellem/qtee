@@ -5,6 +5,13 @@ Repository to explore the physical limits of trusted hardware in the classical a
 >
 > Said differently: [Here be dragons](https://en.wikipedia.org/wiki/Here_be_dragons) 🐉.
 
+## Current challenges facing trusted hardware (TEEs):
+1. **NO proof of manufacturing** according to a known open source chip design specification
+2. **NO proof of non-leakage of secret bits** -- how can we know that the secret bits encoded into the chip were not leaked at any point in time during manufacturing 
+3. **NO proof of hidden-forever secret bits** -- above and beyond trusting or not trusting the chip manufacturers, and the manufacturing processes, one problem remains: Can we truly hide secret bits of information into physical matter?
+
+See https://github.com/sbellem/qtee/issues/2 for more details.
+
 ## Intuition
 The current leading intuition of the feeble mind of this repo's author is that trusted hardware (which can withstand physical attacks) is impossible in the classical setting, meaning that an adversary who can physically access the chip will be capable to break its security because of physics, regardless of whether the chip is perfectly designed, architected, manufactured, or of whether the manufacturer is honest etc. The claim or intuition is that as per our understanding of the laws of physics, an attacker will be able to read the secret information that has been encoded into the chip and therefore will break the security of the chip. If that claim or intuition holds, then what does that mean for trusted hardware? Is it a pipe dream? Can the quantum setting make a difference? Naively thinking, what if we "throw" the secret information into a black hole? Would that help? Could a chip be designed such that it uses [nano black holes](https://en.wikipedia.org/wiki/Micro_black_hole) to store secret keys? How would key derivation work if the root keys are in a black hole? ETC.
 
