@@ -63,6 +63,7 @@ designs, which aim to solve the secure remote computation problem by leveraging 
 * [Matrix-Model Simulations Using Quantum Computing, Deep Learning, and Lattice Monte Carlo](https://journals.aps.org/prxquantum/abstract/10.1103/PRXQuantum.3.010324)
 
 ### PUFs: Physical Unclonable Functions
+See [PUFs.md](./PUFs.md). Also on HackMD at https://hackmd.io/8JDYHl-qQdGGucCV2B7hzA.
 * Nature Electronics: https://www.nature.com/articles/s41928-020-0372-5?proof=t
 * Wikipedia: https://en.wikipedia.org/wiki/Physical_unclonable_function
 * [On the Physical Security of Physically Unclonable Functions](https://d-nb.info/1156184150/34Security%20Analysis%20of%20Physically%20Unclonable%20Functions%20against%20Physical%20Attacks)
