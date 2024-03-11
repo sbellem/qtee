@@ -61,4 +61,4 @@ Now, with this background in mind, it seems that it would be extremely useful to
 
 [22]: https://www.wiley.com/en-ae/Integrated+Circuit+Failure+Analysis:+A+Guide+to+Preparation+Techniques-p-9780471974017
 [Intel SGX Explained]: https://eprint.iacr.org/2016/086
-[SoK: Hardware-supported TEEs](https://arxiv.org/abs/2205.12742)
+[SoK: Hardware-supported TEEs]: https://arxiv.org/abs/2205.12742
