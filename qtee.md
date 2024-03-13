@@ -20,7 +20,7 @@ The key topics that this document wishes to explore are:
     * [Marching Towards DAMOs (aka Zero Trust Manufacturing)](#Marching-Towards-DAMOs)
     * [Root of Trust with PUFs](#Root-of-Trust-with-PUFs)
 * [Do we really need TEEs? Could we do it all with mathematics (FHE, ZKP, MPC, etc)?](#Do-we-really-need-TEEs?) 
-* [Beyond PUFs: Cryptography and Physics United](Beyond-PUFs:-Cryptography-and-Physics-United)
+* [Beyond PUFs: Cryptography and Physics United](#Beyond-PUFs:-Cryptography-and-Physics-United)
 
  
 ## The Problem TEEs aim to solve
