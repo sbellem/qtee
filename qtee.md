@@ -13,16 +13,16 @@ See https://github.com/sbellem/qtee/issues/2, for more details[^2].
 ## Overview
 The key topics that this document wishes to explore are:
 
-* Revisiting the Problem which TEEs aim to solve
-* Motivations for better TEEs
-* Mobilization: How do we start?
-    * Verifiable Chip based on an Open Source Hardware Design
-    * Marching Towards DAMOs (aka Zero Trust Manufacturing)
-    * Root of Trust with PUFs
-* Do we really need TEEs? Could we do it all with mathematics (FHE, ZKP, MPC, etc)? 
-* Beyond PUFs: Cryptography and Physics United
+* [Revisiting the Problem which TEEs aim to solve](#The-Problem-TEEs-aim-to-solve)
+* [Motivations for better TEEs](#Motivation)
+* [Cypherpunk-Friendly Chip](#Cypherpunk-Friendly-Chip)
+    * [Verifiable Chip based on an Open Source Hardware Design](#Verifiable-Chip-based-on-an-Open-Source-Hardware-Design)
+    * [Marching Towards DAMOs (aka Zero Trust Manufacturing)](#Marching-Towards-DAMOs)
+    * [Root of Trust with PUFs](#Root-of-Trust-with-PUFs)
+* [Do we really need TEEs? Could we do it all with mathematics (FHE, ZKP, MPC, etc)?](#Do-we-really-need-TEEs?) 
+* [Beyond PUFs: Cryptography and Physics United](Beyond-PUFs:-Cryptography-and-Physics-United)
 
-
+ 
 ## The Problem TEEs aim to solve
 TEEs are an attempt to solve the _secure remote computation_ problem. Quoting [Intel SGX Explained] by Victor Costan and Srinivas Devadas:
 
@@ -51,7 +51,6 @@ The so-called web3 world (aka as crypto space) increasingly makes use of TEEs (m
 4. Trust that the root of trust cannot be extracted out "cheaply" or "easily" by an attacker who has physical access to the chip.
 
 Note that the above implicitly assumes that the design and implementation are secure, free of bugs. The reasoning is that design and implementation flaws can be fixed and can happen whether the design is open source or not, whether the supply chain is correct, etc.
-
 
 
 ## Cypherpunk-Friendly Chip
@@ -108,7 +107,7 @@ https://github.com/sbellem/qtee
 
 
 
-## Appendix: Intel SGX
+## Appendix: Intel SGX's Root of Trust
 If we take Intel as an example, trusting the chip manufacturer means many things. Intel SGX's so-called root of trust rests on two secret keys (seal secret and provisionaing secret), and an attestation key, as shown in the figure below, from [Intel SGX Explained]. Note that this may have changed since the writing of the [Intel SGX Explained] paper, but at the time at least, the two secrets were said to be stored in e-fuses inside the processor's die. Moreover, the two secret keys, stored in e-fuses, were encrypted with a global wrapping logic key (GWK). The GWK is a 128-bit AES key that is hard-coded in the processor's circuitry, and serves to increase the cost of extracting the keys from an SGX-enabled processor. The Provisioning Secret was said to be generated at the key generation facility - burned into the processor's e-fuses and stored in Intel's Provisioning Service DB. The Seal Secret was said to be generated inside the processor chip, and claimed not to be known to Intel. Hence, trusting Intel meant to trust that they do not leak the attestation key, and the provisioning key as they have access to them. Trusting Intel also meant that the manufacturing process that generates and embeds the Seal Secret did not leak the secret key. Trusting Intel also meant that once a chip is made, they did not attempt to extract the Seal Key, which is the only key, out of three, which they did not know.
 
 
