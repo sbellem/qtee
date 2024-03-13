@@ -4,7 +4,7 @@ This is an initiative to spark research to explore how we could develop a secure
 To put this vision into context, current TEEs such as Intel SGX, face the following challenges:
 
 1. **NO proof of manufacturing** according to a known open source chip design specification
-2. **NO proof of non-leakage of secret bits** -- how can we know that the secret bits (root of trust) encoded into the chip were not leaked at any point in time during manufacturing 
+2. **NO proof of non-leakage of secret bits** -- how can we know that the secret bits (root of trust) encoded into the chip were not leaked at any point in time during manufacturing
 3. **NO proof of hidden-forever secret bits** -- above and beyond trusting or not trusting the chip manufacturers, and the manufacturing processes, one problem remains: Can we truly hide secret bits of information (root of trust) into physical matter?
 
 See https://github.com/sbellem/qtee/issues/2, for more details[^2].
@@ -13,16 +13,16 @@ See https://github.com/sbellem/qtee/issues/2, for more details[^2].
 ## Overview
 The key topics that this document wishes to explore are:
 
-* [Revisiting the Problem which TEEs aim to solve](#The-Problem-TEEs-aim-to-solve)
-* [Motivations for better TEEs](#Motivation)
-* [Cypherpunk-Friendly Chip](#Cypherpunk-Friendly-Chip)
-    * [Verifiable Chip based on an Open Source Hardware Design](#Verifiable-Chip-based-on-an-Open-Source-Hardware-Design)
-    * [Marching Towards DAMOs (aka Zero Trust Manufacturing)](#Marching-Towards-DAMOs)
-    * [Root of Trust with PUFs](#Root-of-Trust-with-PUFs)
-* [Do we really need TEEs? Could we do it all with mathematics (FHE, ZKP, MPC, etc)?](#Do-we-really-need-TEEs?) 
-* [Beyond PUFs: Cryptography and Physics United](#Beyond-PUFs:-Cryptography-and-Physics-United)
+* [Revisiting the Problem which TEEs aim to solve](#the-problem-tees-aim-to-solve)
+* [Motivations for better TEEs](#motivation)
+* [Cypherpunk-Friendly Chip](#cypherpunk-friendly-chip)
+    * [Verifiable Chip based on an Open Source Hardware Design](#verifiable-chip-based-on-an-open-source-hardware-design)
+    * [Marching Towards DAMOs (aka Zero Trust Manufacturing)](#marching-towards-damos)
+    * [Root of Trust with PUFs](#root-of-trust-with-pufs)
+* [Do we really need TEEs? Could we do it all with mathematics (FHE, ZKP, MPC, etc)?](#do-we-really-need-tees?)
+* [Beyond PUFs: Cryptography and Physics United](#beyond-pufs-cryptography-and-physics-united)
 
- 
+
 ## The Problem TEEs aim to solve
 TEEs are an attempt to solve the _secure remote computation_ problem. Quoting [Intel SGX Explained] by Victor Costan and Srinivas Devadas:
 
@@ -37,7 +37,7 @@ Is it even possible to build a chip that can handle physical attacks, such as th
 ## Motivation
 According to [SoK: Hardware-supported TEEs] and [Intel SGX Explained], current chips that implement TEEs cannot protect against physical attacks such as chip delayering, which would allow an attacker to extract the so-called root of trust, meaning hardware embedded secret keys upon which the entire security of the TEE depends. The only current known defense against chip attacks is trying to make the cost of a chip attack as high as possible. To make things worst, it's not even clear what the cost of a chip attack is; perhaps one million dollar (see [CHIP ATTACKS])? So, at the very least, one would hope we would know what the cost of a chip attack is, such that protocol designers could [design mechanisms][mechanism design] that would eliminate economic incentives to attack the chip, because the cost of the attack would not be worth what could be extracted out of the attack. It's very important to note here that a protocol relying on TEEs may also be targeted for attacks for reasons other than financial, and it's probably best to avoid using TEEs for such cases (e.g. privacy preserving application used by political dissidents).
 
-Aside from being vulnerable to chip attacks the current popular TEEs, such as Intel SGX, are closed source, meaning that their hardware designs are not public, which in turn makes it very difficult to know whether a chip is implemented as claimed. Even with an open source hardware design we would need to figure out how to verify that the chip was implemented as per the open source design, and that secrets generated and embedded into the hardware at the time of manufacturing were not leaked. 
+Aside from being vulnerable to chip attacks the current popular TEEs, such as Intel SGX, are closed source, meaning that their hardware designs are not public, which in turn makes it very difficult to know whether a chip is implemented as claimed. Even with an open source hardware design we would need to figure out how to verify that the chip was implemented as per the open source design, and that secrets generated and embedded into the hardware at the time of manufacturing were not leaked.
 
 
 ### Don't Trust, Verify ... Or use TEEs?
