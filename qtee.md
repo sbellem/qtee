@@ -145,7 +145,10 @@ If we take Intel as an example, trusting the chip manufacturer means many things
 ![image](https://hackmd.io/_uploads/rydXhPCTa.png)
 
 
-
+## Contributing to this Document
+You can make edits and pull requests for https://github.com/sbellem/qtee/blob/main/qtee.md which should be a mirror of this document.
+Alternatively you can also comment on or create new issues at https://github.com/sbellem/qtee/issues.
+You should also be able to make comments on this document.
 
 [^1]: Chips attacks cannot be prevented as of today (see [CHIP ATTACKS]). Making the cost of a chip attack expensive is the only current known defense mechanism. Thus, TEEs are ultimately only secure through economics.
 [^2]:  Also, of relevance: https://github.com/sbellem/qtee/issues/1, https://github.com/sbellem/qtee/issues/7, https://github.com/sbellem/qtee/issues/8, [CHIP ATTACKS], and [PUFs].
