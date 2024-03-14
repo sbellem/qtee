@@ -1,5 +1,5 @@
 # qTEE: Moving Towards Open Source and Verifiable Secure-through-Physics TEE Chips
-This is an initiative to spark research to explore how we could develop a secure chip for TEEs (Trusted Execution Environments) that would ultimately be secure because of physics rather than economics[^1]. The chip design should be open source, and its physical implementation should be verifiable, meaning that it should match the open source design. Moreover, the root of trust (embedded secret key) should be proven to have not leaked during generation or manufacturing. Thus, the hope and vision is to develop a TEE chip that does not need to be trusted because it [can be verified by physics and mathematics. For] an example of a cryptographic protocol implementation that is secure through physics see [Experimental relativistic zero-knowledge proofs] by _Alikhani et al_.
+This is an initiative to spark research to explore how we could develop a secure chip for TEEs (Trusted Execution Environments) that would ultimately be secure because of physics rather than economics[^1]. The chip design should be open source, and its physical implementation should be verifiable, meaning that it should match the open source design. Moreover, the root of trust (embedded secret key) should be proven to have not leaked during generation or manufacturing. Thus, the hope and vision is to develop a TEE chip that does not need to be trusted because it can be verified by physics and mathematics. For an example of a cryptographic protocol implementation that is secure through physics see [Experimental relativistic zero-knowledge proofs] by _Alikhani et al_.
 
 
 To put this vision into context, current TEEs such as Intel SGX, face the following challenges:
@@ -53,6 +53,7 @@ The so-called web3 world (aka as crypto space) increasingly makes use of TEEs (m
 
 Note that the above implicitly assumes that the design and implementation are secure, free of bugs[^3].
 
+
 ## Threat Model
 **The worst.**
 
@@ -64,7 +65,7 @@ Note that the above implicitly assumes that the design and implementation are se
 
 **Just think the worst of the worst.**
 
-_Perhaps_ the only thing that may be out-of-bound is remote civilizations or state actors with access to physics knwoledge that is not known by the general public (e.g. academia/universities). For instance, imagine another planet where beings would know how to go faster than the speed of light.
+_Perhaps_ the only thing that may be out-of-bound is remote civilizations or state actors with access to new physics knowledge that is not yet known by the general public (e.g. academia/universities). For instance, imagine another planet where beings would know how to go faster than the speed of light.
 
 
 ## Cypherpunk-Friendly Chip
