@@ -52,6 +52,19 @@ The so-called web3 world (aka as crypto space) increasingly makes use of TEEs (m
 
 Note that the above implicitly assumes that the design and implementation are secure, free of bugs[^3].
 
+## Threat Model
+**The worst.**
+
+* Attackers with physical access to the chip, with unlimited resources and funds MUST be considered
+* State actors
+* Malicious actors with full access to every step of the supply chain, foundries, etc
+* Malicious actors with "special" access to data centers
+* Etc, Etc.
+
+**Just think the worst of the worst.**
+
+_Perhaps_ the only thing that may be out-of-bound is remote civilizations or state actors with access to physics knwoledge that is not known by the general public (e.g. academia/universities). For instance, imagine another planet where beings would know how to go faster than the speed of light.
+
 
 ## Cypherpunk-Friendly Chip
 As mentioned in [The Problem TEEs aim to solve](#The-Problem-TEEs-aim-to-solve), if the problem we wish to tackle is that of secure remote computation, the threat model should include attackers with physical access to the chip, which means that the chip should be secure against physical attacks, which may not even be possible in the classical setting (i.e. without using quantum physics). That being said, it does not mean that we cannot improve the current TEEs. This section aims to explore what we could feasibly do today to have a chip that attempts to align itself with the motto of "Don't Trust, Verify", omnipresent in the web3 and cypherpunk cultures.
@@ -104,7 +117,10 @@ Can we learn something interesting from Zero Trust applied to Chip Manufacturing
 https://github.com/sbellem/qtee/issues/7
 
 
-### Root of Trust with PUFs 
+### Root of Trust with PUFs
+[Physical Unclonable Functions](https://en.wikipedia.org/wiki/Physical_unclonable_function) are arguably the current best hope to protect against physical attacks aimed at extracting secret keys (root of trust). That being said, PUFs are an active area of research where new PUFs design are proposed and existing designs are broken. Hence, research is needed to better understand the limitations of PUFs in the context of TEEs.
+
+
 See https://github.com/sbellem/qtee/blob/main/PUFs.md
 
 
