@@ -129,7 +129,7 @@ See https://github.com/sbellem/qtee/blob/main/PUFs.md
 ## Do we really need TEEs?
 **Why can't we do it all with FHE, ZKP, and MPC?**
 
-Not sure. :smile: Besides the performance limitations of FHE, ZKP and MPC, the problem of proof-of-deletion or certified deletion may be the most mentioned one. The intuition is simple: "How do you prove that you completely forgot what some secret data was?" You could show that your harddisk has been completely wiped out, but perhaps you copied it elsewhere. Hence, certified deletion appears to not be possible in the classical setting but it apparently is if one is willing to step one foot (or two), into the quantum setting (e.g.: [Quantum encryption with certified deletion] by _Broadbent & Islam_, [Quantum Proofs of Deletion for Learning with Errors] by _Poremba_). If we are confined to the classical setting though, then TEEs may be useful. If the program generating and/or handling secrets is executed in a TEE then the program can be written such that it will delete the secrets once it's done with the task. As an alternative to TEEs, there's the idea of traceable secret sharing as presented in [Traceable Secret Sharing: Strong Security and Efficient Constructions] by _Boneh et al_.
+Not sure. :smile: Besides the performance limitations of FHE, ZKP and MPC, the problem of proof-of-deletion or certified deletion may be the most mentioned one. The intuition is simple: "How do you prove that you completely forgot what some secret data was?" You could show that your harddisk has been completely wiped out, but perhaps you copied it elsewhere. Hence, certified deletion appears to not be possible in the classical setting but it apparently is if one is willing to step one foot (or two), into the quantum setting (e.g.: [High-Dimensional Quantum Certified Deletion] by _Hufnagel et al_, [Quantum Proofs of Deletion for Learning with Errors] by _Poremba_). If we are confined to the classical setting though, then TEEs may be useful. If the program generating and/or handling secrets is executed in a TEE then the program can be written such that it will delete the secrets once it's done with the task. As an alternative to TEEs, there's the idea of traceable secret sharing as presented in [Traceable Secret Sharing: Strong Security and Efficient Constructions] by _Boneh et al_.
 
 
 ## Beyond PUFs: Cryptography and Physics United
@@ -172,5 +172,6 @@ You should also be able to make comments on this document.
 [Logic Encryption]: https://link.springer.com/chapter/10.1007/978-3-319-49019-9_3
 [HENSOLDT Cyber]: https://hensoldt-cyber.com/
 [Quantum encryption with certified deletion]: https://arxiv.org/abs/1910.03551
+[High-Dimensional Quantum Certified Deletion]: https://arxiv.org/abs/2304.03397
 [Quantum Proofs of Deletion for Learning with Errors]: https://arxiv.org/abs/2203.01610
 [Traceable Secret Sharing: Strong Security and Efficient Constructions]: https://eprint.iacr.org/2024/405
