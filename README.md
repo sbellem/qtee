@@ -1,10 +1,6 @@
 # qtee: Searching for Security through Physics
 Repository to explore the physical limits of trusted hardware in the classical and quantum settings.
 
-> **Warning**: This repository may never reach its final form, and may best be viewed as an asynchronous intergalactic brainstorming time-space independent session.
->
-> Said differently: [Here be dragons](https://en.wikipedia.org/wiki/Here_be_dragons) 🐉.
-
 ## Current challenges facing trusted hardware (TEEs):
 1. **NO proof of manufacturing** according to a known open source chip design specification
 2. **NO proof of non-leakage of secret bits** -- how can we know that the secret bits encoded into the chip were not leaked at any point in time during manufacturing 
