@@ -24,7 +24,7 @@ The key topics that this document wishes to explore are:
 
 
 ## The Problem TEEs aim to solve
-TEEs are an attempt to solve the _secure remote computation_ problem. Quoting [Intel SGX Explained] by Victor Costan and Srinivas Devadas:
+TEEs are an attempt to solve the _secure remote computation_ problem. Quoting [Intel SGX Explained] by _Victor Costan and Srinivas Devadas_:
 
 > Secure remote computation is the problem of executing software on a remote computer owned and maintained by an untrusted party, with some integrity and confidentiality guarantees.
 
@@ -50,7 +50,7 @@ The so-called web3 world (aka as crypto space) increasingly makes use of TEEs (m
 3. Trust that the root of trust is not leaked during the manufacturing process.
 4. Trust that the root of trust cannot be extracted out "cheaply" or "easily" by an attacker who has physical access to the chip.
 
-Note that the above implicitly assumes that the design and implementation are secure, free of bugs. The reasoning is that design and implementation flaws can be fixed and can happen whether the design is open source or not, whether the supply chain is correct, etc.
+Note that the above implicitly assumes that the design and implementation are secure, free of bugs[^3].
 
 
 ## Cypherpunk-Friendly Chip
@@ -80,27 +80,42 @@ This is also not a new problem. One approach is to use [Logic Encryption], which
 
 
  
-#### References
+#### GitHub Issues
 * https://github.com/sbellem/qtee/issues/1
 * https://github.com/sbellem/qtee/issues/2#issuecomment-1648191994
 
 
 
 ### Marching Towards DAMOs
-refs: https://github.com/sbellem/qtee/issues/7
+**DAMO: Decentralized Autonoumous Manufacturing Organization**
+
+How can we be certain that the manufacturing process did not leak the secret keys (root of trust)? Could the supply chain somehow produce a proof of non-leakage of secret keys? 
+
+Can we learn something interesting from Zero Trust applied to Chip Manufacturing? 
+
+* [Zero trust security model](https://en.wikipedia.org/wiki/Zero_trust_security_model)
+* [Intel: A Zero Trust Approach to Architecting Silicon](https://www.intel.com/content/www/us/en/newsroom/opinion/zero-trust-approach-architecting-silicon.html#gs.43wv53)
+* [Chip Industry Needs More Trust, Not Zero Trust](https://semiengineering.com/chip-industry-needs-more-trust-not-zero-trust/)
+* [Building a Zero Trust Security Model for Autonomous Systems ](https://spectrum.ieee.org/zero-trust-security-autonomous-systems) (See "Zero Trust Applied to Chip Design" section)
+* [Zero Trust Security In Chip Manufacturing](https://youtu.be/OsjMcjGkgVE?si=G0nInzcmRRrXhaSg)
+
+
+#### GitHub Issue
+https://github.com/sbellem/qtee/issues/7
+
 
 ### Root of Trust with PUFs 
-refs: https://github.com/sbellem/qtee/blob/main/PUFs.md
+See https://github.com/sbellem/qtee/blob/main/PUFs.md
 
 
 ## Do we really need TEEs?
 **Why can't we do it all with FHE, ZKP, and MPC?**
 
-Not sure. :smile: Besides the performance limitations FHE, ZKP and MPC, the problem of proof-of-deletion or certified deletion may be the most mentioned one. The intuition is simple: "How do you prove that you completely forgot what some secret data was?" You could show that your harddisk has been completely wiped out, but perhaps you copied it elsewhere. Hence, certified deletion appears to not be possible in the classical setting but it apparently is if one is willing to step one foot (or two), into the quantum setting (e.g.: [Quantum encryption with certified deletion] by _Broadbent & Islam_, [Quantum Proofs of Deletion for Learning with Errors] by _Poremba_). If we are confined to the classical setting though, then TEEs may be useful. If the program generating and/or handling secrets is executed in a TEE then the program can be written such that it will delete the secrets once it's done with the task. As an alternative to TEEs, there's the idea of traceable secret sharing as presented in [Traceable Secret Sharing: Strong Security and Efficient Constructions] by _Boneh et al_.
+Not sure. :smile: Besides the performance limitations of FHE, ZKP and MPC, the problem of proof-of-deletion or certified deletion may be the most mentioned one. The intuition is simple: "How do you prove that you completely forgot what some secret data was?" You could show that your harddisk has been completely wiped out, but perhaps you copied it elsewhere. Hence, certified deletion appears to not be possible in the classical setting but it apparently is if one is willing to step one foot (or two), into the quantum setting (e.g.: [Quantum encryption with certified deletion] by _Broadbent & Islam_, [Quantum Proofs of Deletion for Learning with Errors] by _Poremba_). If we are confined to the classical setting though, then TEEs may be useful. If the program generating and/or handling secrets is executed in a TEE then the program can be written such that it will delete the secrets once it's done with the task. As an alternative to TEEs, there's the idea of traceable secret sharing as presented in [Traceable Secret Sharing: Strong Security and Efficient Constructions] by _Boneh et al_.
 
 
 ## Beyond PUFs: Cryptography and Physics United
-https://github.com/sbellem/qtee
+See https://github.com/sbellem/qtee
 
 ### Trusted Black Hole Execution Environments
 [Black Hole Computers](https://www.scientificamerican.com/article/black-hole-computers-2007-04/)
@@ -118,6 +133,7 @@ If we take Intel as an example, trusting the chip manufacturer means many things
 
 [^1]: Chips attacks cannot be prevented as of today (see [CHIP ATTACKS]). Making the cost of a chip attack expensive is the only current known defense mechanism. Thus, TEEs are ultimately only secure through economics.
 [^2]:  Also, of relevance: https://github.com/sbellem/qtee/issues/1, https://github.com/sbellem/qtee/issues/7, https://github.com/sbellem/qtee/issues/8, [CHIP ATTACKS], and [PUFs].
+[^3]: The reasoning is that design and implementation flaws can be fixed and can happen whether the design is open source or not, whether the supply chain is correct, etc. Hence, design and implementation bugs can be treated separately. It could be argued that an open source hardware design may benefit from a broader community and overtime will contain less bugs than a closed source design.
 
 
 
