@@ -14,14 +14,14 @@ See https://github.com/sbellem/qtee/issues/2, for more details[^2].
 ## Overview
 The key topics that this document wishes to explore are:
 
-* [Revisiting the Problem which TEEs aim to solve](#the-problem-tees-aim-to-solve)
-* [Motivations for better TEEs](#motivation)
-* [Cypherpunk-Friendly Chip](#cypherpunk-friendly-chip)
-    * [Verifiable Chip based on an Open Source Hardware Design](#verifiable-chip-based-on-an-open-source-hardware-design)
-    * [Marching Towards DAMOs (aka Zero Trust Manufacturing)](#marching-towards-damos)
-    * [Root of Trust with PUFs](#root-of-trust-with-pufs)
-* [Do we really need TEEs? Could we do it all with mathematics (FHE, ZKP, MPC, etc)?](#do-we-really-need-tees?)
-* [Beyond PUFs: Cryptography and Physics United](#beyond-pufs-cryptography-and-physics-united)
+* [Revisiting the Problem which TEEs aim to solve](#The-Problem-TEEs-aim-to-solve)
+* [Motivations for better TEEs](#Motivation)
+* [Cypherpunk-Friendly Chip](#Cypherpunk-Friendly-Chip)
+    * [Verifiable Chip based on an Open Source Hardware Design](#Verifiable-Chip-based-on-an-Open-Source-Hardware-Design)
+    * [Marching Towards DAMOs (aka Zero Trust Manufacturing)](#Marching-Towards-DAMOs)
+    * [Root of Trust with PUFs](#Root-of-Trust-with-PUFs)
+* [Do we really need TEEs? Could we do it all with mathematics (FHE, ZKP, MPC, etc)?](#Do-we-really-need-TEEs?)
+* [Beyond PUFs: Cryptography and Physics United](#Beyond-PUFs-Cryptography-and-Physics-United)
 
 
 ## The Problem TEEs aim to solve
@@ -78,12 +78,18 @@ Having an open source hardware design is perhaps the most reasonable place to st
 #### Open Source Hardware Design
 This is not a new idea, and it may be useful to survey current and past efforts such as:
 
+* [Tiny Tapeout]
 * [Chips Alliance]
 * [Caliptra]
 * [Google Titan]
 * [LibreSilicon]
 * [The Silicon Salon]
+
+##### Resources
+[Tiny Tapeout] has a lot of educational material at that may be worth reading for those who don't have a background in hardware. 
  
+Also worth having a look at is the course [Zero to ASIC Course].
+
 
 #### Verfiable Chip Implementation
 This is also not a new problem. One approach is to use [Logic Encryption], which somehow locks the chip design to protect against a  malicious foundry. The company [HENSOLDT Cyber] has numerous research works on the topic, in addition to actually making chips, and hence, is probably worth studying. Their papers are listed at https://hensoldt-cyber.com/scientific-papers/, but let's list a few here:
@@ -164,6 +170,8 @@ You should also be able to make comments on this document.
 [mechanism design]: https://en.wikipedia.org/wiki/Mechanism_design
 [CHIP ATTACKS]: https://github.com/sbellem/qtee/blob/main/CHIP_ATTACKS.md
 [PUFs]: https://github.com/sbellem/qtee/blob/main/PUFs.md
+[Tiny Tapeout]: https://tinytapeout.com/
+[Zero to ASIC Course]: https://zerotoasiccourse.com/
 [Chips Alliance]: https://github.com/chipsalliance
 [Caliptra]: https://github.com/chipsalliance/caliptra
 [Google Titan]: https://opentitan.org/
