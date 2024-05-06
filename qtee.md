@@ -22,6 +22,8 @@ The key topics that this document wishes to explore are:
     * [Root of Trust with PUFs](#Root-of-Trust-with-PUFs)
 * [Do we really need TEEs? Could we do it all with mathematics (FHE, ZKP, MPC, etc)?](#Do-we-really-need-TEEs?)
 * [Beyond PUFs: Cryptography and Physics United](#Beyond-PUFs-Cryptography-and-Physics-United)
+* [Appendix: Intel SGX's Root of Trust](#Appendix-Intel-SGXs-Root-of-Trust)
+* [Appendix: Chip Attacks -- What does it take?](#Appendix-Chip-Attacks-–-What-does-it-take?)
 
 
 ## The Problem TEEs aim to solve
@@ -29,14 +31,14 @@ TEEs are an attempt to solve the _secure remote computation_ problem. Quoting [I
 
 > Secure remote computation is the problem of executing software on a remote computer owned and maintained by an untrusted party, with some integrity and confidentiality guarantees.
 
-Note that the remote computer is said to be owned and maintained by an _untrusted_ party. Yet, current TEEs, cannot handle physical attacks such as chip attacks (see [TEE Chip Attacks: What does it take?](https://hackmd.io/G7hetzQ7THGALpvx378VsQ)), which would allow an attacker to retrieve the root of trust (secret keys encoded in the hardware). Once an attacker knows the secret keys, it can emulate a TEE, and go through the attestation process unnoticed (e.g. see Appendix A. Emulated Guard eXtensions in https://sgx.fail/ paper).
+Note that the remote computer is said to be owned and maintained by an _untrusted_ party. Yet, current TEEs, cannot handle physical attacks such as chip attacks (see [TEE Chip Attacks: What does it take?](#Appendix-Chip-Attacks-–-What-does-it-take?)), which would allow an attacker to retrieve the root of trust (secret keys encoded in the hardware). Once an attacker knows the secret keys, it can emulate a TEE, and go through the attestation process unnoticed (e.g. see Appendix A. Emulated Guard eXtensions in https://sgx.fail/ paper).
 
-Is it even possible to build a chip that can handle physical attacks, such as those making use of Focus Ion Beam microscopes as mentioned in [Intel SGX Explained] (section 3.4.3)? One could argue that it's not possible in the classical setting, but may be possible in the quantum setting. Some argue that PUFs (Physical Unclonable Functions) cannot be broken and would therefore be a solution. However, there's plenty of research that focuses of breaking PUFs, and there's also active research in developping more secure PUFs. Hence, it seems reasonable to assume that PUFs are not an ultimate solution to chip attacks, although they do seem to be a major improvement. (See [PUFs].)
+Is it even possible to build a chip that can handle physical attacks, such as those making use of Focus Ion Beam microscopes as mentioned in [Intel SGX Explained] (section 3.4.3)? One could argue that it's not possible in the classical setting, but may be possible in the quantum setting. Some argue that PUFs (Physical Unclonable Functions) cannot be broken and would therefore be a solution. However, there's plenty of research that focuses of breaking PUFs, and there's also active research in developping more secure PUFs. Hence, it seems reasonable to assume that PUFs are not an ultimate solution to chip attacks, although they do seem to be a major improvement. (See [Root of Trust with PUFs](#Root-of-Trust-with-PUFs).)
 
 
 
 ## Motivation
-According to [SoK: Hardware-supported TEEs] and [Intel SGX Explained], current chips that implement TEEs cannot protect against physical attacks such as chip delayering, which would allow an attacker to extract the so-called root of trust, meaning hardware embedded secret keys upon which the entire security of the TEE depends. The only current known defense against chip attacks is trying to make the cost of a chip attack as high as possible. To make things worst, it's not even clear what the cost of a chip attack is; perhaps one million dollar (see [CHIP ATTACKS])? So, at the very least, one would hope we would know what the cost of a chip attack is, such that protocol designers could [design mechanisms][mechanism design] that would eliminate economic incentives to attack the chip, because the cost of the attack would not be worth what could be extracted out of the attack. It's very important to note here that a protocol relying on TEEs may also be targeted for attacks for reasons other than financial, and it's probably best to avoid using TEEs for such cases (e.g. privacy preserving application used by political dissidents).
+According to [SoK: Hardware-supported TEEs] and [Intel SGX Explained], current chips that implement TEEs cannot protect against physical attacks such as chip delayering, which would allow an attacker to extract the so-called root of trust, meaning hardware embedded secret keys upon which the entire security of the TEE depends. The only current known defense against chip attacks is trying to make the cost of a chip attack as high as possible. To make things worst, it's not even clear what the cost of a chip attack is; perhaps one million dollar (see [TEE Chip Attacks: What does it take?](#Appendix-Chip-Attacks-–-What-does-it-take?))? So, at the very least, one would hope we would know what the cost of a chip attack is, such that protocol designers could [design mechanisms][mechanism design] that would eliminate economic incentives to attack the chip, because the cost of the attack would not be worth what could be extracted out of the attack. It's very important to note here that a protocol relying on TEEs may also be targeted for attacks for reasons other than financial, and it's probably best to avoid using TEEs for such cases (e.g. privacy preserving application used by political dissidents).
 
 Aside from being vulnerable to chip attacks the current popular TEEs, such as Intel SGX, are closed source, meaning that their hardware designs are not public, which in turn makes it very difficult to know whether a chip is implemented as claimed. Even with an open source hardware design we would need to figure out how to verify that the chip was implemented as per the open source design, and that secrets generated and embedded into the hardware at the time of manufacturing were not leaked.
 
@@ -66,6 +68,13 @@ Note that the above implicitly assumes that the design and implementation are se
 **Just think the worst of the worst.**
 
 _Perhaps_ the only thing that may be out-of-bound is remote civilizations or state actors with access to new physics knowledge that is not yet known by the general public (e.g. academia/universities). For instance, imagine another planet where beings would know how to go faster than the speed of light.
+
+### Relevant Readings
+[The battle for Ring Zero] by Cory Doctorow.
+> But how can we trust those sealed, low-level controllers? What if manufacturers – like, say, Microsoft, a convicted criminal monopolist – decides to use its low-level controllers to block free and open OSes that compete with it? What if a government secretly (or openly) orders a company to block privacy tools so that it can spy on its population? What if the designers of the secure co-processor make a mistake that allows criminals to hijack our devices and run code on them that, by design, we cannot detect, inspect, or terminate?
+>
+> That is: to make our computers secure, we install a cop-chip that determines what programs we can run and stop. To keep bad guys from bypassing the cop-chip, we design our computer so it can't see what the cop-chip is doing. **So what happens if the cop-chip is turned on us?**
+
 
 
 ## Cypherpunk-Friendly Chip
@@ -128,9 +137,82 @@ https://github.com/sbellem/qtee/issues/7
 ### Root of Trust with PUFs
 [Physical Unclonable Functions](https://en.wikipedia.org/wiki/Physical_unclonable_function) are arguably the current best hope to protect against physical attacks aimed at extracting secret keys (root of trust). That being said, PUFs are an active area of research where new PUFs design are proposed and existing designs are broken. Hence, research is needed to better understand the limitations of PUFs in the context of TEEs.
 
+#### Introduction to PUFs
+Not sure where it's best to start, but perhaps this article (if you have access):  
+[Physical unclonable functions](https://www.nature.com/articles/s41928-020-0372-5) by [Yansong Gao](https://www.nature.com/articles/s41928-020-0372-5#auth-Yansong-Gao-Aff1-Aff2), [Said F. Al-Sarawi](https://www.nature.com/articles/s41928-020-0372-5#auth-Said_F_-Al_Sarawi-Aff3) & [Derek Abbott](https://www.nature.com/articles/s41928-020-0372-5#auth-Derek-Abbott-Aff4)
 
-See https://github.com/sbellem/qtee/blob/main/PUFs.md
+OR:
 
+* [Physical Unclonable Functions for Device Authentication and Secret Key Generation](https://people.csail.mit.edu/devadas/pubs/puf-dac07.pdf)
+
+  > Because the PUF circuit is rather simple, attackers can try to construct a precise timing model and learn the parameters from many input-output pairs [8]. To prevent these model-building attacks, the PUF circuit output can be obfuscated by XOR’ing multiple outputs or a PUF output can be used as one of the MUX control signals. **Note that the model building attack is irrelevant for the cryptographic key generation where the PUF output is never directly exposed.** [G. Edward Suh, Srinivas Devadas](https://people.csail.mit.edu/devadas/pubs/puf-dac07.pdf)
+
+* [An Introduction to Physically Unclonable Functions](https://www.allaboutcircuits.com/technical-articles/an-introduction-to-physically-unclonable-functions/)
+
+  > When manufactured, the PUF will be fed a series of different challenges and have its responses recorded. Through this exercise, the designers know each PUF's unique response to a given challenge and can use this information to prevent counterfeiting, create and store cryptographic keys, and many other security feats.
+  
+  TODO: figure out if the set of CRPs is not needed for signing keys. Also, out of curiosity could there be oblivious (or zk) CRPs, meaning that no one knows the challenge response pairs, but yet, they can be used.
+  
+
+#### First well-known PUF: Physical One-Way Functions
+https://nbviewer.org/github/rpappu/pdf-publications/blob/master/Pappu-Science-2002.pdf
+
+#### Remote Attestation
+* [A lightweight remote attestation using PUFs and hash-based signatures for low-end IoT devices](https://www.sciencedirect.com/science/article/pii/S0167739X23002236)
+* [SMART: Secure and Minimal Architecture for (Establishing a Dynamic) Root of Trust](https://ics.uci.edu/~gts/paps/smart.pdf)
+
+#### Malicious PUFs
+* [Feasibility and Infeasibility of Secure Computation with Malicious PUFs](https://eprint.iacr.org/2015/405)
+* [On the Security of PUF Protocols under Bad PUFs and PUFs-inside-PUFs Attacks](https://eprint.iacr.org/2016/322)
+* [Everlasting UC Commitments from Fully Malicious PUFs](https://eprint.iacr.org/2021/248)
+
+#### New PUFs
+* https://arxiv.org/abs/2310.19587
+* https://pubs.aip.org/aip/sci/article/2019/29/290009/360043/Fingerprinting-silicon-chips-just-got-easier
+* [Spectral sensitivity near exceptional points as a resource for hardware encryption](https://www.nature.com/articles/s41467-023-36508-x)
+
+#### Applications
+##### [PUF-derived IoT identities in a zero-knowledge protocol for blockchain](https://www.sciencedirect.com/science/article/abs/pii/S2542660518301124)
+> In this paper, an alternative authentication approach in which an MCU generates a secret key internally is introduced, exploiting manufacturing variability as a physical unclonable function (PUF). As the key is generated by the device itself, manufacturers save the expense of a secure environment for external key generation. In production, once chips are loaded with a firmware, it is only necessary to run an internal characterization and pass on the resulting public key, mask and helper data to be stored for authentication and recovery. Further external memory access is prevented, e.g., by blowing the JTAG security fuse. As the secret key is regenerated (with the same result each time) rather than stored in non-volatile memory, it is very hard to clone and the cost of a secure element can be saved.
+
+> The case for such IoT devices is strengthened further in combination with a distributed ledger, or blockchain. First of all, the immutability and distributed trust provided by a blockchain can make the device authentication independent of the manufacturer. Secondly, a business process implemented in chaincode that relies on IoT inputs can validate device signatures to ensure the authenticity and integrity of those inputs.
+
+> Replacing the central database operated by a manufacturer with a blockchain makes the system independent of the manufacturer. The chaincode will still allow only the manufacturer to create new machine entries on the distributed ledger but as the ledger content is distributed to all participants (multiple manufacturers, retailers, owners, etc.) the manufacturer is relieved of administering the system and guaranteeing its availability. A central database would go offline when the manufacturer goes out of business whereas a blockchain can survive.
+> 
+> Given the security disadvantages of symmetric authentication schemes (keeping a database of keys to authenticate with the risk of being hacked or lost, the risk of cloning, and barriers for third-party authentication, among others) our approach instead uses public-key cryptography based on learning parity with noise (LPN) problems, and in particular zero-knowledge (ZK) protocols to further simplify the management of device public keys. The blockchain may make the public keys generated by each device available for anyone to use in their own authentication system.
+> 
+> As for the second aspect, even a low-cost device can prevent manipulation of its communication with a blockchain by signing its messages with our PUF-derived keys, making the proposal suitable for any resources-limited device connected to the blockchain [9]. The chain code, in turn, can also validate the device signatures to ensure data integrity and authenticity, extending the trust the blockchain provides into the IoT device.
+> 
+> This paper proposes using an SRAM-based PUF to generate cryptographic keys that are employed in a zero-knowledge proof to authenticate an IoT device. We present an efficient implementation in an MCU and show that even low-cost devices can perform the required computational tasks sufficiently fast. Experimental results demonstrate that our approach is robust against temperature variations and that collisions of device identities are unlikely.
+
+##### [A survey on physical unclonable function (PUF)-based security solutions for Internet of Things](https://www.sciencedirect.com/science/article/pii/S1389128620312275)
+
+#### Commercial PUFs
+https://www.cryptoquantique.com/products/qdid/
+
+#### Concerns/Questions
+As per [Physical unclonable functions](https://www.nature.com/articles/s41928-020-0372-5):
+
+> Authentication can also be executed remotely, once the CRP (challenge–response pair) is recorded in a secure database only known by the trusted party (server).
+
+This seems to be relating to what is called remote attestation in the context of popular TEEs like SGX. In the context of SGX, for instance, the chip manufacturer is considered to be a trusted party, for various reasons (e.g: https://github.com/sbellem/qtee/issues/2).
+
+#### Hacking & Cryptanalysis
+* https://github.com/nils-wisiol/pypuf (cryptanalysis)
+* https://asvin.io/physically-unclonable-function-setup/
+* https://github.com/nils-wisiol/LP-PUF
+* https://github.com/stnolting/fpga_puf
+* https://www.crypto.ruhr-uni-bochum.de/imperia/md/crypto/kiltz/ulrich_paper_47.pdf
+
+#### Specifications in Chip Designs
+* https://github.com/chipsalliance/Caliptra/blob/main/doc/Caliptra.md#future-effort-caliptra-security-subsystem
+* https://github.com/chipsalliance/caliptra-rtl/blob/main/docs/CaliptraIntegrationSpecification.md
+
+#### References
+* [Physical Unclonable Functions for Device Authentication and Secret Key Generation](https://people.csail.mit.edu/devadas/pubs/puf-dac07.pdf)
+* [Feasibility and Infeasibility of Secure Computation with Malicious PUFs](https://eprint.iacr.org/2015/405)
+* [Providing Root of Trust for ARM TrustZone using On-Chip SRAM](https://eprint.iacr.org/2014/464)
+* [Making sense of PUFs](https://semiengineering.com/pufs-promise-better-security/)
 
 ## Do we really need TEEs?
 **Why can't we do it all with FHE, ZKP, and MPC?**
@@ -152,6 +234,70 @@ If we take Intel as an example, trusting the chip manufacturer means many things
 
 ![image](https://hackmd.io/_uploads/rydXhPCTa.png)
 
+## Appendix: Chip Attacks -- What does it take?
+
+**tl;dr**: Chip attacks cannot be prevented, but only made expansive to carry on, which is very relative, depending on the application in which the chip is used. Furthermore, as far as I know, there's no known chip attack that has been reported along with its required cost. Hence, currently we can only speculate that an attack may be in the range of a 1 million dollars, judging from the cost of focused ion beam (FIB) microscopes and guessing how much money a team of experts would cost. In the context of crypto/web3, protocol designers should probably be extremely careful, given that many protocols move massive amounts of money; in the hundreds of millions, and more.
+
+It would be extremely useful to see actual chip attacks being reported by research groups, as it would help to set a price on such attacks, and the price of the attack could be used by protocol designers.
+
+---
+
+By chip attacks here, we mean those described in [Intel SGX Explained], _section 3.4.3_. The paper is from 2016, and at the time of writing the authors wrote that the Intel's CPU had a [feature size](https://en.wikipedia.org/wiki/Semiconductor_device_fabrication#Feature_size) of 14nm. In the interest of being pro-active to understand current or future chips, we could assume [3nm](https://en.wikipedia.org/wiki/3_nm_process) feature size perhaps. But it's not clear what this exactly means, because apparently these numbers are more of a marketing act, as per https://en.wikipedia.org/wiki/3_nm_process:
+
+> The term "3 nanometer" has no direct relation to any actual physical feature (such as gate length, metal pitch or gate pitch) of the transistors. According to the projections contained in the 2021 update of the [International Roadmap for Devices and Systems](https://en.wikipedia.org/wiki/International_Roadmap_for_Devices_and_Systems) published by IEEE Standards Association Industry Connection, a "3 nm" node is expected to have a contacted gate pitch of 48 nanometers, and a tightest metal pitch of 24 nanometers.[[12]](https://en.wikipedia.org/wiki/3_nm_process#cite_note-IRDS-12)
+>
+> However, in real world commercial practice, "3 nm" is used primarily as a marketing term by individual microchip manufacturers (foundries) to refer to a new, improved generation of silicon semiconductor chips in terms of increased transistor density (i.e. a higher degree of miniaturization), increased speed and reduced power consumption.[[13]](https://en.wikipedia.org/wiki/3_nm_process#cite_note-13)[[14]](https://en.wikipedia.org/wiki/3_nm_process#cite_note-14) There is no industry-wide agreement among different manufacturers about what numbers would define a "3 nm" node.[[15]](https://en.wikipedia.org/wiki/3_nm_process#cite_note-IRDS2-15)
+
+In any case, it's quite clear that instrumentation to work at a smaller scale is needed.
+
+Back to [Intel SGX Explained](https://eprint.iacr.org/2016/086), _section 3.4.3_, some key excerpts:
+
+> The most equipment-intensive physical attacks involve removing a chip’s packaging and directly interacting with its electrical circuits. These attacks generally take advantage of equipment and techniques that were originally developed to diagnose design and manufacturing defects in chips. [[22]] covers these techniques in depth.
+>
+>The cost of chip attacks is dominated by the required equipment, although the reverse-engineering involved is also non-trivial. This cost grows very rapidly as the circuit components shrink. At the time of this writing, the latest Intel CPUs have a 14nm feature size, which requires ion beam microscopy.
+>
+> The least expensive classes of chip attacks are destructive, and only require imaging the chip’s circuitry. These attacks rely on a microscope capable of capturing the necessary details in each layer, and equipment for mechanically removing each layer and exposing the layer below it to the microscope.
+>
+>  E-fuses and polyfuses are particularly vulnerable to imaging attacks, because of their relatively large sizes.
+>
+> [...], once an attacker develops a process for accessing a module without destroying the chip's circuitry, the attacker can use the same process for both passive and active attacks.
+>
+> **At the architectural level, we cannot address physical attacks against the CPU’s chip package.** [...]
+>
+> Thankfully, **physical attacks can be deterred by reducing the value that an attacker obtains by compromising an individual chip. As long as this value is below the cost of carrying out the physical attack, a system's designer can hope that the processor's chip package will not be targeted by the physical attacks.**
+>
+> Architects can reduce the value of compromising an individual system by avoiding shared secrets, such as global encryption keys. Chip designers can increase the cost of a physical attack by not storing a platform's secrets in hardware that is vulnerable to destructive attacks, such as e-fuses.
+
+> [[22]]: Friedrich Beck. _Integrated Circuit Failure Analysis: a Guide to Preparation Techniques._ John Wiley & Sons, 1998.
+
+There's also a brief discussion of PUFs in a security analysis section of [Intel SGX Explained], section _6.6.2 Physical Attacks_:
+
+> The threat model stated by the SGX design excludes physical attacks targeting the CPU chip (§ 3.4.3).  Fortunately, Intel’s patents disclose an array of countermeasures aimed at increasing the cost of chip attacks.
+>
+> For example, the original SGX patents [110, 138] disclose that the Fused Seal Key and the Provisioning Key, which are stored in e-fuses (§ 5.8.2), are encrypted with a global wrapping logic key (GWK). The GWK is a 128-bit AES key that is hard-coded in the processor’s circuitry, and serves to increase the cost of extracting the keys from an SGX-enabled processor.
+>
+> As explained in § 3.4.3, e-fuses have a large feature size, which makes them relatively easy to “read” using a high-resolution microscope. In comparison, the circuitry on the latest Intel processors has a significantly smaller feature size, and is more difficult to reverse engineer. **Unfortunately, the GWK is shared among all the chip dies created from the same mask, so it has all the drawbacks of global secrets explained in § 3.4.3.**
+>
+> Newer Intel patents [67, 68] describe SGX-enabled processors that employ a Physical Unclonable Function (PUF), e.g., [175], [133], which generates a symmetric key that is used during the provisioning process.
+>
+> Specifically, at an early provisioning stage, the PUF key is encrypted with the GWK and transmitted to the key generation server. At a later stage, the key generation server encrypts the key material that will be burned into the processor chip’s e-fuses with the PUF key, and transmits the encrypted material to the chip. The PUF key increases the cost of obtaining a chip’s fuse key material, as an attacker must compromise both provisioning stages in order to be able to decrypt the fuse key material.
+>
+> As mentioned in previous sections, patents reveal design possibilities considered by the SGX engineers. However, due to the length of timelines involved in patent applications, patents necessarily describe earlier versions of the SGX implementation plans, which might not match the shipping implementation. We expect this might be the case with the PUF provisioning patents, as it makes little sense to include a PUF in a chip die and rely on e-fuses and a GWK to store SGX’s root keys. Deriving the root keys from the PUF would be more resilient to chip imaging attacks.
+
+I don't know whether the latest Intel SGX chips make use of PUFs, and how accurate the above still is for the latest chips.
+
+In any case, it's quite clear that from the authors of [Intel SGX Explained], physical attacks cannot be "physically" prevented but can only be "economically" prevented. A more recent paper, [SoK: Hardware-supported TEEs] by _Moritz Schneider et al_, also note that in their survey of TEE designs, but in the industry and academia, none can defend against chip attacks.  
+
+> _Invasive adversary:_ This adversary can launch invasive attacks such as de-layering the physical chip, manipulating clock signals and voltage rails to cause faults, etc., to extract secrets or force a different execution path than the intended one. For the sake of completeness, we include this adversary (`A_inv`) in our list but note that no TEE design currently defends against such an attacker. So, we do not discuss this
+attacker any further in this paper.
+
+**Hence, chips are secure through economic incentives, not through physics.** If that is correct, using TEEs in a protocol calls for a very careful mechanism design where protocol designers take into account the cost of physically attacking the chip. For example, if we put a price tag of 1 million dollar in performing a chip attack, then a protocol using TEEs should make sure that less than 1 million dollars can be gained by performing a chip attack. Moreover, it is very important to take into account that this way of thinking does not consider attackers who wish to attack a protocol for non-economical reasons, such as breaking the privacy and/or anonymity of participants in the targeted protocol. In the case of such protocols, then it seems that current TEEs are simply not a reliable technology, as any attackers with sufficient funds and motivated to break the privacy and/or anonymity of a protocol, would be able to carry on the attack.
+
+Now, with this background in mind, it seems that it would be extremely useful to see actual chip attacks being reported by research groups, as it would help to set a price on such attacks, and the price of the attack could be use by protocol designers.
+
+[22]: https://www.wiley.com/en-ae/Integrated+Circuit+Failure+Analysis:+A+Guide+to+Preparation+Techniques-p-9780471974017
+[Intel SGX Explained]: https://eprint.iacr.org/2016/086
+[SoK: Hardware-supported TEEs]: https://arxiv.org/abs/2205.12742
 
 ## Contributing to this Document
 You can make edits and pull requests for https://github.com/sbellem/qtee/blob/main/qtee.md which should be a mirror of this document.
@@ -183,3 +329,4 @@ You should also be able to make comments on this document.
 [High-Dimensional Quantum Certified Deletion]: https://arxiv.org/abs/2304.03397
 [Quantum Proofs of Deletion for Learning with Errors]: https://arxiv.org/abs/2203.01610
 [Traceable Secret Sharing: Strong Security and Efficient Constructions]: https://eprint.iacr.org/2024/405
+[The battle for Ring Zero]: https://pluralistic.net/2022/01/30/ring-minus-one/#drm-political-economy
