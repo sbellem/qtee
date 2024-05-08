@@ -1,25 +1,37 @@
+:::info
+:construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction:
+
+_This document is just a draft. Not to be taken too seriously._ :slightly_smiling_face: 
+
+:construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction:
+:::
+
 # qTEE: Moving Towards Open Source and Verifiable Secure-through-Physics TEE Chips
 This is an initiative to spark research to explore how we could develop a secure chip for TEEs (Trusted Execution Environments) that would ultimately be secure because of physics rather than economics[^1]. The chip design should be open source, and its physical implementation should be verifiable, meaning that it should match the open source design. Moreover, the root of trust (embedded secret key) should be proven to have not leaked during generation or manufacturing. Thus, the hope and vision is to develop a TEE chip that does not need to be trusted because it can be verified by physics and mathematics. For an example of a cryptographic protocol implementation that is secure through physics see [Experimental relativistic zero-knowledge proofs] by _Alikhani et al_.
 
 
+:::danger 
 To put this vision into context, current TEEs such as Intel SGX, face the following challenges:
 
-1. **NO proof of manufacturing** according to a known open source chip design specification
-2. **NO proof of non-leakage of secret bits** -- how can we know that the secret bits (root of trust) encoded into the chip were not leaked at any point in time during manufacturing
-3. **NO proof of hidden-forever secret bits** -- above and beyond trusting or not trusting the chip manufacturers, and the manufacturing processes, one problem remains: Can we truly hide secret bits of information (root of trust) into physical matter?
+1. :radioactive_sign: **NO proof of manufacturing** according to a known open source chip design specification
+2. :radioactive_sign: **NO proof of non-leakage of secret bits** -- how can we know that the secret bits (root of trust) encoded into the chip were not leaked during manufacturing
+3. :radioactive_sign: **NO proof of hidden-forever secret bits** -- above and beyond trusting or not trusting the chip manufacturers, and the manufacturing processes, one problem remains: Can we truly hide secret bits of information (root of trust) into physical matter?
+4. :radioactive_sign: **Centralized remote attestation** -- meaning that trust in the manufacturer is required to attest the trustworthiness of a TEE. [[RFC 9334]]
 
 See https://github.com/sbellem/qtee/issues/2, for more details[^2].
-
+:::
 
 ## Overview
 The key topics that this document wishes to explore are:
 
 * [Revisiting the Problem which TEEs aim to solve](#The-Problem-TEEs-aim-to-solve)
 * [Motivations for better TEEs](#Motivation)
+* [Threat Model](#Threat-Model)
 * [Cypherpunk-Friendly Chip](#Cypherpunk-Friendly-Chip)
     * [Verifiable Chip based on an Open Source Hardware Design](#Verifiable-Chip-based-on-an-Open-Source-Hardware-Design)
     * [Marching Towards DAMOs (aka Zero Trust Manufacturing)](#Marching-Towards-DAMOs)
     * [Root of Trust with PUFs](#Root-of-Trust-with-PUFs)
+    * [Decentralized Remote Attestation](#Decentralized-Remote-Attestation)
 * [Do we really need TEEs? Could we do it all with mathematics (FHE, ZKP, MPC, etc)?](#Do-we-really-need-TEEs?)
 * [Beyond PUFs: Cryptography and Physics United](#Beyond-PUFs-Cryptography-and-Physics-United)
 * [Appendix: Intel SGX's Root of Trust](#Appendix-Intel-SGXs-Root-of-Trust)
@@ -29,7 +41,9 @@ The key topics that this document wishes to explore are:
 ## The Problem TEEs aim to solve
 TEEs are an attempt to solve the _secure remote computation_ problem. Quoting [Intel SGX Explained] by _Victor Costan and Srinivas Devadas_:
 
-> Secure remote computation is the problem of executing software on a remote computer owned and maintained by an untrusted party, with some integrity and confidentiality guarantees.
+:::info
+> _Secure remote computation is the problem of executing software on a remote computer owned and maintained by an untrusted party, with some integrity and confidentiality guarantees._
+:::
 
 Note that the remote computer is said to be owned and maintained by an _untrusted_ party. Yet, current TEEs, cannot handle physical attacks such as chip attacks (see [TEE Chip Attacks: What does it take?](#Appendix-Chip-Attacks-–-What-does-it-take?)), which would allow an attacker to retrieve the root of trust (secret keys encoded in the hardware). Once an attacker knows the secret keys, it can emulate a TEE, and go through the attestation process unnoticed (e.g. see Appendix A. Emulated Guard eXtensions in https://sgx.fail/ paper).
 
@@ -46,15 +60,19 @@ Aside from being vulnerable to chip attacks the current popular TEEs, such as In
 ### Don't Trust, Verify ... Or use TEEs?
 In the crypto world, the motto "Don't Trust, Verify" is frequently used to emphasize the verifiability feature of the various protocols, which allows any user to verify for themselves the validity of a transaction or claim. It may be said that the backbone of the reverred verifiability is cryptography and distributed systems, which involves trusting mathematics and trusting an honest majority, respectively. Consensus protocols, and many multi-party computation (MPC) protocols require to trust that the majority of the validators are honest. The majority may range from 51% to 75% depending on the protocol. So on one hand the world of crypto is secured through a combination of mathematics and trust in an "honest majority". So what about TEEs? Where do they fit in this picture?
 
-The so-called web3 world (aka as crypto space) increasingly makes use of TEEs (mostly Intel SGX) in applications where substantial amounts of money may flow, and where TEEs help secure the confidentiality of its users. It's therefore important to properly understand what it means to trust TEEs. For a strange reason, it seems complicated to answer the question of "What does it means to trust TEEs?" If you ask different people, you may find a spectrum of different answers ranging from the likes of: "You have to trust the chip maker! But you already trust them anyways." to "Intel SGX is broken every month, I don't understand why people use them!" In general, it may be fair to say that trusting a TEE means the following:
+The so-called web3 world (aka as crypto space) increasingly makes use of TEEs (mostly Intel SGX) in applications where substantial amounts of money may flow, and where TEEs help secure the confidentiality of its users. It's therefore important to properly understand what it means to trust TEEs. For a strange reason, it seems complicated to answer the question of "What does it mean to trust TEEs?" If you ask different people, you may find a spectrum of different answers ranging from the likes of: "You have to trust the chip maker! But you already trust them anyways." to "Intel SGX is broken every month, I don't understand why people use them!"
 
-1. Trust that the chip is designed as per the claims of the chip maker.
-2. Trust that the chip is manufactured as per the claims of the chip maker.
-3. Trust that the root of trust is not leaked during the manufacturing process.
-4. Trust that the root of trust cannot be extracted out "cheaply" or "easily" by an attacker who has physical access to the chip.
+:::warning
+In general, it may be fair to say that trusting a TEE means the following:
 
-Note that the above implicitly assumes that the design and implementation are secure, free of bugs[^3].
+1. Trust that the chip is **designed** as per the claims of the chip maker.
+2. Trust that the chip is **manufactured** as per the claims of the chip maker.
+3. Trust that the **root of trust** is not leaked during the manufacturing process.
+4. Trust that the **root of trust** cannot be extracted out "cheaply" or "easily" by an attacker who has physical access to the chip.
+5. Trust the **remote attestation** process, which may mean having to trust the role of the manufacturer (e.g. Intel SGX with EPID or DCAP).[^3]
 
+Note that the above implicitly assumes that the design and implementation are secure, free of bugs.[^4]
+:::
 
 ## Threat Model
 **The worst.**
@@ -70,15 +88,26 @@ Note that the above implicitly assumes that the design and implementation are se
 _Perhaps_ the only thing that may be out-of-bound is remote civilizations or state actors with access to new physics knowledge that is not yet known by the general public (e.g. academia/universities). For instance, imagine another planet where beings would know how to go faster than the speed of light.
 
 ### Relevant Readings
-[The battle for Ring Zero] by Cory Doctorow.
-> But how can we trust those sealed, low-level controllers? What if manufacturers – like, say, Microsoft, a convicted criminal monopolist – decides to use its low-level controllers to block free and open OSes that compete with it? What if a government secretly (or openly) orders a company to block privacy tools so that it can spy on its population? What if the designers of the secure co-processor make a mistake that allows criminals to hijack our devices and run code on them that, by design, we cannot detect, inspect, or terminate?
+:::danger
+[The battle for Ring Zero] _by Cory Doctorow_.
+> _But how can we trust those sealed, low-level controllers? What if manufacturers – like, say, Microsoft, a convicted criminal monopolist – decides to use its low-level controllers to block free and open OSes that compete with it? What if a government secretly (or openly) orders a company to block privacy tools so that it can spy on its population? What if the designers of the secure co-processor make a mistake that allows criminals to hijack our devices and run code on them that, by design, we cannot detect, inspect, or terminate?_
 >
-> That is: to make our computers secure, we install a cop-chip that determines what programs we can run and stop. To keep bad guys from bypassing the cop-chip, we design our computer so it can't see what the cop-chip is doing. **So what happens if the cop-chip is turned on us?**
-
+> _That is: to make our computers secure, we install a cop-chip that determines what programs we can run and stop. To keep bad guys from bypassing the cop-chip, we design our computer so it can't see what the cop-chip is doing. **So what happens if the cop-chip is turned on us?**_
+:::
 
 
 ## Cypherpunk-Friendly Chip
-As mentioned in [The Problem TEEs aim to solve](#The-Problem-TEEs-aim-to-solve), if the problem we wish to tackle is that of secure remote computation, the threat model should include attackers with physical access to the chip, which means that the chip should be secure against physical attacks, which may not even be possible in the classical setting (i.e. without using quantum physics). That being said, it does not mean that we cannot improve the current TEEs. This section aims to explore what we could feasibly do today to have a chip that attempts to align itself with the motto of "Don't Trust, Verify", omnipresent in the web3 and cypherpunk cultures.
+As mentioned in [The Problem TEEs aim to solve](#The-Problem-TEEs-aim-to-solve), if the problem we wish to tackle is that of secure remote computation, the threat model should include attackers with physical access to the chip, which means that the chip should be secure against physical attacks, which begs the question as to whether this is even possible in the classical setting (i.e. without using quantum physics). That being said, it does not mean that we cannot improve the current TEEs. This section aims to explore what we could feasibly do today to have a chip that attempts to align itself with the motto of "Don't Trust, Verify", omnipresent in the web3 and cypherpunk cultures.
+
+In the context of a secure chip, the motto **"Don't Trust, Verify"** calls for at least four fundamental pillars, which address the challenges presented at the beginning of this document:
+
+:::success
+1. **Proof of manufacturing** according to a known open source chip design specification
+2. **Proof of non-leakage of secret bits** to verify that the root of trust wasn't leaked during manufacturing
+3. **Proof of hidden-forever secret bits** -- the root of trust must be proven to be unbreakable
+4. **Decentralized Remote Attestation** -- :grin: a device should be able to provide a proof that it is what it claims to be.
+:::
+
 
 
 ### Verifiable Chip based on an Open Source Hardware Design
@@ -117,11 +146,17 @@ This is also not a new problem. One approach is to use [Logic Encryption], which
 
 
 ### Marching Towards DAMOs
-**DAMO: Decentralized Autonoumous Manufacturing Organization**
+**DAMO: Decentralized Autonomous Manufacturing Organization**
 
-How can we be certain that the manufacturing process did not leak the secret keys (root of trust)? Could the supply chain somehow produce a proof of non-leakage of secret keys? 
+How can we be certain that the manufacturing process did not leak the secret keys (root of trust)? Could the supply chain somehow produce a proof of non-leakage of secret keys?
 
-Can we learn something interesting from Zero Trust applied to Chip Manufacturing? 
+Could we somehow bootstrap a fully automated foundry, where the manufacturing process is fully programmed, verifiable, and chips are built atom-by-atom.
+
+Or, could we build chips at home?
+
+
+#### Zero Trust Manufacturing
+_Can we learn something interesting from Zero Trust applied to Chip Manufacturing?_
 
 * [Zero trust security model](https://en.wikipedia.org/wiki/Zero_trust_security_model)
 * [Intel: A Zero Trust Approach to Architecting Silicon](https://www.intel.com/content/www/us/en/newsroom/opinion/zero-trust-approach-architecting-silicon.html#gs.43wv53)
@@ -129,6 +164,14 @@ Can we learn something interesting from Zero Trust applied to Chip Manufacturing
 * [Building a Zero Trust Security Model for Autonomous Systems ](https://spectrum.ieee.org/zero-trust-security-autonomous-systems) (See "Zero Trust Applied to Chip Design" section)
 * [Zero Trust Security In Chip Manufacturing](https://youtu.be/OsjMcjGkgVE?si=G0nInzcmRRrXhaSg)
 
+#### Building chips atoms by atoms?
+_Nanofactories, nanomanufacturing, atomically precise manufacturing, etc._
+* [Nanofactory](https://www.molecularassembler.com/Nanofactory/index.htm)
+* [Productive Nanosystems](https://en.wikipedia.org/wiki/Productive_nanosystems)
+* [Nanosystems: Molecular Machinery, Manufacturing, and Computation](https://web.archive.org/web/20191008162657/http://e-drexler.com/d/06/00/Nanosystems/toc.html) _by Eric Drexler_
+* [An Introduction to Molecular Nanotechnology](https://youtu.be/cdKyf8fsH6w?si=bE-kHxiHpvKj8Wq3) _with Ralph Merkle_
+* [Molecularly Precise Fabrication and Massively Parallel Assembly: The Two Keys to 21st Century Manufacturing](https://www.molecularassembler.com/Nanofactory/TwoKeys.htm) _by Robert A. Freitas Jr. and Ralph C. Merkle_
+* [Engines of Creation 2.0, The Coming Era of Nanotechnology](https://web.archive.org/web/20140810022659/http://www1.appstate.edu/dept/physics/nanotech/EnginesofCreation2_8803267.pdf) _by Eric Drexler_
 
 #### GitHub Issue
 https://github.com/sbellem/qtee/issues/7
@@ -137,7 +180,6 @@ https://github.com/sbellem/qtee/issues/7
 ### Root of Trust with PUFs
 [Physical Unclonable Functions](https://en.wikipedia.org/wiki/Physical_unclonable_function) are arguably the current best hope to protect against physical attacks aimed at extracting secret keys (root of trust). That being said, PUFs are an active area of research where new PUFs design are proposed and existing designs are broken. Hence, research is needed to better understand the limitations of PUFs in the context of TEEs.
 
-#### Introduction to PUFs
 Not sure where it's best to start, but perhaps this article (if you have access):  
 [Physical unclonable functions](https://www.nature.com/articles/s41928-020-0372-5) by [Yansong Gao](https://www.nature.com/articles/s41928-020-0372-5#auth-Yansong-Gao-Aff1-Aff2), [Said F. Al-Sarawi](https://www.nature.com/articles/s41928-020-0372-5#auth-Said_F_-Al_Sarawi-Aff3) & [Derek Abbott](https://www.nature.com/articles/s41928-020-0372-5#auth-Derek-Abbott-Aff4)
 
@@ -214,6 +256,49 @@ This seems to be relating to what is called remote attestation in the context of
 * [Providing Root of Trust for ARM TrustZone using On-Chip SRAM](https://eprint.iacr.org/2014/464)
 * [Making sense of PUFs](https://semiengineering.com/pufs-promise-better-security/)
 
+### Decentralized Remote Attestation
+:construction: TODO :construction: 
+
+Not sure how this could be achieved. Conceptually speaking, a device should be able to proof what it claims to be with respect to both its hardware and software, without relying on a trusted third party such as the manufacturer. [RFC 9334 - Remote ATtestation procedureS (RATS) Architecture](https://rfc-editor.org/rfc/rfc9334.html) may be useful to review in the context of our [threat model](#Threat-Model).
+
+For instance, in the case of Intel SGX, the chip manufacturer plays a central role in the remote attestation process. It may be useful to go through all the steps that Intel plays (e.g. provisioning attestation keys, verifying quotes, etc) and think through to see how these steps could be decentralized. Perhaps first defining the [ideal functionality] for remote attestation would be useful; or reviewing works that have already done so. Once we have the ideal functionality defined
+
+#### Ideal Functionality for Remote Attestation
+:construction: TODO :construction: 
+See perhaps [Cryptographically Assured Information Flow: Assured Remote Execution](https://arxiv.org/abs/2402.02630) for inspiration.
+
+
+#### Thought experiment
+
+:::success
+:construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction:
+:construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction:
+:construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction:
+ 
+#### :thought_balloon: Thought experiment
+If somehow we have managed to manufacture a chip, in a "decentralized" way, such that it can be verified, then perhaps the "decentralized" manufacturing process could log public metadata about the chip that would uniquely identify it. For instance, the metadata could be tied to a fingerprint generated via a PUF, in the chip. The metadata would contain the proof of correct manufacturing with respect to the requirements discussed earlier, such as matching a (formally verified) open source hardware design, and not leaking secret bits.
+
+Then remote attestation in this case would involve first requesting from the device that it provides its unique fingerpring which could then be verified against the public metadata ... but how could we prevent devices from providing a fake fingerprint? Perhaps the public records of correctly manufactured devices should not be public afterall. That is, a chip's fingerprint should not be publicly linkable to the metadata (proofs of correct manufacturing). Said differently, a verifier should just needs to know that the chip it is interacting with has been manufactured correctly, and the verification process should not reveal information that could be used by a malicious chip to forge a fake identity.
+
+We also need a proof that it loaded the expected software for execution ...
+
+:construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction:
+:construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction:
+:construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: 
+:::
+
+#### Readings
+* [Cryptographically Assured Information Flow: Assured Remote Execution](https://arxiv.org/abs/2402.02630)
+* https://web.cs.wpi.edu/~guttman/pubs/good_attest.pdf
+* https://arxiv.org/abs/2105.02466
+* https://seclab.stanford.edu/pcl/cs259/projects/cs259_final_lavina_jayesh/CS259_report_lavina_jayesh.pdf
+* https://github.com/ietf-rats-wg/architecture?tab=readme-ov-file
+* https://link.springer.com/article/10.1007/s10207-011-0124-7
+* https://arxiv.org/pdf/2308.11921
+* https://arxiv.org/pdf/2306.14882
+* https://arxiv.org/pdf/2204.06790
+
+
 ## Do we really need TEEs?
 **Why can't we do it all with FHE, ZKP, and MPC?**
 
@@ -221,7 +306,10 @@ Not sure. :smile: Besides the performance limitations of FHE, ZKP and MPC, the p
 
 
 ## Beyond PUFs: Cryptography and Physics United
-See https://github.com/sbellem/qtee
+_See https://github.com/sbellem/qtee_
+
+Since a TEE is ultimately a physical device, in which secret bits are embedded, it seems inevitable that soon or later we'll have to confront the question of whether it's really physically possible to hide these secret bits. Current efforts and hopes appear to rest on economic incentives at best, meaning that the costs of breaking into the physical device are hoped to be too high for the gains that the attacker will get in return.  But what if we could design and implement chips that are secure as long as the physics is not broken. That is, chips for which breaking their security would mean breaking laws of physics. This is not a new concept, and has been done in [Physical One-Way Functions] _by Ravikanth Pappu_ and [Experimental relativistic zero-knowledge proofs] _by Alikhani et al._ for instance. 
+
 
 ### Trusted Black Hole Execution Environments
 [Black Hole Computers](https://www.scientificamerican.com/article/black-hole-computers-2007-04/)
@@ -235,10 +323,12 @@ If we take Intel as an example, trusting the chip manufacturer means many things
 ![image](https://hackmd.io/_uploads/rydXhPCTa.png)
 
 ## Appendix: Chip Attacks -- What does it take?
-
+:::danger
 **tl;dr**: Chip attacks cannot be prevented, but only made expansive to carry on, which is very relative, depending on the application in which the chip is used. Furthermore, as far as I know, there's no known chip attack that has been reported along with its required cost. Hence, currently we can only speculate that an attack may be in the range of a 1 million dollars, judging from the cost of focused ion beam (FIB) microscopes and guessing how much money a team of experts would cost. In the context of crypto/web3, protocol designers should probably be extremely careful, given that many protocols move massive amounts of money; in the hundreds of millions, and more.
-
+:::
+:::success
 It would be extremely useful to see actual chip attacks being reported by research groups, as it would help to set a price on such attacks, and the price of the attack could be used by protocol designers.
+:::
 
 ---
 
@@ -286,12 +376,15 @@ There's also a brief discussion of PUFs in a security analysis section of [Intel
 
 I don't know whether the latest Intel SGX chips make use of PUFs, and how accurate the above still is for the latest chips.
 
-In any case, it's quite clear that from the authors of [Intel SGX Explained], physical attacks cannot be "physically" prevented but can only be "economically" prevented. A more recent paper, [SoK: Hardware-supported TEEs] by _Moritz Schneider et al_, also note that in their survey of TEE designs, but in the industry and academia, none can defend against chip attacks.  
+:::danger
+In any case, it's quite clear that from the authors of [Intel SGX Explained], physical attacks cannot be "physically" prevented but can only be "economically" prevented. A more recent paper, [SoK: Hardware-supported TEEs] by _Moritz Schneider et al_, also note that in their survey of TEE designs, both in the industry and academia, none can defend against chip attacks.  
 
-> _Invasive adversary:_ This adversary can launch invasive attacks such as de-layering the physical chip, manipulating clock signals and voltage rails to cause faults, etc., to extract secrets or force a different execution path than the intended one. For the sake of completeness, we include this adversary (`A_inv`) in our list but note that no TEE design currently defends against such an attacker. So, we do not discuss this
-attacker any further in this paper.
+> _Invasive adversary:_ This adversary can launch invasive attacks such as de-layering the physical chip, manipulating clock signals and voltage rails to cause faults, etc., to extract secrets or force a different execution path than the intended one. For the sake of completeness, we include this adversary (`A_inv`) in our list but note that **no TEE design currently defends against such an attacker.** So, we do not discuss this attacker any further in this paper.
+:::
 
+:::warning
 **Hence, chips are secure through economic incentives, not through physics.** If that is correct, using TEEs in a protocol calls for a very careful mechanism design where protocol designers take into account the cost of physically attacking the chip. For example, if we put a price tag of 1 million dollar in performing a chip attack, then a protocol using TEEs should make sure that less than 1 million dollars can be gained by performing a chip attack. Moreover, it is very important to take into account that this way of thinking does not consider attackers who wish to attack a protocol for non-economical reasons, such as breaking the privacy and/or anonymity of participants in the targeted protocol. In the case of such protocols, then it seems that current TEEs are simply not a reliable technology, as any attackers with sufficient funds and motivated to break the privacy and/or anonymity of a protocol, would be able to carry on the attack.
+:::
 
 Now, with this background in mind, it seems that it would be extremely useful to see actual chip attacks being reported by research groups, as it would help to set a price on such attacks, and the price of the attack could be use by protocol designers.
 
@@ -306,16 +399,18 @@ You should also be able to make comments on this document.
 
 [^1]: Chips attacks cannot be prevented as of today (see [CHIP ATTACKS]). Making the cost of a chip attack expensive is the only current known defense mechanism. Thus, TEEs are ultimately only secure through economics.
 [^2]:  Also, of relevance: https://github.com/sbellem/qtee/issues/1, https://github.com/sbellem/qtee/issues/7, https://github.com/sbellem/qtee/issues/8, [CHIP ATTACKS], and [PUFs].
-[^3]: The reasoning is that design and implementation flaws can be fixed and can happen whether the design is open source or not, whether the supply chain is correct, etc. Hence, design and implementation bugs can be treated separately. It could be argued that an open source hardware design may benefit from a broader community and overtime will contain less bugs than a closed source design.
+[^3]: See for instance [RFC 9334](https://www.rfc-editor.org/rfc/rfc9334.html#name-security-considerations) (section 12) for security considerations when treating the topic of remote attestation.
+[^4]: The reasoning is that design and implementation flaws can be fixed and can happen whether the design is open source or not, whether the supply chain is correct, etc. Hence, design and implementation bugs can be treated separately. It could be argued that an open source hardware design may benefit from a broader community and overtime will contain less bugs than a closed source design.
 
 
 
 [Experimental relativistic zero-knowledge proofs]: https://www.nature.com/articles/s41586-021-03998-y
 [Intel SGX Explained]: https://eprint.iacr.org/2016/086
 [SoK: Hardware-supported TEEs]: https://arxiv.org/abs/2205.12742
+[RFC 9334]: https://www.rfc-editor.org/rfc/rfc9334.html#name-security-considerations
 [mechanism design]: https://en.wikipedia.org/wiki/Mechanism_design
-[CHIP ATTACKS]: https://github.com/sbellem/qtee/blob/main/CHIP_ATTACKS.md
-[PUFs]: https://github.com/sbellem/qtee/blob/main/PUFs.md
+[CHIP ATTACKS]: #Appendix-Chip-Attacks-–-What-does-it-take?
+[PUFs]: #Root-of-Trust-with-PUFs
 [Tiny Tapeout]: https://tinytapeout.com/
 [Zero to ASIC Course]: https://zerotoasiccourse.com/
 [Chips Alliance]: https://github.com/chipsalliance
@@ -330,3 +425,5 @@ You should also be able to make comments on this document.
 [Quantum Proofs of Deletion for Learning with Errors]: https://arxiv.org/abs/2203.01610
 [Traceable Secret Sharing: Strong Security and Efficient Constructions]: https://eprint.iacr.org/2024/405
 [The battle for Ring Zero]: https://pluralistic.net/2022/01/30/ring-minus-one/#drm-political-economy
+[Physical One-Way Functions]: https://cba.mit.edu/docs/theses/01.03.pappuphd.powf.pdf
+[ideal functionality]: https://en.wikipedia.org/wiki/Universal_composability#Ideal_functionality
