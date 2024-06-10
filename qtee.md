@@ -25,14 +25,17 @@ See https://github.com/sbellem/qtee/issues/2, for more details[^2].
 The key topics that this document wishes to explore are:
 
 * [Revisiting the Problem which TEEs aim to solve](#The-Problem-TEEs-aim-to-solve)
+* [Do we really need TEEs? Could we do it all with mathematics (FHE, ZKP, MPC, etc)?](#Do-we-really-need-TEEs?)
 * [Motivations for better TEEs](#Motivation)
+    * [Don't Trust, Verify ... Or use TEEs?](#Dont-Trust-Verify-…-Or-use-TEEs)
+    * [Kerckhoffs's Principle applied to Chip Design](#Kerckhoffss-Principle-applied-to-Chip-Design)
+    * [Related Work](#Related-Work)
 * [Threat Model](#Threat-Model)
 * [Cypherpunk-Friendly Chip](#Cypherpunk-Friendly-Chip)
     * [Verifiable Chip based on an Open Source Hardware Design](#Verifiable-Chip-based-on-an-Open-Source-Hardware-Design)
     * [Marching Towards DAMOs (aka Zero Trust Manufacturing)](#Marching-Towards-DAMOs)
     * [Root of Trust with PUFs](#Root-of-Trust-with-PUFs)
     * [Decentralized Remote Attestation](#Decentralized-Remote-Attestation)
-* [Do we really need TEEs? Could we do it all with mathematics (FHE, ZKP, MPC, etc)?](#Do-we-really-need-TEEs?)
 * [Beyond PUFs: Cryptography and Physics United](#Beyond-PUFs-Cryptography-and-Physics-United)
 * [Appendix: Intel SGX's Root of Trust](#Appendix-Intel-SGXs-Root-of-Trust)
 * [Appendix: Chip Attacks -- What does it take?](#Appendix-Chip-Attacks-–-What-does-it-take?)
@@ -49,7 +52,10 @@ Note that the remote computer is said to be owned and maintained by an _untruste
 
 Is it even possible to build a chip that can handle physical attacks, such as those making use of Focus Ion Beam microscopes as mentioned in [Intel SGX Explained] (section 3.4.3)? One could argue that it's not possible in the classical setting, but may be possible in the quantum setting. Some argue that PUFs (Physical Unclonable Functions) cannot be broken and would therefore be a solution. However, there's plenty of research that focuses of breaking PUFs, and there's also active research in developping more secure PUFs. Hence, it seems reasonable to assume that PUFs are not an ultimate solution to chip attacks, although they do seem to be a major improvement. (See [Root of Trust with PUFs](#Root-of-Trust-with-PUFs).)
 
+## Do we really need TEEs?
+**Why can't we do it all with FHE, ZKP, and MPC?**
 
+Not sure. :smile: Besides the performance limitations of FHE, ZKP and MPC, the problem of proof-of-deletion or certified deletion may be the most mentioned one. The intuition is simple: "How do you prove that you completely forgot what some secret data was deleted?" You could show that your harddisk has been completely wiped out, but perhaps you copied it elsewhere. Hence, certified deletion appears to not be possible in the classical setting but it apparently is if one is willing to step one foot (or two), into the quantum setting (e.g.: [High-Dimensional Quantum Certified Deletion] by _Hufnagel et al_, [Quantum Proofs of Deletion for Learning with Errors] by _Poremba_). If we are confined to the classical setting though, then TEEs may be useful. If the program generating and/or handling secrets is executed in a TEE then the program can be written such that it will delete the secrets once it's done with the task. As an alternative to TEEs, there's the idea of traceable secret sharing as presented in [Traceable Secret Sharing: Strong Security and Efficient Constructions] by _Boneh et al_.
 
 ## Motivation
 According to [SoK: Hardware-supported TEEs] and [Intel SGX Explained], current chips that implement TEEs cannot protect against physical attacks such as chip delayering, which would allow an attacker to extract the so-called root of trust, meaning hardware embedded secret keys upon which the entire security of the TEE depends. The only current known defense against chip attacks is trying to make the cost of a chip attack as high as possible. To make things worst, it's not even clear what the cost of a chip attack is; perhaps one million dollar (see [TEE Chip Attacks: What does it take?](#Appendix-Chip-Attacks-–-What-does-it-take?))? So, at the very least, one would hope we would know what the cost of a chip attack is, such that protocol designers could [design mechanisms][mechanism design] that would eliminate economic incentives to attack the chip, because the cost of the attack would not be worth what could be extracted out of the attack. It's very important to note here that a protocol relying on TEEs may also be targeted for attacks for reasons other than financial, and it's probably best to avoid using TEEs for such cases (e.g. privacy preserving application used by political dissidents).
@@ -74,18 +80,45 @@ In general, it may be fair to say that trusting a TEE means the following:
 Note that the above implicitly assumes that the design and implementation are secure, free of bugs.[^4]
 :::
 
+### Kerckhoffs's Principle applied to Chip Design
+:::success
+[Auguste Kerckhoffs](https://en.wikipedia.org/wiki/Auguste_Kerckhoffs), back in 1883, in his paper entitled [La Cryptographie Militaire](https://www.petitcolas.net/kerckhoffs/la_cryptographie_militaire_i.htm) (Military Cryptography), argued that security through obscurity wasn't a desirable defense technique.
+
+> **_Il faut qu’il n'exige pas le secret, et qu'il puisse sans inconvénient tomber entre les mains de l’ennemi_**
+
+roughly translated to:
+
+> **_It must not require secrecy, and it must be capable without inconvenience to fall into the enemy's hand_**
+
+(Perhaps, one may point out that Kerckhoffs was assuming that the private key would be held secretly and not be part of an open design. The need to secure a private key in an open design begs for physics to enter the arena(e.g. PUFs).
+
+For example, the Secure Cryptographic Implementation Association (SIMPLE-Crypto Association) aims to apply 
+Kerckhoffs's Principle to hardware and lays out their vision at https://www.simple-crypto.org/about/vision/:
+
+> **[...] our vision is that as research advances, the security by obscurity paradigm becomes less justified and its benefits are outweighted by its drawbacks.** That is, while a closed source approach can limit the adversary's understanding of the target implementations as long as their specifications remain opaque, it also limits the public understanding of the mechanims on which security relies, and therefore the possibility to optimize them. By contrast, an open approach to security can lead to a better evaluation of the worst-case security level that is targeted by cryptographic designs.
+:::
+
+:::danger
+For some reason, the hardware world does not embrace open source like the software world. Moreover, it is common practice to use [security through obscurity](https://en.wikipedia.org/wiki/Security_through_obscurity) as a core design principle to secure hardware. Simply said, for whatever reason, the current hardware industry appears to be dominated by the belief that it's best to hide the design and inner workings of a chip by adding unnecessary elements to the design, just to confuse a potential attacker, in the hope that the attacker will not be able to understand the design, and thus reverse engineer it.
+:::
+
+
+### Related Work
+[Lessons Learned from Blockchain Applications of Trusted Execution Environments and Implications for Future Research](https://arxiv.org/pdf/2203.12724)
+
+
 ## Threat Model
 **The worst.**
 
-* Attackers with physical access to the chip, with unlimited resources and funds MUST be considered
+* Attackers with physical access to the chip, with unlimited resources and funds **MUST** be considered
 * State actors
 * Malicious actors with full access to every step of the supply chain, foundries, etc
-* Malicious actors with "special" access to data centers
-* Etc, Etc.
+* Malicious actors with unlimited access to data centers, e.g. swapping computers with their own fake SGX computers without being noticed
+* etc, etc.
 
 **Just think the worst of the worst.**
 
-_Perhaps_ the only thing that may be out-of-bound is remote civilizations or state actors with access to new physics knowledge that is not yet known by the general public (e.g. academia/universities). For instance, imagine another planet where beings would know how to go faster than the speed of light.
+_Perhaps_ the only thing that may be out-of-bound is remote civilizations or state actors with access to new physics that is not yet known by the general public (e.g. academia/universities). For instance, imagine another planet where beings would know how to go faster than the speed of light.
 
 ### Relevant Readings
 :::danger
@@ -122,6 +155,7 @@ This is not a new idea, and it may be useful to survey current and past efforts 
 * [Google Titan]
 * [LibreSilicon]
 * [The Silicon Salon]
+* [Free Silicon Conference 2024](https://wiki.f-si.org/index.php/FSiC2024)
 
 ##### Resources
 [Tiny Tapeout] has a lot of educational material at that may be worth reading for those who don't have a background in hardware. 
@@ -299,17 +333,14 @@ We also need a proof that it loaded the expected software for execution ...
 * https://arxiv.org/pdf/2204.06790
 
 
-## Do we really need TEEs?
-**Why can't we do it all with FHE, ZKP, and MPC?**
-
-Not sure. :smile: Besides the performance limitations of FHE, ZKP and MPC, the problem of proof-of-deletion or certified deletion may be the most mentioned one. The intuition is simple: "How do you prove that you completely forgot what some secret data was?" You could show that your harddisk has been completely wiped out, but perhaps you copied it elsewhere. Hence, certified deletion appears to not be possible in the classical setting but it apparently is if one is willing to step one foot (or two), into the quantum setting (e.g.: [High-Dimensional Quantum Certified Deletion] by _Hufnagel et al_, [Quantum Proofs of Deletion for Learning with Errors] by _Poremba_). If we are confined to the classical setting though, then TEEs may be useful. If the program generating and/or handling secrets is executed in a TEE then the program can be written such that it will delete the secrets once it's done with the task. As an alternative to TEEs, there's the idea of traceable secret sharing as presented in [Traceable Secret Sharing: Strong Security and Efficient Constructions] by _Boneh et al_.
-
-
 ## Beyond PUFs: Cryptography and Physics United
 _See https://github.com/sbellem/qtee_
 
 Since a TEE is ultimately a physical device, in which secret bits are embedded, it seems inevitable that soon or later we'll have to confront the question of whether it's really physically possible to hide these secret bits. Current efforts and hopes appear to rest on economic incentives at best, meaning that the costs of breaking into the physical device are hoped to be too high for the gains that the attacker will get in return.  But what if we could design and implement chips that are secure as long as the physics is not broken. That is, chips for which breaking their security would mean breaking laws of physics. This is not a new concept, and has been done in [Physical One-Way Functions] _by Ravikanth Pappu_ and [Experimental relativistic zero-knowledge proofs] _by Alikhani et al._ for instance. 
 
+
+### Equivalence Relations between High Energy Physics and Cryptography
+[Black-Hole Radiation Decoding is Quantum Cryptography](https://arxiv.org/abs/2211.05491)
 
 ### Trusted Black Hole Execution Environments
 [Black Hole Computers](https://www.scientificamerican.com/article/black-hole-computers-2007-04/)
@@ -332,7 +363,7 @@ It would be extremely useful to see actual chip attacks being reported by resear
 
 ---
 
-By chip attacks here, we mean those described in [Intel SGX Explained], _section 3.4.3_. The paper is from 2016, and at the time of writing the authors wrote that the Intel's CPU had a [feature size](https://en.wikipedia.org/wiki/Semiconductor_device_fabrication#Feature_size) of 14nm. In the interest of being pro-active to understand current or future chips, we could assume [3nm](https://en.wikipedia.org/wiki/3_nm_process) feature size perhaps. But it's not clear what this exactly means, because apparently these numbers are more of a marketing act, as per https://en.wikipedia.org/wiki/3_nm_process:
+By chip attacks here, we mean those described in [Intel SGX Explained], _section 3.4.3_. The paper is from 2016, and at the time of writing the authors wrote that the Intel's CPU had a [feature size](https://en.wikipedia.org/wiki/Semiconductor_device_fabrication#Feature_size) of 14nm. In the interest of being pro-active to understand current or future chips, we could assume [3nm](https://en.wikipedia.org/wiki/3_nm_process) feature size perhaps. But it's not clear what this exactly means, because apparently these numbers are more of a marketing act, as per [3 nm process](https://en.wikipedia.org/wiki/3_nm_process):
 
 > The term "3 nanometer" has no direct relation to any actual physical feature (such as gate length, metal pitch or gate pitch) of the transistors. According to the projections contained in the 2021 update of the [International Roadmap for Devices and Systems](https://en.wikipedia.org/wiki/International_Roadmap_for_Devices_and_Systems) published by IEEE Standards Association Industry Connection, a "3 nm" node is expected to have a contacted gate pitch of 48 nanometers, and a tightest metal pitch of 24 nanometers.[[12]](https://en.wikipedia.org/wiki/3_nm_process#cite_note-IRDS-12)
 >
