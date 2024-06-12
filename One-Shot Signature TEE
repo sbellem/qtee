@@ -1,0 +1,26 @@
+
+# Can we build a Quantum TEE
+
+TEEs (Trusted Execution Environments) are a way to run code in a secure environment, isolated from the rest of a computer system. This is useful for running sensitive code, such as cryptographic operations, in a way that is protected from other software running on the same system. TEEs today are realized via Trusted Hardware: Chip designers purposely design a chip to be inaccessible from the rest of a system so that users can be sure that the code that runs on it is safe. There is even the possibility of *remote attestation*, where a remote party can verify that the code running on a TEE is the code that was intended to run.
+
+The issue with remote attestation is that it relies on the assumption that the hardware is secure. If the hardware is compromised, then the remote attestation can be faked. This is a problem in an attack model where the attacker has physical access to the chip and potentially probe the state of the chip with microscopy tools.
+
+## Why might Quantum computing offer a solution?
+
+A funtamental issue with solving this problem is that the TEE is supposed to run normally when responding to outside queries. Consider a TEE which is tasked with providing a "Read-once" memory: An external call can be made to choose a single slot from the TEE memory to read, but the TEE should not reveal any additional memory slots. In the classical world this is impossible: The attacker could simply copy the entire TEE state, and then read the memory slots one by one using the normal read procedure.
+
+Quantum computing offers a potential solution to this problem. Quantum data is subject to the *no-cloning theorem*, which means it is often not possible to exactly observe or duplicate a quantum state. This means that a TEE based on quantum cryptography, where the data is stored in a quantum state, would not be vulnerable to this attack as stated.
+
+## Attacking the Quantum TEE with the gentle measurement lemma
+
+Unfortunately there is still a way to attack a quantum TEE. The gentle measurement lemma states that if a quantum state is measured in a gentle way, then the state is not disturbed too much. This means that if the output of the "read-once" memory is determministic, then the attacker who reads the first memory slot will not have disturbed the state at all, and can then read the second memory slot with high fidelity by "uncomputing" the first read operation and then carrying it out again to see another slot.
+
+This is not helped even if the reading procedure describes using many measurements of uncertain values. The "principle of deferred measurement" states that the measurement can be deferred until the end of the computation, and the gentle measurement lemma can be applied to the entire measurement procedure.
+
+## Can we get around this?
+
+In the plain model there is no way to get around this, but there are a few things we could try:
+
+* Intense classical computation: The attack described above forces the attacker to perform the entire read operation in superposition, so that it can be uncomputed later. While we can't fundamentally prevent this, we can make it very expensive for the attacker to do so. If we specify that part of the operation involves a large amount of classical computation, then the attacker would need to perform this computation in superposition, which is perhaps much more expensive than the original operation, depnding on the relative expense of classical and quantum computation.
+* External connection: Taking the idea farther, we might force the attacker to prove it had measured some data early by forcing the attacker to post classical data to some blockchain. The idea would be that it is not possible for the attacker to fake a confirmed blockchain transaction, and that a light client proof of this transaction could then be fed into some witness to some functional encryption scheme to allow the attacker to read the memory slot. In some sense this doesn't solve the problem since it requires us to use external trusted computation, but this is better than MPC in that we do not need the blockchain validators to be aware of our protocol.
+* Proof of secure erasure: Many classical protocols that prove security based on the assumption that the attacker has limited memory. If the attacker produces a proof that they used a lot of memory, it proves they have erased some other memory.
