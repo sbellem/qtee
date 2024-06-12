@@ -6,9 +6,9 @@ _This document is just a draft. Not to be taken too seriously._ :slightly_smilin
 :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction:
 :::
 
+
 # qTEE: Moving Towards Open Source and Verifiable Secure-through-Physics TEE Chips
 This is an initiative to spark research to explore how we could develop a secure chip for TEEs (Trusted Execution Environments) that would ultimately be secure because of physics rather than economics[^1]. The chip design should be open source, and its physical implementation should be verifiable, meaning that it should match the open source design. Moreover, the root of trust (embedded secret key) should be proven to have not leaked during generation or manufacturing. Thus, the hope and vision is to develop a TEE chip that does not need to be trusted because it can be verified by physics and mathematics. For an example of a cryptographic protocol implementation that is secure through physics see [Experimental relativistic zero-knowledge proofs] by _Alikhani et al_.
-
 
 :::danger 
 To put this vision into context, current TEEs such as Intel SGX, face the following challenges:
