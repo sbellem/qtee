@@ -231,7 +231,10 @@ OR:
   
 
 #### First well-known PUF: Physical One-Way Functions
-https://nbviewer.org/github/rpappu/pdf-publications/blob/master/Pappu-Science-2002.pdf
+https://www.science.org/doi/full/10.1126/science.1074376
+
+Also at https://nbviewer.org/github/rpappu/pdf-publications/blob/master/Pappu-Science-2002.pdf
+
 
 #### Remote Attestation
 * [A lightweight remote attestation using PUFs and hash-based signatures for low-end IoT devices](https://www.sciencedirect.com/science/article/pii/S0167739X23002236)
@@ -243,7 +246,8 @@ https://nbviewer.org/github/rpappu/pdf-publications/blob/master/Pappu-Science-20
 * [Everlasting UC Commitments from Fully Malicious PUFs](https://eprint.iacr.org/2021/248)
 
 #### New PUFs
-* https://arxiv.org/abs/2310.19587
+* [Self-assembled physical unclonable function labels based on plasmonic coupling
+](https://arxiv.org/abs/2310.19587)
 * https://pubs.aip.org/aip/sci/article/2019/29/290009/360043/Fingerprinting-silicon-chips-just-got-easier
 * [Spectral sensitivity near exceptional points as a resource for hardware encryption](https://www.nature.com/articles/s41467-023-36508-x)
 
@@ -285,10 +289,20 @@ This seems to be relating to what is called remote attestation in the context of
 * https://github.com/chipsalliance/caliptra-rtl/blob/main/docs/CaliptraIntegrationSpecification.md
 
 #### References
+* [Physical One-Way Functions](https://www.science.org/doi/full/10.1126/science.1074376) _by Pappu et al._
+* [On the Foundations of Physical Unclonable Functions](https://eprint.iacr.org/2009/277) _by Rührmair et al._
+* [Security based on Physical Unclonability and Disorder](https://aceslab.org/sites/default/files/04-fk-PUF.pdf) _by Rührmair et al._
+* [SIMPL Systems: On a Public Key Variant of Physical Unclonable Functions](https://eprint.iacr.org/2009/255) _by Rührmair_
+* [Towards Secret-Free Security](https://eprint.iacr.org/2019/388.pdf) by Ruhrmair
+* [Physically Unclonable Functions: A Study on the State of the Art and Future Research Directions](https://link.springer.com/chapter/10.1007/978-3-642-14452-3_1) _by Roel Maes & Ingrid Verbauwhede_
+
+##### Other References
 * [Physical Unclonable Functions for Device Authentication and Secret Key Generation](https://people.csail.mit.edu/devadas/pubs/puf-dac07.pdf)
 * [Feasibility and Infeasibility of Secure Computation with Malicious PUFs](https://eprint.iacr.org/2015/405)
 * [Providing Root of Trust for ARM TrustZone using On-Chip SRAM](https://eprint.iacr.org/2014/464)
 * [Making sense of PUFs](https://semiengineering.com/pufs-promise-better-security/)
+
+
 
 ### Decentralized Remote Attestation
 :construction: TODO :construction: 
