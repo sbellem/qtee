@@ -214,6 +214,10 @@ https://github.com/sbellem/qtee/issues/7
 ### Root of Trust with PUFs
 [Physical Unclonable Functions](https://en.wikipedia.org/wiki/Physical_unclonable_function) are arguably the current best hope to protect against physical attacks aimed at extracting secret keys (root of trust). That being said, PUFs are an active area of research where new PUFs design are proposed and existing designs are broken. Hence, research is needed to better understand the limitations of PUFs in the context of TEEs.
 
+The first PUFs was presented in the PhD thesis titled 
+[Physical one-way functions](https://dspace.mit.edu/handle/1721.1/45499), by Ravikanth Srinivasa Pappu.
+
+
 Not sure where it's best to start, but perhaps this article (if you have access):  
 [Physical unclonable functions](https://www.nature.com/articles/s41928-020-0372-5) by [Yansong Gao](https://www.nature.com/articles/s41928-020-0372-5#auth-Yansong-Gao-Aff1-Aff2), [Said F. Al-Sarawi](https://www.nature.com/articles/s41928-020-0372-5#auth-Said_F_-Al_Sarawi-Aff3) & [Derek Abbott](https://www.nature.com/articles/s41928-020-0372-5#auth-Derek-Abbott-Aff4)
 
@@ -295,12 +299,14 @@ This seems to be relating to what is called remote attestation in the context of
 * [SIMPL Systems: On a Public Key Variant of Physical Unclonable Functions](https://eprint.iacr.org/2009/255) _by Rührmair_
 * [Towards Secret-Free Security](https://eprint.iacr.org/2019/388.pdf) by Ruhrmair
 * [Physically Unclonable Functions: A Study on the State of the Art and Future Research Directions](https://link.springer.com/chapter/10.1007/978-3-642-14452-3_1) _by Roel Maes & Ingrid Verbauwhede_
+* [Silicon Physical Random Functions](https://dl.acm.org/doi/pdf/10.1145/586110.586132) _by Gassend et al._
 
 ##### Other References
 * [Physical Unclonable Functions for Device Authentication and Secret Key Generation](https://people.csail.mit.edu/devadas/pubs/puf-dac07.pdf)
 * [Feasibility and Infeasibility of Secure Computation with Malicious PUFs](https://eprint.iacr.org/2015/405)
 * [Providing Root of Trust for ARM TrustZone using On-Chip SRAM](https://eprint.iacr.org/2014/464)
 * [Making sense of PUFs](https://semiengineering.com/pufs-promise-better-security/)
+* https://github.com/Tribler/tribler/issues/3064
 
 
 
@@ -360,12 +366,41 @@ Since a TEE is ultimately a physical device, in which secret bits are embedded, 
 [Black Hole Computers](https://www.scientificamerican.com/article/black-hole-computers-2007-04/)
 
 
+## Appendix: Keystone Enclave
+**[Keystone Enclave](https://github.com/keystone-enclave/keystone) Architecture Overview**
+
+![image](https://hackmd.io/_uploads/rJWsUtcHR.png)
+
+**Keystone Workflow**
+![image](https://hackmd.io/_uploads/rkuqCY9HA.png)
+
+
 
 ## Appendix: Intel SGX's Root of Trust
 If we take Intel as an example, trusting the chip manufacturer means many things. Intel SGX's so-called root of trust rests on two secret keys (seal secret and provisionaing secret), and an attestation key, as shown in the figure below, from [Intel SGX Explained]. Note that this may have changed since the writing of the [Intel SGX Explained] paper, but at the time at least, the two secrets were said to be stored in e-fuses inside the processor's die. Moreover, the two secret keys, stored in e-fuses, were encrypted with a global wrapping logic key (GWK). The GWK is a 128-bit AES key that is hard-coded in the processor's circuitry, and serves to increase the cost of extracting the keys from an SGX-enabled processor. The Provisioning Secret was said to be generated at the key generation facility - burned into the processor's e-fuses and stored in Intel's Provisioning Service DB. The Seal Secret was said to be generated inside the processor chip, and claimed not to be known to Intel. Hence, trusting Intel meant to trust that they do not leak the attestation key, and the provisioning key as they have access to them. Trusting Intel also meant that the manufacturing process that generates and embeds the Seal Secret did not leak the secret key. Trusting Intel also meant that once a chip is made, they did not attempt to extract the Seal Key, which is the only key, out of three, which they did not know.
 
 
 ![image](https://hackmd.io/_uploads/rydXhPCTa.png)
+
+## Appendix: Software Attestation in Intel SGX
+From [Intel SGX Explained], section 3.3.1:
+
+![image](https://hackmd.io/_uploads/r1c8jd9S0.png)
+
+[Intel SGX Explained], 5.7.2 Certificate-Based Enclave Identity, mentions:
+
+> The SGX implementation relies on a hard-coded MRSIGNER value to recognize certificates issued by Intel. Enclaves that have an Intel-issued certificate can receive additional privileges, which are discussed in § 5.8.
+
+and further in section 5.8:
+
+> The cryptographic primitive used in SGX's attestation signature is too complex to be implemented in hardware, so the signing process is performed by a privileged Quoting Enclave, which is issued by Intel, and can access the SGX attestation key. 
+
+Observation/question: Whoever has access to Intel's signing key could potentially sign a different quoting enclave that would use the attestation key to sign "fake" quotes. 
+
+:::warning
+Not sure if that is still relevant with DCAP.
+:::
+
 
 ## Appendix: Chip Attacks -- What does it take?
 :::danger
