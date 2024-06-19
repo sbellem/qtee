@@ -240,6 +240,56 @@ https://www.science.org/doi/full/10.1126/science.1074376
 Also at https://nbviewer.org/github/rpappu/pdf-publications/blob/master/Pappu-Science-2002.pdf
 
 
+#### Taxonomy of PUFs
+Main reference: https://pubs.aip.org/aip/apr/article/6/1/011303/571003/A-PUF-taxonomy
+
+![image](https://hackmd.io/_uploads/r19_7exI0.png)
+
+
+![image](https://hackmd.io/_uploads/HJdtVgxUA.png)
+
+
+Images source: [A PUF taxonomy](https://pubs.aip.org/aip/apr/article/6/1/011303/571003/A-PUF-taxonomy) by McGrath et al.
+
+
+<table>
+    <thead>
+        <tr>
+            <th>Concept</th>
+            <th>Mechanism</th>
+            <th>Parameter</th>
+            <th>Implicity</th>
+            <th>Evaluation</th>
+            <th>Family</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Arbiter PUF</td>
+            <td rowspan=4>All-electronic</td>
+            <td rowspan=2>Time</td>
+            <td rowspan=4>Implicit</td>
+            <td rowspan=4>Intrinsic</td>
+            <td rowspan=3>Racetrack</td> 
+        </tr>
+        <tr>
+            <td>ClockPUF</td>
+        </tr>
+        <tr>
+            <td>Ring oscillator PUF</td>
+            <td rowspan=2>Frequency</td>
+        </tr>
+        <tr>
+            <td>TERO PUF</td>
+            <td>Transient/glitch</td>
+        </tr>
+    </tbody>
+</table>
+
+Partial table source: [A PUF taxonomy](https://pubs.aip.org/aip/apr/article/6/1/011303/571003/A-PUF-taxonomy) by McGrath et al.
+
+
+
 #### Remote Attestation
 * [A lightweight remote attestation using PUFs and hash-based signatures for low-end IoT devices](https://www.sciencedirect.com/science/article/pii/S0167739X23002236)
 * [SMART: Secure and Minimal Architecture for (Establishing a Dynamic) Root of Trust](https://ics.uci.edu/~gts/paps/smart.pdf)
@@ -300,6 +350,7 @@ This seems to be relating to what is called remote attestation in the context of
 * [Towards Secret-Free Security](https://eprint.iacr.org/2019/388.pdf) by Ruhrmair
 * [Physically Unclonable Functions: A Study on the State of the Art and Future Research Directions](https://link.springer.com/chapter/10.1007/978-3-642-14452-3_1) _by Roel Maes & Ingrid Verbauwhede_
 * [Silicon Physical Random Functions](https://dl.acm.org/doi/pdf/10.1145/586110.586132) _by Gassend et al._
+* [PUF Taxonomy](https://pubs.aip.org/aip/apr/article/6/1/011303/571003/A-PUF-taxonomy)
 
 ##### Other References
 * [Physical Unclonable Functions for Device Authentication and Secret Key Generation](https://people.csail.mit.edu/devadas/pubs/puf-dac07.pdf)
