@@ -42,7 +42,7 @@ Intel SGX aims to solve the secure remote computation problem with hardware.
 
 * **NO proof of manufacturing**
 
-* **Centralized remote attestation** 
+* **Centralized remote attestation**
 
 ---
 
@@ -117,7 +117,7 @@ _[Pappu et al.](https://www.science.org/doi/full/10.1126/science.1074376)_
 **Physical One-Way Functions**
 -- [PhD thesis](https://dspace.mit.edu/handle/1721.1/45499) by Pappu
 
-> "Our work is philosophically inspired by the notion of Quantum Money, first proposed in 1983 by Wiesner in a paper titled [Conjugate Coding](https://dl.acm.org/doi/10.1145/1008908.1008920)". 
+> "Our work is philosophically inspired by the notion of Quantum Money, first proposed in 1983 by Wiesner in a paper titled [Conjugate Coding](https://dl.acm.org/doi/10.1145/1008908.1008920)".
 
 
 <!-- In this paper, Wiesner presented two ideas. The first one was a verify-only memory, that, with high probability, cannot be read or copied by someone ignorant of its contents. The second idea was a scheme to multiplex two messages in such a way that, with high probability, either message could be recovered at the cost of irreversibly destroying the other.
@@ -135,7 +135,7 @@ _[Pappu et al.](https://www.science.org/doi/full/10.1126/science.1074376)_
 <img src="https://hackmd.io/_uploads/B1qBRo3BR.png" width="750"/>
 
 * Weak PUF
-* Attacks -> Data remanence, semi-invasive 
+* Attacks -> Data remanence, semi-invasive
 
 ---
 
@@ -230,12 +230,12 @@ Image source: [Keystone Enclave Documentation](https://docs.keystone-enclave.org
 ### Elements of the Remote Attestation Flow
 <!-- .slide: style="text-align: left" -->
 
-* Secure Monitor Hash: $\color{forestgreen}{M_H = H(M)}$ 
+* Secure Monitor Hash: $\color{forestgreen}{M_H = H(M)}$
 * Enclave App Hash: $\color{forestgreen}{E_H = H(E)}$
 * Attestation Payload: $\color{forestgreen}{A = H(M_H, E_H)}$
 
 Bob knows $\color{forestgreen}{M_H}$ and $\color{forestgreen}{E_H}$.
-Alice MUST prove that she's using the expected secure monitor and enclave app, by sending an attestation payload. 
+Alice MUST prove that she's using the expected secure monitor and enclave app, by sending an attestation payload.
 
 ---
 
@@ -263,7 +263,7 @@ _Based on [SIMPL System](https://eprint.iacr.org/2009/255.pdf), section 4.2, by 
 ---
 
 5. Alice uses a $\color{forestgreen}{\tt{MAC}}$ with $\color{forestgreen}{K_1, \ldots, K_l}$, and sends the values $\color{forestgreen}{A, {\tt{MAC}}_{K_1}(A), \ldots, {\tt{MAC}}_{K_l}(A)}$ to Bob
- 
+
 6. Bob gets $\color{forestgreen}{A', V_1, \ldots , V_l}$; measures $\color{forestgreen}{\Delta t}$ between sending the $\color{forestgreen}{C_1, \ldots, C_k}$ in step 2 and receiving $\color{forestgreen}{A', V_1, \ldots, V_l}$. If $\color{forestgreen}{\Delta t \gt 2 \cdot t_{max}}$, then abort
 
 7. Bob computes the values $\color{forestgreen}{R_1, \ldots, R_k}$ by simulation via $\color{forestgreen}{\tt{Sim}}$, and derives the keys $\color{forestgreen}{K'_1, \ldots, K'_l}$ by application of the same hash function as in step 3
@@ -340,7 +340,7 @@ Van der Leest et al_
 
 # Acknowledgments
 Pratyush Ranjan Tiwari (Johns Hopkins)
-Thorben Moos (UCLouvain, Belgium) 
+Thorben Moos (UCLouvain, Belgium)
 Francois-Xavier Standaert (UCLouvain, Belgium)
 
 ---
@@ -366,69 +366,69 @@ An extended exploration of PUFs
 **Mechanism**: Electronic | **Implicity**: Implicit | **Evaluation**: Intrinsic
 
 <table>
-	<thead>
-		<tr>
-			<th>Concept</th>
-			<th>Parameter</th>
-			<th>Family</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>
-				<b><a href="https://ieeexplore.ieee.org/abstract/document/1346548">
-						Arbiter PUF
-					</a></b>
-			</td>
-			<td rowspan=1>Time</td>
-			<td rowspan=2>Racetrack</td>
-		</tr>
-		<tr>
-			<td>
-				<b>
-					<a href="https://dl.acm.org/doi/abs/10.1145/586110.586132">
-						Ring oscillator PUF
-					</a>
-				</b>
-			</td>
-			<td rowspan=1>Frequency</td>
-		</tr>
-		<tr>
-			<td>
-				<b>
-					<a href="https://link.springer.com/chapter/10.1007/978-3-540-74735-2_5">
-						SRAM PUF
-					</a>
-				</b>
-			</td>
-			<td rowspan=1>Bistable state</td>
-			<td rowspan=1>Volatile memory</td>
-		</tr>
-		<tr>
-			<td>
-				<b>
-					<a href="https://dl.acm.org/doi/abs/10.1145/1629911.1630089">
-						Power distro. PUF
-					</a>
-				</b>
-			</td>
-			<td rowspan=2>Voltage/current</td>
-			<td rowspan=4>Direct characterisation</td>
-		</tr>
-		<tr>
-			<td>
-				<b>
-					<a href="https://ieeexplore.ieee.org/abstract/document/839821">
-						TV PUF
-					</a>
-				</b>
-			</td>
-		</tr>
-		<tr>
-			<td>VIA PUF</td>
-			<td rowspan=1>Binary connectivity</td>
-		</tr>
-	</tbody>
+  <thead>
+    <tr>
+      <th>Concept</th>
+      <th>Parameter</th>
+      <th>Family</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <b><a href="https://ieeexplore.ieee.org/abstract/document/1346548">
+            Arbiter PUF
+          </a></b>
+      </td>
+      <td rowspan=1>Time</td>
+      <td rowspan=2>Racetrack</td>
+    </tr>
+    <tr>
+      <td>
+        <b>
+          <a href="https://dl.acm.org/doi/abs/10.1145/586110.586132">
+            Ring oscillator PUF
+          </a>
+        </b>
+      </td>
+      <td rowspan=1>Frequency</td>
+    </tr>
+    <tr>
+      <td>
+        <b>
+          <a href="https://link.springer.com/chapter/10.1007/978-3-540-74735-2_5">
+            SRAM PUF
+          </a>
+        </b>
+      </td>
+      <td rowspan=1>Bistable state</td>
+      <td rowspan=1>Volatile memory</td>
+    </tr>
+    <tr>
+      <td>
+        <b>
+          <a href="https://dl.acm.org/doi/abs/10.1145/1629911.1630089">
+            Power distro. PUF
+          </a>
+        </b>
+      </td>
+      <td rowspan=2>Voltage/current</td>
+      <td rowspan=4>Direct characterisation</td>
+    </tr>
+    <tr>
+      <td>
+        <b>
+          <a href="https://ieeexplore.ieee.org/abstract/document/839821">
+            TV PUF
+          </a>
+        </b>
+      </td>
+    </tr>
+    <tr>
+      <td>VIA PUF</td>
+      <td rowspan=1>Binary connectivity</td>
+    </tr>
+  </tbody>
 </table>
 
 Partial table source: [A PUF taxonomy](https://pubs.aip.org/aip/apr/article/6/1/011303/571003/A-PUF-taxonomy) by McGrath et al.
