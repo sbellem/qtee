@@ -21,6 +21,8 @@ Moving Towards
 
 _Bolton Bailey, Sam Breckenridge, Sylvain Bellemare_
 
+IC3 2024 Blockchain Camp
+
 ---
 
 # The Problem
@@ -44,7 +46,7 @@ Intel SGX aims to solve the secure remote computation problem with hardware.
 
 ---
 
-## Current TEEs are only secure through economics
+## Current TEEs are ultimately secure through economics
 
 ---
 
@@ -287,6 +289,8 @@ _Based on [SIMPL System](https://eprint.iacr.org/2009/255.pdf), section 4.2, by 
 * Attacks on SRAM PUFs (helper data, error correction)
 * Keystone + sanctum (drawback with honest but curious manufacturer)
 * Optimizations on SIMPL PUF (VDF + SNARK)
+* Blogpost in the works
+* See 
 
 ---
 
@@ -348,6 +352,86 @@ Francois-Xavier Standaert (UCLouvain, Belgium)
 * [SIMPL System: On a Public Key Variant of Physical Unclonable Functions](https://eprint.iacr.org/2009/255.pdf), Ulrich Rührmair
 * [Red Team vs. Blue Team: A Real-World Hardware Trojan Detection Case Study Across Four Modern CMOS Technology Generations](https://eprint.iacr.org/2022/1720), by Puschner et al
 
+---
+
+# PUFs Reloaded
+
+An extended exploration of PUFs
+
+---
+
+<!-- .slide: style="font-size: 32px;" -->
+
+### Commercial PUFS
+**Mechanism**: Electronic | **Implicity**: Implicit | **Evaluation**: Intrinsic
+
+<table>
+	<thead>
+		<tr>
+			<th>Concept</th>
+			<th>Parameter</th>
+			<th>Family</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+				<b><a href="https://ieeexplore.ieee.org/abstract/document/1346548">
+						Arbiter PUF
+					</a></b>
+			</td>
+			<td rowspan=1>Time</td>
+			<td rowspan=2>Racetrack</td>
+		</tr>
+		<tr>
+			<td>
+				<b>
+					<a href="https://dl.acm.org/doi/abs/10.1145/586110.586132">
+						Ring oscillator PUF
+					</a>
+				</b>
+			</td>
+			<td rowspan=1>Frequency</td>
+		</tr>
+		<tr>
+			<td>
+				<b>
+					<a href="https://link.springer.com/chapter/10.1007/978-3-540-74735-2_5">
+						SRAM PUF
+					</a>
+				</b>
+			</td>
+			<td rowspan=1>Bistable state</td>
+			<td rowspan=1>Volatile memory</td>
+		</tr>
+		<tr>
+			<td>
+				<b>
+					<a href="https://dl.acm.org/doi/abs/10.1145/1629911.1630089">
+						Power distro. PUF
+					</a>
+				</b>
+			</td>
+			<td rowspan=2>Voltage/current</td>
+			<td rowspan=4>Direct characterisation</td>
+		</tr>
+		<tr>
+			<td>
+				<b>
+					<a href="https://ieeexplore.ieee.org/abstract/document/839821">
+						TV PUF
+					</a>
+				</b>
+			</td>
+		</tr>
+		<tr>
+			<td>VIA PUF</td>
+			<td rowspan=1>Binary connectivity</td>
+		</tr>
+	</tbody>
+</table>
+
+Partial table source: [A PUF taxonomy](https://pubs.aip.org/aip/apr/article/6/1/011303/571003/A-PUF-taxonomy) by McGrath et al.
 
 
 
