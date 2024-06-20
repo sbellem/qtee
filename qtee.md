@@ -1,16 +1,12 @@
 :::info
-:construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction:
-
-_This document is just a draft. Not to be taken too seriously._ :slightly_smiling_face: 
-
-:construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction:
+:construction: :construction_worker: :construction: **This document is work-in-progress** :construction: :construction_worker: :construction:
 :::
 
 
 # qTEE: Moving Towards Open Source and Verifiable Secure-through-Physics TEE Chips
 This is an initiative to spark research to explore how we could develop a secure chip for TEEs (Trusted Execution Environments) that would ultimately be secure because of physics rather than economics[^1]. The chip design should be open source, and its physical implementation should be verifiable, meaning that it should match the open source design. Moreover, the root of trust (embedded secret key) should be proven to have not leaked during generation or manufacturing. Thus, the hope and vision is to develop a TEE chip that does not need to be trusted because it can be verified by physics and mathematics. For an example of a cryptographic protocol implementation that is secure through physics see [Experimental relativistic zero-knowledge proofs] by _Alikhani et al_.
 
-:::danger 
+:::danger
 To put this vision into context, current TEEs such as Intel SGX, face the following challenges:
 
 1. :radioactive_sign: **NO proof of manufacturing** according to a known open source chip design specification
@@ -37,8 +33,11 @@ The key topics that this document wishes to explore are:
     * [Root of Trust with PUFs](#Root-of-Trust-with-PUFs)
     * [Decentralized Remote Attestation](#Decentralized-Remote-Attestation)
 * [Beyond PUFs: Cryptography and Physics United](#Beyond-PUFs-Cryptography-and-Physics-United)
-* [Appendix: Intel SGX's Root of Trust](#Appendix-Intel-SGXs-Root-of-Trust)
-* [Appendix: Chip Attacks -- What does it take?](#Appendix-Chip-Attacks-–-What-does-it-take?)
+* [Appendix](#Appendix)
+    * [Keystone Enclave](#Keystone-Enclave)
+    * [Intel SGX's Root of Trust](#Intel-SGXs-Root-of-Trust)
+    * [Software Attestation in Intel SGX](#Software-Attestation-in-Intel-SGX)
+    * [Physical Attacks -- What does it take?](#Physical-Attacks-–-What-does-it-take?)
 
 
 ## The Problem TEEs aim to solve
@@ -470,7 +469,16 @@ Since a TEE is ultimately a physical device, in which secret bits are embedded, 
 [Black Hole Computers](https://www.scientificamerican.com/article/black-hole-computers-2007-04/)
 
 
-## Appendix: Keystone Enclave
+
+## Appendix
+
+### Hardware ORAM
+Putting this here for now, more as of a note to look further into the problem of memory access pattern leakage and whether this can be addressed at the level of hardware (e.g. slide deck: [Techniques for Practical ORAM and ORAM in Hardware](https://www.bu.edu/hic/files/2015/02/Freecursive_Ring_ORAM.pdf), _by Ren et al_; and paper: [A Low-Latency, Low-Area Hardware Oblivious RAM Controller](https://ieeexplore.ieee.org/document/7160074), _by Fletcher et al_.)
+
+
+
+
+### Keystone Enclave
 From https://github.com/keystone-enclave/keystone?tab=readme-ov-file#status:
 
 > Keystone started as an academic project that helps researchers to build and test their ideas. Now, Keystone is an Incubation Stage open-source project of the Confidential Computing Consortium (CCC) under the Linux Foundation.
@@ -490,13 +498,13 @@ From https://github.com/keystone-enclave/keystone?tab=readme-ov-file#status:
 
 
 
-## Appendix: Intel SGX's Root of Trust
+### Intel SGX's Root of Trust
 If we take Intel as an example, trusting the chip manufacturer means many things. Intel SGX's so-called root of trust rests on two secret keys (seal secret and provisionaing secret), and an attestation key, as shown in the figure below, from [Intel SGX Explained]. Note that this may have changed since the writing of the [Intel SGX Explained] paper, but at the time at least, the two secrets were said to be stored in e-fuses inside the processor's die. Moreover, the two secret keys, stored in e-fuses, were encrypted with a global wrapping logic key (GWK). The GWK is a 128-bit AES key that is hard-coded in the processor's circuitry, and serves to increase the cost of extracting the keys from an SGX-enabled processor. The Provisioning Secret was said to be generated at the key generation facility - burned into the processor's e-fuses and stored in Intel's Provisioning Service DB. The Seal Secret was said to be generated inside the processor chip, and claimed not to be known to Intel. Hence, trusting Intel meant to trust that they do not leak the attestation key, and the provisioning key as they have access to them. Trusting Intel also meant that the manufacturing process that generates and embeds the Seal Secret did not leak the secret key. Trusting Intel also meant that once a chip is made, they did not attempt to extract the Seal Key, which is the only key, out of three, which they did not know.
-
 
 ![image](https://hackmd.io/_uploads/rydXhPCTa.png)
 
-## Appendix: Software Attestation in Intel SGX
+
+### Software Attestation in Intel SGX
 From [Intel SGX Explained], section 3.3.1:
 
 ![image](https://hackmd.io/_uploads/r1c8jd9S0.png)
@@ -516,7 +524,13 @@ Not sure if that is still relevant with DCAP.
 :::
 
 
-## Appendix: Chip Attacks -- What does it take?
+### Physical Attacks -- What does it take?
+
+#### Power Analysis Attacks
+
+:construction: :construction_worker: :construction: 
+
+#### Chip Attacks
 :::danger
 **tl;dr**: Chip attacks cannot be prevented, but only made expansive to carry on, which is very relative, depending on the application in which the chip is used. Furthermore, as far as I know, there's no known chip attack that has been reported along with its required cost. Hence, currently we can only speculate that an attack may be in the range of a 1 million dollars, judging from the cost of focused ion beam (FIB) microscopes and guessing how much money a team of experts would cost. In the context of crypto/web3, protocol designers should probably be extremely careful, given that many protocols move massive amounts of money; in the hundreds of millions, and more.
 :::
