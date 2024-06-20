@@ -252,6 +252,9 @@ Main reference: https://pubs.aip.org/aip/apr/article/6/1/011303/571003/A-PUF-tax
 Images source: [A PUF taxonomy](https://pubs.aip.org/aip/apr/article/6/1/011303/571003/A-PUF-taxonomy) by McGrath et al.
 
 
+
+##### Commercial PUFS
+
 <table>
     <thead>
         <tr>
@@ -265,24 +268,74 @@ Images source: [A PUF taxonomy](https://pubs.aip.org/aip/apr/article/6/1/011303/
     </thead>
     <tbody>
         <tr>
-            <td>Arbiter PUF</td>
-            <td rowspan=4>All-electronic</td>
-            <td rowspan=2>Time</td>
-            <td rowspan=4>Implicit</td>
-            <td rowspan=4>Intrinsic</td>
-            <td rowspan=3>Racetrack</td> 
+            <td>
+                <b><a href="https://ieeexplore.ieee.org/abstract/document/1346548">
+                    Arbiter PUF
+                </a></b>
+            </td>
+            <td rowspan=7>All-electronic</td>
+            <td rowspan=1>Time</td>
+            <td rowspan=6>Implicit</td>
+            <td rowspan=6>Intrinsic</td>
+            <td rowspan=2>Racetrack</td> 
         </tr>
         <tr>
-            <td>ClockPUF</td>
+            <td>
+                <b>
+                    <a href="https://dl.acm.org/doi/abs/10.1145/586110.586132">
+                        Ring oscillator PUF
+                    </a>
+                </b>
+            </td>
+            <td rowspan=1>Frequency</td>
         </tr>
         <tr>
-            <td>Ring oscillator PUF</td>
-            <td rowspan=2>Frequency</td>
+            <td>
+                <b>
+                    <a href="https://link.springer.com/chapter/10.1007/978-3-540-74735-2_5">
+                        SRAM PUF
+                    </a>
+                </b>
+            </td>
+            <td rowspan=1>Bistable state</td>
+            <td rowspan=1>Volatile memory</td>
         </tr>
         <tr>
-            <td>TERO PUF</td>
-            <td>Transient/glitch</td>
+            <td>
+                <b>
+                    <a href="https://dl.acm.org/doi/abs/10.1145/1629911.1630089">
+                    Power distro. PUF
+                    </a>
+                </b>
+            </td>
+        	<td rowspan=2>Voltage/current</td>
+        	<td rowspan=4>Direct characterisation</td>
         </tr>
+        <tr>
+            <td>
+                <b>
+                    <a href="https://ieeexplore.ieee.org/abstract/document/839821">
+                        TV PUF
+                    </a>
+                </b>
+            </td>
+        </tr>
+        <tr>
+            <td>VIA PUF</td>  
+            <td rowspan=1>Binary connectivity</td>
+        </tr>
+        <tr>
+            <td>Q EPUF</td>
+            <td rowspan=1>Voltage/current</td>
+            <td rowspan=2>Explicit</td>
+            <td rowspan=2>Extrinsic</td>
+        </tr>
+    <tr>
+        <td>Q OPUF</td>
+        <td rowspan=1>Hybrid (optical)</td>
+        <td>Intensity and Frequency</td>
+        <td rowspan=1>Optical</td>
+    </tr>
     </tbody>
 </table>
 
@@ -418,6 +471,16 @@ Since a TEE is ultimately a physical device, in which secret bits are embedded, 
 
 
 ## Appendix: Keystone Enclave
+From https://github.com/keystone-enclave/keystone?tab=readme-ov-file#status:
+
+> Keystone started as an academic project that helps researchers to build and test their ideas. Now, Keystone is an Incubation Stage open-source project of the Confidential Computing Consortium (CCC) under the Linux Foundation.
+>
+> Keystone has helped many researchers focus on their creative ideas instead of building TEE by themselves from scratch. This resulted in many innovative research projects and publications, which have been pushing the technical advancement of TEEs.
+>
+> We are currently trying to make Keystone production-ready. You can find the latest general roadmap of Keystone [here](https://docs.google.com/document/d/1E-982564GvOcWzdCqM7TXCJV_7uWy2F8NiwglWorjFA/edit#heading=h.xa3pe84ubay4).
+
+
+
 **[Keystone Enclave](https://github.com/keystone-enclave/keystone) Architecture Overview**
 
 ![image](https://hackmd.io/_uploads/rJWsUtcHR.png)
