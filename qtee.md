@@ -4,6 +4,13 @@
 
 
 # qTEE: Moving Towards Open Source and Verifiable Secure-through-Physics TEE Chips
+
+> **_Information is not a disembodied abstract entity; it is always tied to a physical representation. It is represented by engraving on a stone tablet, a spin, a charge,
+a hole in a punched card, a mark on paper, or some other equivalent._** _This ties the handling of information to all the possibilities and restrictions of our real physical word, its laws of physics and its storehouse of available parts._
+>
+> -- **Rolf Landauer**, in The physical nature of information
+
+
 This is an initiative to spark research to explore how we could develop a secure chip for TEEs (Trusted Execution Environments) that would ultimately be secure because of physics rather than economics[^1]. The chip design should be open source, and its physical implementation should be verifiable, meaning that it should match the open source design. Moreover, the root of trust (embedded secret key) should be proven to have not leaked during generation or manufacturing. Thus, the hope and vision is to develop a TEE chip that does not need to be trusted because it can be verified by physics and mathematics. For an example of a cryptographic protocol implementation that is secure through physics see [Experimental relativistic zero-knowledge proofs] by _Alikhani et al_.
 
 :::danger
@@ -32,7 +39,7 @@ The key topics that this document wishes to explore are:
     * [Marching Towards DAMOs (aka Zero Trust Manufacturing)](#Marching-Towards-DAMOs)
     * [Root of Trust with PUFs](#Root-of-Trust-with-PUFs)
     * [Decentralized Remote Attestation](#Decentralized-Remote-Attestation)
-* [Beyond PUFs: Cryptography and Physics United](#Beyond-PUFs-Cryptography-and-Physics-United)
+* [The Rise of Crypto-Physics](#The-Rise-of-Crypto-Physics)
 * [Appendix](#Appendix)
     * [Keystone Enclave](#Keystone-Enclave)
     * [Intel SGX's Root of Trust](#Intel-SGXs-Root-of-Trust)
@@ -91,7 +98,7 @@ roughly translated to:
 
 (Perhaps, one may point out that Kerckhoffs was assuming that the private key would be held secretly and not be part of an open design. The need to secure a private key in an open design begs for physics to enter the arena(e.g. PUFs).
 
-For example, the Secure Cryptographic Implementation Association (SIMPLE-Crypto Association) aims to apply 
+For example, the Secure Cryptographic Implementation Association (SIMPLE-Crypto Association) aims to apply
 Kerckhoffs's Principle to hardware and lays out their vision at https://www.simple-crypto.org/about/vision/:
 
 > **[...] our vision is that as research advances, the security by obscurity paradigm becomes less justified and its benefits are outweighted by its drawbacks.** That is, while a closed source approach can limit the adversary's understanding of the target implementations as long as their specifications remain opaque, it also limits the public understanding of the mechanims on which security relies, and therefore the possibility to optimize them. By contrast, an open approach to security can lead to a better evaluation of the worst-case security level that is targeted by cryptographic designs.
@@ -146,20 +153,29 @@ In the context of a secure chip, the motto **"Don't Trust, Verify"** calls for a
 Having an open source hardware design is perhaps the most reasonable place to start. Verifying that a physical chip does implement the intended open source hardware design is perhaps more difficult, and we can try to tackle this in a second step. Hence, we'll first start by exploring how we could have a TEE chip with an open source hardware design.
 
 #### Open Source Hardware Design
-This is not a new idea, and it may be useful to survey current and past efforts such as:
+Yes. It's possible. This is not a new idea, and it may be useful to survey current and past efforts such as:
 
-* [Tiny Tapeout]
-* [Chips Alliance]
-* [Caliptra]
-* [Google Titan]
-* [LibreSilicon]
-* [The Silicon Salon]
+* [Tiny Tapeout](https://tinytapeout.com)
+* [Chips Alliance](https://github.com/chipsalliance)
+* [Caliptra](https://github.com/chipsalliance/caliptra-rtl)
+* [OpenTitan](https://opentitan.org)
+* [Libre Silicon Alliance](https://github.com/libresilicon)
+* [The Silicon Salon](https://github.com/libresilicon)
 * [Free Silicon Conference 2024](https://wiki.f-si.org/index.php/FSiC2024)
+* [efabless](https://efabless.com/)
+
+##### Multi Project Wafer
+* [Build Custom Silicon with Google](https://developers.google.com/silicon)
+* https://efabless.com/open_shuttle_program
+* https://www.skywatertechnology.com/technology-and-design-enablement/mpw-programs/
+* https://opensource.googleblog.com/2022/10/announcing-globalfoundries-open-mpw-shuttle-program.html
+
+
 
 ##### Resources
-[Tiny Tapeout] has a lot of educational material at that may be worth reading for those who don't have a background in hardware. 
- 
-Also worth having a look at is the course [Zero to ASIC Course].
+[Tiny Tapeout](https://tinytapeout.com) has a lot of educational material at that may be worth reading for those who don't have a background in hardware.
+
+Also worth having a look at is the course [Zero to ASIC Course](https://www.zerotoasiccourse.com/).
 
 
 #### Verfiable Chip Implementation
@@ -170,8 +186,11 @@ This is also not a new problem. One approach is to use [Logic Encryption], which
 * [A Critical Evaluation of the Paradigm Shift in the Design of Logic Encryption Algorithms](https://www.ice.rwth-aachen.de/publications/publication/sisejkovicVLSIDAT2019/)
 * [A Unifying Logic Encryption Security Metric](https://www.ice.rwth-aachen.de/publications/publication/sisejkovicSAMOS2018/)
 
+More generally speaking, learning what [OpenTitan](https://opentitan.org/book/doc/project_governance/index.html#quality-standards-for-open-hardware-ip) does for what they call "Quality standards for open hardware IP" may be useful.
 
- 
+
+
+
 #### GitHub Issues
 * https://github.com/sbellem/qtee/issues/1
 * https://github.com/sbellem/qtee/issues/2#issuecomment-1648191994
@@ -213,11 +232,11 @@ https://github.com/sbellem/qtee/issues/7
 ### Root of Trust with PUFs
 [Physical Unclonable Functions](https://en.wikipedia.org/wiki/Physical_unclonable_function) are arguably the current best hope to protect against physical attacks aimed at extracting secret keys (root of trust). That being said, PUFs are an active area of research where new PUFs design are proposed and existing designs are broken. Hence, research is needed to better understand the limitations of PUFs in the context of TEEs.
 
-The first PUFs was presented in the PhD thesis titled 
+The first PUFs was presented in the PhD thesis titled
 [Physical one-way functions](https://dspace.mit.edu/handle/1721.1/45499), by Ravikanth Srinivasa Pappu.
 
 
-Not sure where it's best to start, but perhaps this article (if you have access):  
+Not sure where it's best to start, but perhaps this article (if you have access):
 [Physical unclonable functions](https://www.nature.com/articles/s41928-020-0372-5) by [Yansong Gao](https://www.nature.com/articles/s41928-020-0372-5#auth-Yansong-Gao-Aff1-Aff2), [Said F. Al-Sarawi](https://www.nature.com/articles/s41928-020-0372-5#auth-Said_F_-Al_Sarawi-Aff3) & [Derek Abbott](https://www.nature.com/articles/s41928-020-0372-5#auth-Derek-Abbott-Aff4)
 
 OR:
@@ -229,9 +248,9 @@ OR:
 * [An Introduction to Physically Unclonable Functions](https://www.allaboutcircuits.com/technical-articles/an-introduction-to-physically-unclonable-functions/)
 
   > When manufactured, the PUF will be fed a series of different challenges and have its responses recorded. Through this exercise, the designers know each PUF's unique response to a given challenge and can use this information to prevent counterfeiting, create and store cryptographic keys, and many other security feats.
-  
+
   TODO: figure out if the set of CRPs is not needed for signing keys. Also, out of curiosity could there be oblivious (or zk) CRPs, meaning that no one knows the challenge response pairs, but yet, they can be used.
-  
+
 
 #### First well-known PUF: Physical One-Way Functions
 https://www.science.org/doi/full/10.1126/science.1074376
@@ -307,8 +326,8 @@ Images source: [A PUF taxonomy](https://pubs.aip.org/aip/apr/article/6/1/011303/
                     </a>
                 </b>
             </td>
-        	<td rowspan=2>Voltage/current</td>
-        	<td rowspan=4>Direct characterisation</td>
+            <td rowspan=2>Voltage/current</td>
+            <td rowspan=4>Direct characterisation</td>
         </tr>
         <tr>
             <td>
@@ -414,24 +433,22 @@ This seems to be relating to what is called remote attestation in the context of
 
 
 ### Decentralized Remote Attestation
-:construction: TODO :construction: 
+:construction: TODO :construction:
 
 Not sure how this could be achieved. Conceptually speaking, a device should be able to proof what it claims to be with respect to both its hardware and software, without relying on a trusted third party such as the manufacturer. [RFC 9334 - Remote ATtestation procedureS (RATS) Architecture](https://rfc-editor.org/rfc/rfc9334.html) may be useful to review in the context of our [threat model](#Threat-Model).
 
 For instance, in the case of Intel SGX, the chip manufacturer plays a central role in the remote attestation process. It may be useful to go through all the steps that Intel plays (e.g. provisioning attestation keys, verifying quotes, etc) and think through to see how these steps could be decentralized. Perhaps first defining the [ideal functionality] for remote attestation would be useful; or reviewing works that have already done so. Once we have the ideal functionality defined
 
 #### Ideal Functionality for Remote Attestation
-:construction: TODO :construction: 
+:construction: TODO :construction:
 See perhaps [Cryptographically Assured Information Flow: Assured Remote Execution](https://arxiv.org/abs/2402.02630) for inspiration.
 
 
 #### Thought experiment
 
 :::success
-:construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction:
-:construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction:
-:construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction:
- 
+:construction: :construction_worker: :construction:
+
 #### :thought_balloon: Thought experiment
 If somehow we have managed to manufacture a chip, in a "decentralized" way, such that it can be verified, then perhaps the "decentralized" manufacturing process could log public metadata about the chip that would uniquely identify it. For instance, the metadata could be tied to a fingerprint generated via a PUF, in the chip. The metadata would contain the proof of correct manufacturing with respect to the requirements discussed earlier, such as matching a (formally verified) open source hardware design, and not leaking secret bits.
 
@@ -439,9 +456,8 @@ Then remote attestation in this case would involve first requesting from the dev
 
 We also need a proof that it loaded the expected software for execution ...
 
-:construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction:
-:construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction:
-:construction: :construction: :construction: :construction: :construction: :construction: :construction: :construction: 
+:construction: :construction_worker: :construction:
+
 :::
 
 #### Readings
@@ -456,11 +472,41 @@ We also need a proof that it loaded the expected software for execution ...
 * https://arxiv.org/pdf/2204.06790
 
 
-## Beyond PUFs: Cryptography and Physics United
+## The Rise of Crypto-Physics
 _See https://github.com/sbellem/qtee_
 
-Since a TEE is ultimately a physical device, in which secret bits are embedded, it seems inevitable that soon or later we'll have to confront the question of whether it's really physically possible to hide these secret bits. Current efforts and hopes appear to rest on economic incentives at best, meaning that the costs of breaking into the physical device are hoped to be too high for the gains that the attacker will get in return.  But what if we could design and implement chips that are secure as long as the physics is not broken. That is, chips for which breaking their security would mean breaking laws of physics. This is not a new concept, and has been done in [Physical One-Way Functions] _by Ravikanth Pappu_ and [Experimental relativistic zero-knowledge proofs] _by Alikhani et al._ for instance. 
+Since a TEE is ultimately a physical device, in which secret bits are embedded, it seems inevitable that soon or later we'll have to confront the question of whether it's really physically possible to hide these secret bits. Current efforts and hopes appear to rest on economic incentives at best, meaning that the costs of breaking into the physical device are hoped to be too high for the gains that the attacker will get in return.  But what if we could design and implement chips that are secure as long as the physics is not broken. That is, chips for which breaking their security would mean breaking laws of physics. This is not a new concept, and has been done in [Physical One-Way Functions] _by Ravikanth Pappu_ and [Experimental relativistic zero-knowledge proofs] _by Alikhani et al._ for instance.
 
+### Physics of Information
+A brief look into the work of [Rolf Landauer](https://www.nature.com/articles/23376), the head and heart of the physics of information.
+
+#### Key works
+* [Information is Physical](https://pubs.aip.org/physicstoday/article-abstract/44/5/23/406580/Information-is-PhysicalThere-are-no-unavoidable)
+* [The physical nature of information](https://cqi.inf.usi.ch/qic/64_Landauer_The_physical_nature_of_information.pdf)
+* [Information is a Physical Entity](http://bit-player.org/wp-content/uploads/2009/11/Landauer1999.pdf)
+* [Information is Inevitably Physical](https://www.taylorfrancis.com/chapters/edit/10.1201/9780429500459-8/information-inevitably-physical-rolf-landauer)
+
+---
+
+* [Landauer's principle](https://en.wikipedia.org/wiki/Landauer's_principle) on wikipedia
+* [Blogpost: Information is physical](http://bit-player.org/2009/information-is-physical) by Brian Hayes
+
+#### Is information physical or not?
+* [Computing study refutes famous claim that "information is physical"](
+https://phys.org/news/2016-07-refutes-famous-physical.html)
+* [Information is non-physical: The rules connecting representation and meaning do not obey the laws of physics](https://journals.sagepub.com/doi/full/10.1177/01655515221141040)
+
+
+
+### Quantum Money
+A brief look into the pioneering work, [Conjugate Coding](https://dl.acm.org/doi/10.1145/1008908.1008920) by Stephen Wiesner.
+
+### Quantum Cryptography, or Unforgeable Subway Tokens
+A brief look into the pioneering work, [Quantum Cryptography, or Unforgeable Subway Tokens](https://link.springer.com/chapter/10.1007/978-1-4757-0602-4_26), by Charles H. Bennett, Gilles Brassard, Seth Breidbart and Stephen Wiesner.
+
+
+### Physical One-Way Functions
+A brief look into the pioneering work by Ravikanth Pappu on physical one-way functions in his [PhD Thesis](https://dspace.mit.edu/handle/1721.1/45499).
 
 ### Equivalence Relations between High Energy Physics and Cryptography
 [Black-Hole Radiation Decoding is Quantum Cryptography](https://arxiv.org/abs/2211.05491)
@@ -515,9 +561,9 @@ From [Intel SGX Explained], section 3.3.1:
 
 and further in section 5.8:
 
-> The cryptographic primitive used in SGX's attestation signature is too complex to be implemented in hardware, so the signing process is performed by a privileged Quoting Enclave, which is issued by Intel, and can access the SGX attestation key. 
+> The cryptographic primitive used in SGX's attestation signature is too complex to be implemented in hardware, so the signing process is performed by a privileged Quoting Enclave, which is issued by Intel, and can access the SGX attestation key.
 
-Observation/question: Whoever has access to Intel's signing key could potentially sign a different quoting enclave that would use the attestation key to sign "fake" quotes. 
+Observation/question: Whoever has access to Intel's signing key could potentially sign a different quoting enclave that would use the attestation key to sign "fake" quotes.
 
 :::warning
 Not sure if that is still relevant with DCAP.
@@ -528,7 +574,7 @@ Not sure if that is still relevant with DCAP.
 
 #### Power Analysis Attacks
 
-:construction: :construction_worker: :construction: 
+:construction: :construction_worker: :construction:
 
 #### Chip Attacks
 :::danger
@@ -585,7 +631,7 @@ There's also a brief discussion of PUFs in a security analysis section of [Intel
 I don't know whether the latest Intel SGX chips make use of PUFs, and how accurate the above still is for the latest chips.
 
 :::danger
-In any case, it's quite clear that from the authors of [Intel SGX Explained], physical attacks cannot be "physically" prevented but can only be "economically" prevented. A more recent paper, [SoK: Hardware-supported TEEs] by _Moritz Schneider et al_, also note that in their survey of TEE designs, both in the industry and academia, none can defend against chip attacks.  
+In any case, it's quite clear that from the authors of [Intel SGX Explained], physical attacks cannot be "physically" prevented but can only be "economically" prevented. A more recent paper, [SoK: Hardware-supported TEEs] by _Moritz Schneider et al_, also note that in their survey of TEE designs, both in the industry and academia, none can defend against chip attacks.
 
 > _Invasive adversary:_ This adversary can launch invasive attacks such as de-layering the physical chip, manipulating clock signals and voltage rails to cause faults, etc., to extract secrets or force a different execution path than the intended one. For the sake of completeness, we include this adversary (`A_inv`) in our list but note that **no TEE design currently defends against such an attacker.** So, we do not discuss this attacker any further in this paper.
 :::
@@ -601,16 +647,20 @@ Now, with this background in mind, it seems that it would be extremely useful to
 [SoK: Hardware-supported TEEs]: https://arxiv.org/abs/2205.12742
 
 ## Contributing to this Document
-You can make edits and pull requests for https://github.com/sbellem/qtee/blob/main/qtee.md which should be a mirror of this document.
-Alternatively you can also comment on or create new issues at https://github.com/sbellem/qtee/issues.
+You can make edits and pull requests for [qtee.md](https://github.com/sbellem/qtee/blob/main/qtee.md) which should be a mirror of this document.
+Alternatively you can also comment on or create new [issues](https://github.com/sbellem/qtee/issues).
+
 You should also be able to make comments on this document.
+
 
 [^1]: Chips attacks cannot be prevented as of today (see [CHIP ATTACKS]). Making the cost of a chip attack expensive is the only current known defense mechanism. Thus, TEEs are ultimately only secure through economics.
 [^2]:  Also, of relevance: https://github.com/sbellem/qtee/issues/1, https://github.com/sbellem/qtee/issues/7, https://github.com/sbellem/qtee/issues/8, [CHIP ATTACKS], and [PUFs].
 [^3]: See for instance [RFC 9334](https://www.rfc-editor.org/rfc/rfc9334.html#name-security-considerations) (section 12) for security considerations when treating the topic of remote attestation.
 [^4]: The reasoning is that design and implementation flaws can be fixed and can happen whether the design is open source or not, whether the supply chain is correct, etc. Hence, design and implementation bugs can be treated separately. It could be argued that an open source hardware design may benefit from a broader community and overtime will contain less bugs than a closed source design.
 
-
+<center>
+<a href="https://github.com/sbellem/qtee/blob/main/qtee.md"><svg xmlns="http://www.w3.org/2000/svg" height="64" width="62" viewBox="0 0 496 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#63E6BE" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3 .3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5 .3-6.2 2.3zm44.2-1.7c-2.9 .7-4.9 2.6-4.6 4.9 .3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3 .7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3 .3 2.9 2.3 3.9 1.6 1 3.6 .7 4.3-.7 .7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3 .7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3 .7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></a>
+</center>
 
 [Experimental relativistic zero-knowledge proofs]: https://www.nature.com/articles/s41586-021-03998-y
 [Intel SGX Explained]: https://eprint.iacr.org/2016/086
