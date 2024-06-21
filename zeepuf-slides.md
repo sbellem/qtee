@@ -75,6 +75,19 @@ Intel SGX aims to solve the secure remote computation problem with hardware.
 
 ---
 
+# But. Why?
+
+---
+
+<!-- .slide: style="font-size: 32px;" -->
+
+> **_Information is not a disembodied abstract entity; it is always tied to a physical representation. It is represented by engraving on a stone tablet, a spin, a charge,
+a hole in a punched card, a mark on paper, or some other equivalent._** _This ties the handling of information to all the possibilities and restrictions of our real physical word, its laws of physics and its storehouse of available parts._
+>
+> -- **Rolf Landauer**, in The physical nature of information
+
+---
+
 <!-- .slide: style="font-size: 16px;" -->
 
 # - External Root of Trust - | - Internal Root of Trust -
