@@ -159,24 +159,26 @@ In the context of a secure chip, the motto **"Don't Trust, Verify"** calls for a
 ### Verifiable Chip based on an Open Source Hardware Design
 Having an open source hardware design is perhaps the most reasonable place to start. Verifying that a physical chip does implement the intended open source hardware design is perhaps more difficult, and we can try to tackle this in a second step. Hence, we'll first start by exploring how we could have a TEE chip with an open source hardware design.
 
-#### Open Source Hardware Design
+#### Open Source Hardware
 Yes. It's possible. This is not a new idea, and it may be useful to survey current and past efforts such as:
 
-* [Tiny Tapeout](https://tinytapeout.com)
-* [Chips Alliance](https://github.com/chipsalliance)
-* [Caliptra](https://github.com/chipsalliance/caliptra-rtl)
-* [OpenTitan](https://opentitan.org)
-* [Libre Silicon Alliance](https://github.com/libresilicon)
-* [The Silicon Salon](https://github.com/libresilicon)
+* [Tiny Tapeout]
+* [Banana Pi]
+* [Chips Alliance]
+* [Caliptra]
+* [OpenTitan]
+* [Libre Silicon Alliance][LibreSilicon]
+* [The Silicon Salon]
+
+##### Conferences
 * [Free Silicon Conference 2024](https://wiki.f-si.org/index.php/FSiC2024)
-* [efabless](https://efabless.com/)
+
 
 ##### Multi Project Wafer
 * [Build Custom Silicon with Google](https://developers.google.com/silicon)
-* https://efabless.com/open_shuttle_program
-* https://www.skywatertechnology.com/technology-and-design-enablement/mpw-programs/
-* https://opensource.googleblog.com/2022/10/announcing-globalfoundries-open-mpw-shuttle-program.html
-
+* [efabless](https://efabless.com/open_shuttle_program)
+* [SkyWater](https://www.skywatertechnology.com/technology-and-design-enablement/mpw-programs/)
+* [Google funds open source silicon manufacturing shuttles for GlobalFoundries PDK](https://opensource.googleblog.com/2022/10/announcing-globalfoundries-open-mpw-shuttle-program.html)
 
 
 ##### Resources
@@ -681,10 +683,11 @@ You should also be able to make comments on this document.
 [CHIP ATTACKS]: #Appendix-Chip-Attacks-–-What-does-it-take?
 [PUFs]: #Root-of-Trust-with-PUFs
 [Tiny Tapeout]: https://tinytapeout.com/
+[Banana Pi]: https://banana-pi.org/
 [Zero to ASIC Course]: https://zerotoasiccourse.com/
 [Chips Alliance]: https://github.com/chipsalliance
 [Caliptra]: https://github.com/chipsalliance/caliptra
-[Google Titan]: https://opentitan.org/
+[OpenTitan]: https://opentitan.org/
 [LibreSilicon]: https://libresilicon.com/
 [The Silicon Salon]: https://www.siliconsalon.info/
 [Logic Encryption]: https://link.springer.com/chapter/10.1007/978-3-319-49019-9_3
