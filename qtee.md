@@ -31,6 +31,16 @@ To put this vision into context, current TEEs such as Intel SGX, face the follow
 See https://github.com/sbellem/qtee/issues/2, for more details[^2].
 :::
 
+## Scope
+The intent of this document is to work on addressing the four fundamental core challenges mentioned above. These core challenges are arguably all rooted in the security of the root-of-trust. Hence, as we make progress in our understanding, this document may tighten its focus on how to secure the root-of-trust via physics rather than economics, meanwhile extracting the work on the other core challenges to their own documents.
+
+## Related Work
+For a shorter introduction, readers are highly encouraged to read [Flashbots' call to action](https://collective.flashbots.net/t/project-t-tee-from-trusted-to-trustless-execution-environments/3541) to write a position paper "_to communicate the problem and its importance to the broader hardware research community_".
+
+For a broader presentation of the various challenges involved in making fully secure TEEs, readers are highly encouraged to read the [Autonomous TEE Manifesto](https://notes.poeticte.ch/s/KA7fPN6-O) by the
+[Poetic Technologies UG](https://poeticte.ch/) team.
+
+
 ## Overview
 The key topics that this document wishes to explore are:
 
