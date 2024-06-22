@@ -7,6 +7,8 @@
 :construction:
 :::
 
+![image](https://hackmd.io/_uploads/S1umV5NL0.png)
+
 
 # qTEE: Moving Towards Open Source and Verifiable Secure-through-Physics TEE Chips
 
@@ -478,8 +480,6 @@ We also need a proof that it loaded the expected software for execution ...
 
 
 ## The Rise of Crypto-Physics
-_See https://github.com/sbellem/qtee_
-
 Since a TEE is ultimately a physical device, in which secret bits are embedded, it seems inevitable that soon or later we'll have to confront the question of whether it's really physically possible to hide these secret bits. Current efforts and hopes appear to rest on economic incentives at best, meaning that the costs of breaking into the physical device are hoped to be too high for the gains that the attacker will get in return.  But what if we could design and implement chips that are secure as long as the physics is not broken. That is, chips for which breaking their security would mean breaking laws of physics. This is not a new concept, and has been done in [Physical One-Way Functions] _by Ravikanth Pappu_ and [Experimental relativistic zero-knowledge proofs] _by Alikhani et al._ for instance.
 
 ### Physics of Information
@@ -519,6 +519,7 @@ A brief look into the pioneering work by Ravikanth Pappu on physical one-way fun
 ### Trusted Black Hole Execution Environments
 [Black Hole Computers](https://www.scientificamerican.com/article/black-hole-computers-2007-04/)
 
+More resources are listed in https://github.com/sbellem/qtee.
 
 
 ## Appendix
