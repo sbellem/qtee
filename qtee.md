@@ -160,7 +160,13 @@ In the context of a secure chip, the motto **"Don't Trust, Verify"** calls for a
 Having an open source hardware design is perhaps the most reasonable place to start. Verifying that a physical chip does implement the intended open source hardware design is perhaps more difficult, and we can try to tackle this in a second step. Hence, we'll first start by exploring how we could have a TEE chip with an open source hardware design.
 
 #### Open Source Hardware
-Yes. It's possible. This is not a new idea, and it may be useful to survey current and past efforts such as:
+Yes. It's possible. This is not a new idea. See the wikipedia entry on [Open Source Hardware](https://en.wikipedia.org/wiki/Open-source_hardware).
+
+The [story](https://web.archive.org/web/20120701165927/http://public.web.cern.ch/Press/PressReleases/Releases2011/PR08.11E.html) behind [CERN Open Hardware License](https://ohwr.org/project/cernohl) is noteworthy:
+
+> "For us, the drive towards open hardware was largely motivated by well-intentioned envy of our colleagues who develop Linux device-drivers," said Javier Serrano, an engineer at CERN's Beams Department and the founder of the OHR. "They are part of a very large community of designers who share their knowledge and time in order to come up with the best possible operating system. We felt that there was no intrinsic reason why hardware development should be any different."
+
+It may be useful to survey current and past efforts such as:
 
 * [Tiny Tapeout]
 * [Banana Pi]
