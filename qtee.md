@@ -239,11 +239,10 @@ https://github.com/sbellem/qtee/issues/7
 
 
 ### Root of Trust with PUFs
-[Physical Unclonable Functions](https://en.wikipedia.org/wiki/Physical_unclonable_function) are arguably the current best hope to protect against physical attacks aimed at extracting secret keys (root of trust). That being said, PUFs are an active area of research where new PUFs design are proposed and existing designs are broken. Hence, research is needed to better understand the limitations of PUFs in the context of TEEs.
+[Physical Unclonable Functions](https://en.wikipedia.org/wiki/Physical_unclonable_function) are arguably the current best hope to protect against physical attacks aimed at extracting secret keys (root of trust). That being said, PUFs are an active area of research where new PUF designs are proposed and existing designs are broken. Hence, active research is vital to better understand the benefits and limitations of PUFs in the context of TEEs.
 
-The first PUFs was presented in the PhD thesis titled
+The first PUF was presented in the PhD thesis titled
 [Physical one-way functions](https://dspace.mit.edu/handle/1721.1/45499), by Ravikanth Srinivasa Pappu.
-
 
 Not sure where it's best to start, but perhaps this article (if you have access):
 [Physical unclonable functions](https://www.nature.com/articles/s41928-020-0372-5) by [Yansong Gao](https://www.nature.com/articles/s41928-020-0372-5#auth-Yansong-Gao-Aff1-Aff2), [Said F. Al-Sarawi](https://www.nature.com/articles/s41928-020-0372-5#auth-Said_F_-Al_Sarawi-Aff3) & [Derek Abbott](https://www.nature.com/articles/s41928-020-0372-5#auth-Derek-Abbott-Aff4)
