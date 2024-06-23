@@ -303,7 +303,7 @@ _Based on [SIMPL System](https://eprint.iacr.org/2009/255.pdf), section 4.2, by 
 * Keystone + sanctum (drawback with honest but curious manufacturer)
 * Optimizations on SIMPL PUF (VDF + SNARK)
 * Blogpost in the works
-* See 
+* See hackmd.io/@sbellem/qtee in the meantime
 
 ---
 
@@ -352,7 +352,7 @@ Van der Leest et al_
 ---
 
 # Acknowledgments
-Pratyush Ranjan Tiwari (Johns Hopkins)
+Pratyush Ranjan Tiwari (Johns Hopkins, US)
 Thorben Moos (UCLouvain, Belgium)
 Francois-Xavier Standaert (UCLouvain, Belgium)
 
@@ -438,7 +438,13 @@ An extended exploration of PUFs
       </td>
     </tr>
     <tr>
-      <td>VIA PUF</td>
+      <td>
+          <b>
+            <a href="https://ieeexplore.ieee.org/abstract/document/7302303?casa_token=f73oyXSpWcIAAAAA:ArZQTOMyB1vWUScTXS7WYiFXhTxWpj5h6xrJCkPZOp6ImKX9fo92VNedVcA1tNSs-ZSY8PEqRqg">
+              VIA PUF
+            </a>
+          </b>
+        </td>
       <td rowspan=1>Binary connectivity</td>
     </tr>
   </tbody>
@@ -454,8 +460,6 @@ Partial table source: [A PUF taxonomy](https://pubs.aip.org/aip/apr/article/6/1/
 <!--
 [hackmd](https://hackmd.io/0zpr6jNiQgOkKaipSl2pHw)
 -->
-
----
 
 <!---
 ### References
