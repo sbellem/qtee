@@ -83,9 +83,17 @@ Is it even possible to build a chip that can handle physical attacks, such as th
 Not sure. :smile: Besides the performance limitations of FHE, ZKP and MPC, the problem of proof-of-deletion or certified deletion may be the most mentioned one. The intuition is simple: "How do you prove that you completely forgot what some secret data was deleted?" You could show that your harddisk has been completely wiped out, but perhaps you copied it elsewhere. Hence, certified deletion appears to not be possible in the classical setting but it apparently is if one is willing to step one foot (or two), into the quantum setting (e.g.: [High-Dimensional Quantum Certified Deletion] by _Hufnagel et al_, [Quantum Proofs of Deletion for Learning with Errors] by _Poremba_). If we are confined to the classical setting though, then TEEs may be useful. If the program generating and/or handling secrets is executed in a TEE then the program can be written such that it will delete the secrets once it's done with the task. As an alternative to TEEs, there's the idea of traceable secret sharing as presented in [Traceable Secret Sharing: Strong Security and Efficient Constructions] by _Boneh et al_.
 
 ## Motivation
+:::info
+**Moving from security-through-economics towards security-through-physics.**
+:::
+
 According to [SoK: Hardware-supported TEEs] and [Intel SGX Explained], current chips that implement TEEs cannot protect against physical attacks such as chip delayering, which would allow an attacker to extract the so-called root of trust, meaning hardware embedded secret keys upon which the entire security of the TEE depends. The only current known defense against chip attacks is trying to make the cost of a chip attack as high as possible. To make things worst, it's not even clear what the cost of a chip attack is; perhaps one million dollar (see [TEE Chip Attacks: What does it take?](#Appendix-Chip-Attacks-–-What-does-it-take?))? So, at the very least, one would hope we would know what the cost of a chip attack is, such that protocol designers could [design mechanisms][mechanism design] that would eliminate economic incentives to attack the chip, because the cost of the attack would not be worth what could be extracted out of the attack. It's very important to note here that a protocol relying on TEEs may also be targeted for attacks for reasons other than financial, and it's probably best to avoid using TEEs for such cases (e.g. privacy preserving application used by political dissidents).
 
 Aside from being vulnerable to chip attacks the current popular TEEs, such as Intel SGX, are closed source, meaning that their hardware designs are not public, which in turn makes it very difficult to know whether a chip is implemented as claimed. Even with an open source hardware design we would need to figure out how to verify that the chip was implemented as per the open source design, and that secrets generated and embedded into the hardware at the time of manufacturing were not leaked.
+
+### References
+See [On the Physical Security of Physically Unclonable Functions] (1.1.2 Physical Attacks) by Shahin Tajik.
+
 
 
 ### Don't Trust, Verify ... Or use TEEs?
@@ -255,8 +263,11 @@ _Nanofactories, nanomanufacturing, atomically precise manufacturing, etc._
 
 ### Root of Trust with PUFs
 :::warning
-:construction: :construction_worker: :construction: _This section needs some work._ Maybe organize in 3 main sections: 1) What's a PUF? History, types of PUFs, etc 2) Security of PUFs (especially physical attacks) 3) How a PUF fits into the context of a TEE
+:construction: :construction_worker: :construction: _This section needs some work._ Maybe organize in 3 main sections: 1) What's a PUF? History, types of PUFs, etc 2) Security of PUFs (especially physical attacks) 3) How PUFs fit into the context of a TEE & which PUF is best for TEEs
+
+For a somewhat formal definition of an ideal PUF and its properties see section 2.1 in [On the Physical Security of Physically Unclonable Functions] _by Shahin Tajik_.
 :::
+
 
 [Physical Unclonable Functions](https://en.wikipedia.org/wiki/Physical_unclonable_function) are arguably the current best hope to protect against physical attacks aimed at extracting secret keys (root of trust). That being said, PUFs are an active area of research where new PUF designs are proposed and existing designs are broken. Hence, active research is vital to better understand the benefits and limitations of PUFs in the context of TEEs.
 
@@ -458,7 +469,7 @@ The pufpunks may be going into a different direction than caliptra, as it seems 
 * [Silicon Physical Random Functions](https://dl.acm.org/doi/pdf/10.1145/586110.586132) _by Gassend et al._
 * [PUF Taxonomy](https://pubs.aip.org/aip/apr/article/6/1/011303/571003/A-PUF-taxonomy)
 * [Physically Unclonable Functions - Constructions, Properties and Applications](https://link.springer.com/book/10.1007/978-3-642-41395-7) _by Roel Maes_
-* [On the Physical Security of Physically Unclonable Functions](https://link.springer.com/book/10.1007/978-3-319-75820-6) _by Shahin Tajik_
+* [On the Physical Security of Physically Unclonable Functions] _by Shahin Tajik_
 
 ##### Other References
 * [Physical Unclonable Functions for Device Authentication and Secret Key Generation](https://people.csail.mit.edu/devadas/pubs/puf-dac07.pdf)
@@ -728,3 +739,4 @@ You should also be able to make comments on this document.
 [The battle for Ring Zero]: https://pluralistic.net/2022/01/30/ring-minus-one/#drm-political-economy
 [Physical One-Way Functions]: https://cba.mit.edu/docs/theses/01.03.pappuphd.powf.pdf
 [ideal functionality]: https://en.wikipedia.org/wiki/Universal_composability#Ideal_functionality
+* [On the Physical Security of Physically Unclonable Functions]: https://link.springer.com/book/10.1007/978-3-319-75820-6
