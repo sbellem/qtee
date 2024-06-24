@@ -20,16 +20,18 @@ a hole in a punched card, a mark on paper, or some other equivalent._** _This ti
 
 This is an initiative to spark research to explore how we could develop a secure chip for TEEs (Trusted Execution Environments) that would ultimately be secure because of physics rather than economics[^1]. The chip design should be open source, and its physical implementation should be verifiable, meaning that it should match the open source design. Moreover, the root of trust (embedded secret key) should be proven to have not leaked during generation or manufacturing. Thus, the hope and vision is to develop a TEE chip that does not need to be trusted because it can be verified by physics and mathematics. For an example of a cryptographic protocol implementation that is secure through physics see [Experimental relativistic zero-knowledge proofs] by _Alikhani et al_.
 
-:::danger
 To put this vision into context, current TEEs such as Intel SGX, face the following challenges:
 
+:::danger
+## Four Core Challenges for TEEs
 1. :radioactive_sign: **NO proof of manufacturing** according to a known open source chip design specification
 2. :radioactive_sign: **NO proof of non-leakage of secret bits** -- how can we know that the secret bits (root of trust) encoded into the chip were not leaked during manufacturing
 3. :radioactive_sign: **NO proof of hidden-forever secret bits** -- above and beyond trusting or not trusting the chip manufacturers, and the manufacturing processes, one problem remains: Can we truly hide secret bits of information (root of trust) into physical matter?
 4. :radioactive_sign: **Centralized remote attestation** -- meaning that trust in the manufacturer is required to attest the trustworthiness of a TEE. [[RFC 9334]]
+:::
 
 See https://github.com/sbellem/qtee/issues/2, for more details[^2].
-:::
+
 
 ## Scope
 The intent of this document is to work on addressing the four fundamental core challenges mentioned above. These core challenges are arguably all rooted in the security of the root-of-trust. Hence, as we make progress in our understanding, this document may tighten its focus on how to secure the root-of-trust via physics rather than economics, meanwhile extracting the work on the other core challenges to their own documents.
@@ -155,13 +157,13 @@ _Perhaps_ the only thing that may be out-of-bound is remote civilizations or sta
 ## Cypherpunk-Friendly Chip
 As mentioned in [The Problem TEEs aim to solve](#The-Problem-TEEs-aim-to-solve), if the problem we wish to tackle is that of secure remote computation, the threat model should include attackers with physical access to the chip, which means that the chip should be secure against physical attacks, which begs the question as to whether this is even possible in the classical setting (i.e. without using quantum physics). That being said, it does not mean that we cannot improve the current TEEs. This section aims to explore what we could feasibly do today to have a chip that attempts to align itself with the motto of "Don't Trust, Verify", omnipresent in the web3 and cypherpunk cultures.
 
-In the context of a secure chip, the motto **"Don't Trust, Verify"** calls for at least four fundamental pillars, which address the challenges presented at the beginning of this document:
+In the context of a secure chip, the motto **"Don't Trust, Verify"** calls for at least four fundamental pillars, which address the challenges presented at the [beginning](#Four-Core-Challenges-for-TEEs) of this document:
 
 :::success
 1. **Proof of manufacturing** according to a known open source chip design specification
 2. **Proof of non-leakage of secret bits** to verify that the root of trust wasn't leaked during manufacturing
 3. **Proof of hidden-forever secret bits** -- the root of trust must be proven to be unbreakable
-4. **Decentralized Remote Attestation** -- :grin: a device should be able to provide a proof that it is what it claims to be.
+4. **Decentralized Remote Attestation** -- :grin: a device should be able to provide a proof that it is what it claims to be, without relyng on any external validation, such as a chip manufacturer, or even a k-of-N validator set. In other words, using the word "autonomous" as in the [Autonomous TEE Manifesto](https://notes.poeticte.ch/s/KA7fPN6-O) a device should be fully autonomous when it comes down to proving what it is, and the state it is in.
 :::
 
 
@@ -233,7 +235,7 @@ Or, could we build chips at home?
 
 
 #### Zero Trust Manufacturing
-_Can we learn something interesting from Zero Trust applied to Chip Manufacturing?_
+_Can we learn something interesting from Zero Trust applied to Chip Manufacturing?_[^5]
 
 * [Zero trust security model](https://en.wikipedia.org/wiki/Zero_trust_security_model)
 * [Intel: A Zero Trust Approach to Architecting Silicon](https://www.intel.com/content/www/us/en/newsroom/opinion/zero-trust-approach-architecting-silicon.html#gs.43wv53)
@@ -250,11 +252,12 @@ _Nanofactories, nanomanufacturing, atomically precise manufacturing, etc._
 * [Molecularly Precise Fabrication and Massively Parallel Assembly: The Two Keys to 21st Century Manufacturing](https://www.molecularassembler.com/Nanofactory/TwoKeys.htm) _by Robert A. Freitas Jr. and Ralph C. Merkle_
 * [Engines of Creation 2.0, The Coming Era of Nanotechnology](https://web.archive.org/web/20140810022659/http://www1.appstate.edu/dept/physics/nanotech/EnginesofCreation2_8803267.pdf) _by Eric Drexler_
 
-#### GitHub Issue
-https://github.com/sbellem/qtee/issues/7
-
 
 ### Root of Trust with PUFs
+:::warning
+:construction: :construction_worker: :construction: _This section needs some work._ Maybe organize in 3 main sections: 1) What's a PUF? History, types of PUFs, etc 2) Security of PUFs (especially physical attacks) 3) How a PUF fits into the context of a TEE
+:::
+
 [Physical Unclonable Functions](https://en.wikipedia.org/wiki/Physical_unclonable_function) are arguably the current best hope to protect against physical attacks aimed at extracting secret keys (root of trust). That being said, PUFs are an active area of research where new PUF designs are proposed and existing designs are broken. Hence, active research is vital to better understand the benefits and limitations of PUFs in the context of TEEs.
 
 The first PUF was presented in the PhD thesis titled
@@ -419,12 +422,17 @@ Partial table source: [A PUF taxonomy](https://pubs.aip.org/aip/apr/article/6/1/
 #### Commercial PUFs
 https://www.cryptoquantique.com/products/qdid/
 
+<!--
 #### Concerns/Questions
+:::warning
+Probably does not apply to the usecase of TEEs, as we would use a weak PUF, to derive a key, which would not need to leave the PUF.
+:::
 As per [Physical unclonable functions](https://www.nature.com/articles/s41928-020-0372-5):
 
 > Authentication can also be executed remotely, once the CRP (challenge–response pair) is recorded in a secure database only known by the trusted party (server).
 
 This seems to be relating to what is called remote attestation in the context of popular TEEs like SGX. In the context of SGX, for instance, the chip manufacturer is considered to be a trusted party, for various reasons (e.g: https://github.com/sbellem/qtee/issues/2).
+-->
 
 #### Hacking & Cryptanalysis
 * https://github.com/nils-wisiol/pypuf (cryptanalysis)
@@ -433,9 +441,12 @@ This seems to be relating to what is called remote attestation in the context of
 * https://github.com/stnolting/fpga_puf
 * https://www.crypto.ruhr-uni-bochum.de/imperia/md/crypto/kiltz/ulrich_paper_47.pdf
 
-#### Specifications in Chip Designs
-* https://github.com/chipsalliance/Caliptra/blob/main/doc/Caliptra.md#future-effort-caliptra-security-subsystem
-* https://github.com/chipsalliance/caliptra-rtl/blob/main/docs/CaliptraIntegrationSpecification.md
+
+#### Specifications in Chip Designs (Caliptra)
+The pufpunks may be going into a different direction than caliptra, as it seems to be geared towards datacenters, but it is probably good idea to understand the caliptra design.
+* [Caliptra: A Datacenter System on a Chip (SoC) Root of Trust (RoT)](https://github.com/chipsalliance/Caliptra/blob/main/doc/Caliptra.md#future-effort-caliptra-security-subsystemhttps://github.com/chipsalliance/Caliptra/blob/main/doc/Caliptra.md#future-effort-caliptra-security-subsystem)
+* [Caliptra Integration Specification](https://github.com/chipsalliance/caliptra-rtl/blob/main/docs/CaliptraIntegrationSpecification.md)
+
 
 #### References
 * [Physical One-Way Functions](https://www.science.org/doi/full/10.1126/science.1074376) _by Pappu et al._
@@ -446,6 +457,8 @@ This seems to be relating to what is called remote attestation in the context of
 * [Physically Unclonable Functions: A Study on the State of the Art and Future Research Directions](https://link.springer.com/chapter/10.1007/978-3-642-14452-3_1) _by Roel Maes & Ingrid Verbauwhede_
 * [Silicon Physical Random Functions](https://dl.acm.org/doi/pdf/10.1145/586110.586132) _by Gassend et al._
 * [PUF Taxonomy](https://pubs.aip.org/aip/apr/article/6/1/011303/571003/A-PUF-taxonomy)
+* [Physically Unclonable Functions - Constructions, Properties and Applications](https://link.springer.com/book/10.1007/978-3-642-41395-7) _by Roel Maes_
+* [On the Physical Security of Physically Unclonable Functions](https://link.springer.com/book/10.1007/978-3-319-75820-6) _by Shahin Tajik_
 
 ##### Other References
 * [Physical Unclonable Functions for Device Authentication and Secret Key Generation](https://people.csail.mit.edu/devadas/pubs/puf-dac07.pdf)
@@ -688,6 +701,7 @@ You should also be able to make comments on this document.
 [^2]:  Also, of relevance: https://github.com/sbellem/qtee/issues/1, https://github.com/sbellem/qtee/issues/7, https://github.com/sbellem/qtee/issues/8, [CHIP ATTACKS], and [PUFs].
 [^3]: See for instance [RFC 9334](https://www.rfc-editor.org/rfc/rfc9334.html#name-security-considerations) (section 12) for security considerations when treating the topic of remote attestation.
 [^4]: The reasoning is that design and implementation flaws can be fixed and can happen whether the design is open source or not, whether the supply chain is correct, etc. Hence, design and implementation bugs can be treated separately. It could be argued that an open source hardware design may benefit from a broader community and overtime will contain less bugs than a closed source design.
+[^5]: See also https://github.com/sbellem/qtee/issues/7
 
 
 [Experimental relativistic zero-knowledge proofs]: https://www.nature.com/articles/s41586-021-03998-y
