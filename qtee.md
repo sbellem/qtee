@@ -213,15 +213,36 @@ It may be useful to survey current and past efforts such as:
 Also worth having a look at is the course [Zero to ASIC Course](https://www.zerotoasiccourse.com/).
 
 
-#### Verfiable Chip Implementation
-This is also not a new problem. One approach is to use [Logic Encryption], which somehow locks the chip design to protect against a  malicious foundry. The company [HENSOLDT Cyber] has numerous research works on the topic, in addition to actually making chips, and hence, is probably worth studying. Their papers are listed at https://hensoldt-cyber.com/scientific-papers/, but let's list a few here:
+#### Verifiable Chip Implementation
+How do we know whether a given chip corresponds to a given design? At least two possible approaches:
+
+* (**Pre-fab**) [Logic Encryption] - encrypts the design
+* (**Post-fab**) [Microscope imaging](https://eprint.iacr.org/2022/1720.pdf) of the chip to compare it against its design
+
+##### Pre-Fabrication: Logic Encryption
+[Logic Encryption] somehow locks the chip design to protect against a  malicious foundry. The company [HENSOLDT Cyber] has numerous research works on the topic, in addition to actually making chips, and hence, is probably worth studying. Their papers are listed at https://hensoldt-cyber.com/scientific-papers/, but let's list a few here:
 
 * [Scaling Logic Locking Schemes to Multi-Module Hardware Designs](https://www.ice.rwth-aachen.de/publications/publication/sisejkovicARCS2020/)
 * [Inter-Lock: Logic Encryption for Processor Cores Beyond Module Boundaries](https://www.ice.rwth-aachen.de/publications/publication/sisejkovicETS2019/)
 * [A Critical Evaluation of the Paradigm Shift in the Design of Logic Encryption Algorithms](https://www.ice.rwth-aachen.de/publications/publication/sisejkovicVLSIDAT2019/)
 * [A Unifying Logic Encryption Security Metric](https://www.ice.rwth-aachen.de/publications/publication/sisejkovicSAMOS2018/)
 
+
+##### Post-Fabrication: Microscope Imaging
+See [Red Team vs. Blue Team: A Real-World Hardware Trojan Detection Case Study Across Four Modern CMOS Technology Generations](https://eprint.iacr.org/2022/1720.pdf) _by Puschner et al._ in which SEM imaging was used to detect hardware trojan insertions in chips.
+
+> [!Important]
+> Some imaging techniques (invasive) destroy the chip in the process meanwhile others (non-invasive) do not. Invasive analysis would need to be combined with a Cut-and-Choose protocol as proposed by Miller in https://github.com/sbellem/qtee/issues/2#issuecomment-1464600086.
+>
+> It's important to point out that there seems to be newer techniques that are non-invasive, based on X-ray ptychography or Photonic Emission Analysis/Microscopy (PEM).
+> 
+> TODO:
+> Add references to different imaging techniques.
+
+___
+
 More generally speaking, learning what [OpenTitan](https://opentitan.org/book/doc/project_governance/index.html#quality-standards-for-open-hardware-ip) does for what they call "Quality standards for open hardware IP" may be useful.
+
 
 
 
@@ -269,41 +290,46 @@ For a somewhat formal definition of an ideal PUF and its properties see section 
 [A Formalization of the Security Features of Physical Functions] _by Armknecht et al._
 :::
 
-[Physical Unclonable Functions](https://en.wikipedia.org/wiki/Physical_unclonable_function) are arguably the current best hope to protect against physical attacks aimed at extracting secret keys (root of trust). That being said, PUFs are an active area of research where new PUF designs are proposed and existing designs are broken. Hence, active research is vital to better understand the benefits and limitations of PUFs in the context of TEEs.
+[Physically Unclonable Functions](https://www.nature.com/articles/s41928-020-0372-5) are arguably the current best hope to protect against physical attacks aimed at extracting secret keys (root of trust). That being said, PUFs are an active area of research where new PUF designs are proposed and existing designs are broken. Hence, active research is vital to better understand the benefits and limitations of PUFs in the context of TEEs.
 
 The first PUF was presented in the PhD thesis titled
-[Physical one-way functions](https://dspace.mit.edu/handle/1721.1/45499), by Ravikanth Srinivasa Pappu.
+[Physical One-Way Functions](https://dspace.mit.edu/handle/1721.1/45499), by Ravikanth Srinivasa Pappu, and in a follow up article, (with the same name) [Physical One-Way Functions](https://www.science.org/doi/10.1126/science.1074376), by Pappu, Recht, Taylor, and Gershenfeld.
 
-Not sure where it's best to start, but perhaps this article (if you have access):
-[Physical unclonable functions](https://www.nature.com/articles/s41928-020-0372-5) by [Yansong Gao](https://www.nature.com/articles/s41928-020-0372-5#auth-Yansong-Gao-Aff1-Aff2), [Said F. Al-Sarawi](https://www.nature.com/articles/s41928-020-0372-5#auth-Said_F_-Al_Sarawi-Aff3) & [Derek Abbott](https://www.nature.com/articles/s41928-020-0372-5#auth-Derek-Abbott-Aff4)
+One possible place to start learning about PUFs, is [Physically Unclonable Functions: A Study on the State of the Art and Future Research Directions](https://link.springer.com/chapter/10.1007/978-3-642-14452-3_1) _by Roel Maes & Ingrid Verbauwhede_.
 
-OR:
 
-* [Physical Unclonable Functions for Device Authentication and Secret Key Generation](https://people.csail.mit.edu/devadas/pubs/puf-dac07.pdf)
 
-  > Because the PUF circuit is rather simple, attackers can try to construct a precise timing model and learn the parameters from many input-output pairs [8]. To prevent these model-building attacks, the PUF circuit output can be obfuscated by XOR’ing multiple outputs or a PUF output can be used as one of the MUX control signals. **Note that the model building attack is irrelevant for the cryptographic key generation where the PUF output is never directly exposed.** [G. Edward Suh, Srinivas Devadas](https://people.csail.mit.edu/devadas/pubs/puf-dac07.pdf)
+<!--
+TODO Move this into attack section, just to point out that machine learning attacks don't apply to key gen
 
+[Physical Unclonable Functions for Device Authentication and Secret Key Generation](https://people.csail.mit.edu/devadas/pubs/puf-dac07.pdf)
+
+> Because the PUF circuit is rather simple, attackers can try to construct a precise timing model and learn the parameters from many input-output pairs [8]. To prevent these model-building attacks, the PUF circuit output can be obfuscated by XOR’ing multiple outputs or a PUF output can be used as one of the MUX control signals. **Note that the model building attack is irrelevant for the cryptographic key generation where the PUF output is never directly exposed.** [G. Edward Suh, Srinivas Devadas](https://people.csail.mit.edu/devadas/pubs/puf-dac07.pdf)
+-->
+
+<!--
 * [An Introduction to Physically Unclonable Functions](https://www.allaboutcircuits.com/technical-articles/an-introduction-to-physically-unclonable-functions/)
 
   > When manufactured, the PUF will be fed a series of different challenges and have its responses recorded. Through this exercise, the designers know each PUF's unique response to a given challenge and can use this information to prevent counterfeiting, create and store cryptographic keys, and many other security feats.
 
   TODO: figure out if the set of CRPs is not needed for signing keys. Also, out of curiosity could there be oblivious (or zk) CRPs, meaning that no one knows the challenge response pairs, but yet, they can be used.
+-->
 
-
+<!--
 #### First well-known PUF: Physical One-Way Functions
 https://www.science.org/doi/full/10.1126/science.1074376
 
 Also at https://nbviewer.org/github/rpappu/pdf-publications/blob/master/Pappu-Science-2002.pdf
-
+-->
 
 #### Taxonomy of PUFs
 Main reference: https://pubs.aip.org/aip/apr/article/6/1/011303/571003/A-PUF-taxonomy
 
+:::spoiler
 ![image](https://hackmd.io/_uploads/r19_7exI0.png)
 
-
 ![image](https://hackmd.io/_uploads/HJdtVgxUA.png)
-
+:::
 
 Images source: [A PUF taxonomy](https://pubs.aip.org/aip/apr/article/6/1/011303/571003/A-PUF-taxonomy) by McGrath et al.
 
@@ -416,6 +442,7 @@ Partial table source: [A PUF taxonomy](https://pubs.aip.org/aip/apr/article/6/1/
 
 #### Applications
 ##### [PUF-derived IoT identities in a zero-knowledge protocol for blockchain](https://www.sciencedirect.com/science/article/abs/pii/S2542660518301124)
+:::spoiler
 > In this paper, an alternative authentication approach in which an MCU generates a secret key internally is introduced, exploiting manufacturing variability as a physical unclonable function (PUF). As the key is generated by the device itself, manufacturers save the expense of a secure environment for external key generation. In production, once chips are loaded with a firmware, it is only necessary to run an internal characterization and pass on the resulting public key, mask and helper data to be stored for authentication and recovery. Further external memory access is prevented, e.g., by blowing the JTAG security fuse. As the secret key is regenerated (with the same result each time) rather than stored in non-volatile memory, it is very hard to clone and the cost of a secure element can be saved.
 
 > The case for such IoT devices is strengthened further in combination with a distributed ledger, or blockchain. First of all, the immutability and distributed trust provided by a blockchain can make the device authentication independent of the manufacturer. Secondly, a business process implemented in chaincode that relies on IoT inputs can validate device signatures to ensure the authenticity and integrity of those inputs.
@@ -427,6 +454,7 @@ Partial table source: [A PUF taxonomy](https://pubs.aip.org/aip/apr/article/6/1/
 > As for the second aspect, even a low-cost device can prevent manipulation of its communication with a blockchain by signing its messages with our PUF-derived keys, making the proposal suitable for any resources-limited device connected to the blockchain [9]. The chain code, in turn, can also validate the device signatures to ensure data integrity and authenticity, extending the trust the blockchain provides into the IoT device.
 > 
 > This paper proposes using an SRAM-based PUF to generate cryptographic keys that are employed in a zero-knowledge proof to authenticate an IoT device. We present an efficient implementation in an MCU and show that even low-cost devices can perform the required computational tasks sufficiently fast. Experimental results demonstrate that our approach is robust against temperature variations and that collisions of device identities are unlikely.
+:::
 
 ##### [A survey on physical unclonable function (PUF)-based security solutions for Internet of Things](https://www.sciencedirect.com/science/article/pii/S1389128620312275)
 
@@ -458,6 +486,8 @@ The pufpunks may be going into a different direction than caliptra, as it seems 
 * [Caliptra: A Datacenter System on a Chip (SoC) Root of Trust (RoT)](https://github.com/chipsalliance/Caliptra/blob/main/doc/Caliptra.md#future-effort-caliptra-security-subsystemhttps://github.com/chipsalliance/Caliptra/blob/main/doc/Caliptra.md#future-effort-caliptra-security-subsystem)
 * [Caliptra Integration Specification](https://github.com/chipsalliance/caliptra-rtl/blob/main/docs/CaliptraIntegrationSpecification.md)
 
+#### Post-Quantum Security with SRAM PUFs
+[Addressing Quantum Computing Threats With SRAM PUFs](https://semiengineering.com/addressing-quantum-computing-threats-with-sram-pufs/)
 
 #### References
 * [Physical One-Way Functions](https://www.science.org/doi/full/10.1126/science.1074376) _by Pappu et al._
@@ -694,6 +724,9 @@ Now, with this background in mind, it seems that it would be extremely useful to
 [Intel SGX Explained]: https://eprint.iacr.org/2016/086
 [SoK: Hardware-supported TEEs]: https://arxiv.org/abs/2205.12742
 
+## Acknowledgements
+Thanks to Thorben Moos for providing valuable feedback and pointers.
+
 ## Contributing to this Document 
 You can make edits and pull requests for [qtee.md](https://github.com/sbellem/qtee/blob/main/qtee.md) which should be a mirror of this document.
 Alternatively you can also comment on or create new [issues](https://github.com/sbellem/qtee/issues).
@@ -742,3 +775,4 @@ You should also be able to make comments on this document.
 [ideal functionality]: https://en.wikipedia.org/wiki/Universal_composability#Ideal_functionality
 [On the Physical Security of Physically Unclonable Functions]: https://link.springer.com/book/10.1007/978-3-319-75820-6
 [A Formalization of the Security Features of Physical Functions]: https://ieeexplore.ieee.org/document/5958042
+[Silicon Physical Random Functions]: https://dl.acm.org/doi/pdf/10.1145/586110.586132
