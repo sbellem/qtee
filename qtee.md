@@ -265,9 +265,9 @@ _Nanofactories, nanomanufacturing, atomically precise manufacturing, etc._
 :::warning
 :construction: :construction_worker: :construction: _This section needs some work._ Maybe organize in 3 main sections: 1) What's a PUF? History, types of PUFs, etc 2) Security of PUFs (especially physical attacks) 3) How PUFs fit into the context of a TEE & which PUF is best for TEEs
 
-For a somewhat formal definition of an ideal PUF and its properties see section 2.1 in [On the Physical Security of Physically Unclonable Functions] _by Shahin Tajik_.
+For a somewhat formal definition of an ideal PUF and its properties see section 2.1 in [On the Physical Security of Physically Unclonable Functions] _by Shahin Tajik_ or
+[A Formalization of the Security Features of Physical Functions] _by Armknecht et al._
 :::
-
 
 [Physical Unclonable Functions](https://en.wikipedia.org/wiki/Physical_unclonable_function) are arguably the current best hope to protect against physical attacks aimed at extracting secret keys (root of trust). That being said, PUFs are an active area of research where new PUF designs are proposed and existing designs are broken. Hence, active research is vital to better understand the benefits and limitations of PUFs in the context of TEEs.
 
@@ -470,6 +470,7 @@ The pufpunks may be going into a different direction than caliptra, as it seems 
 * [PUF Taxonomy](https://pubs.aip.org/aip/apr/article/6/1/011303/571003/A-PUF-taxonomy)
 * [Physically Unclonable Functions - Constructions, Properties and Applications](https://link.springer.com/book/10.1007/978-3-642-41395-7) _by Roel Maes_
 * [On the Physical Security of Physically Unclonable Functions] _by Shahin Tajik_
+* [A Formalization of the Security Features of Physical Functions] _by Armknecht et al._
 
 ##### Other References
 * [Physical Unclonable Functions for Device Authentication and Secret Key Generation](https://people.csail.mit.edu/devadas/pubs/puf-dac07.pdf)
@@ -483,7 +484,7 @@ The pufpunks may be going into a different direction than caliptra, as it seems 
 ### Decentralized Remote Attestation
 :construction: TODO :construction:
 
-Not sure how this could be achieved. Conceptually speaking, a device should be able to proof what it claims to be with respect to both its hardware and software, without relying on a trusted third party such as the manufacturer. [RFC 9334 - Remote ATtestation procedureS (RATS) Architecture](https://rfc-editor.org/rfc/rfc9334.html) may be useful to review in the context of our [threat model](#Threat-Model).
+Not sure how this could be achieved. Conceptually speaking, a device should be able to proof what it claims to be with respect to both its hardware and software, without relying on a trusted third party such as the manufacturer. [RFC 9334 - Remote Attestation procedureS (RATS) Architecture](https://rfc-editor.org/rfc/rfc9334.html) may be useful to review in the context of our [threat model](#Threat-Model).
 
 For instance, in the case of Intel SGX, the chip manufacturer plays a central role in the remote attestation process. It may be useful to go through all the steps that Intel plays (e.g. provisioning attestation keys, verifying quotes, etc) and think through to see how these steps could be decentralized. Perhaps first defining the [ideal functionality] for remote attestation would be useful; or reviewing works that have already done so. Once we have the ideal functionality defined
 
@@ -739,4 +740,5 @@ You should also be able to make comments on this document.
 [The battle for Ring Zero]: https://pluralistic.net/2022/01/30/ring-minus-one/#drm-political-economy
 [Physical One-Way Functions]: https://cba.mit.edu/docs/theses/01.03.pappuphd.powf.pdf
 [ideal functionality]: https://en.wikipedia.org/wiki/Universal_composability#Ideal_functionality
-* [On the Physical Security of Physically Unclonable Functions]: https://link.springer.com/book/10.1007/978-3-319-75820-6
+[On the Physical Security of Physically Unclonable Functions]: https://link.springer.com/book/10.1007/978-3-319-75820-6
+[A Formalization of the Security Features of Physical Functions]: https://ieeexplore.ieee.org/document/5958042
