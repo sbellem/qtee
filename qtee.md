@@ -255,12 +255,16 @@ More generally speaking, learning what [OpenTitan](https://opentitan.org/book/do
 
 ### Marching Towards DAMOs
 **DAMO: Decentralized Autonomous Manufacturing Organization**
-
 How can we be certain that the manufacturing process did not leak the secret keys (root of trust)? Could the supply chain somehow produce a proof of non-leakage of secret keys?
 
 Could we somehow bootstrap a fully automated foundry, where the manufacturing process is fully programmed, verifiable, and chips are built atom-by-atom.
 
 Or, could we build chips at home?
+
+> [!NOTE]
+> PUFs, covered in the next section, may solve the problem of ensuring that the key does not leak at manufacturing time, since the key is not injected, but rather internally created when the chip is powered up, and never stored in non-volatile memory (NVM).
+>
+> However, we nevertheless need to make sure that the expected chip with the expected PUF has been manufactured. This may be achieved with imaging the chip against its expected design. (TODO: Add link/ref) 
 
 
 #### Zero Trust Manufacturing
