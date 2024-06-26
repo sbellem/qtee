@@ -63,7 +63,7 @@ The key topics that this document wishes to explore are:
     * [Keystone Enclave](#Keystone-Enclave)
     * [Intel SGX's Root of Trust](#Intel-SGXs-Root-of-Trust)
     * [Software Attestation in Intel SGX](#Software-Attestation-in-Intel-SGX)
-    * [Physical Attacks -- What does it take?](#Physical-Attacks-–-What-does-it-take?)
+    * [Physical Attacks on Chips](#Physical-Attacks-on-Chips)
 
 
 ## The Problem TEEs aim to solve
@@ -73,21 +73,21 @@ TEEs are an attempt to solve the _secure remote computation_ problem. Quoting [I
 > _Secure remote computation is the problem of executing software on a remote computer owned and maintained by an untrusted party, with some integrity and confidentiality guarantees._
 :::
 
-Note that the remote computer is said to be owned and maintained by an _untrusted_ party. Yet, current TEEs, cannot handle physical attacks such as chip attacks (see [TEE Chip Attacks: What does it take?](#Appendix-Chip-Attacks-–-What-does-it-take?)), which would allow an attacker to retrieve the root of trust (secret keys encoded in the hardware). Once an attacker knows the secret keys, it can emulate a TEE, and go through the attestation process unnoticed (e.g. see Appendix A. Emulated Guard eXtensions in https://sgx.fail/ paper).
+Note that the remote computer is said to be owned and maintained by an _untrusted_ party. Yet, current TEEs, cannot handle physical attacks such as chip attacks (see [Physical Attacks on Chips](#Physical-Attacks-on-Chip)), which would allow an attacker to retrieve the root of trust (secret keys encoded in the hardware). Once an attacker knows the secret keys, it can emulate a TEE, and go through the attestation process unnoticed (e.g. see Appendix A. Emulated Guard eXtensions in https://sgx.fail/ paper).
 
-Is it even possible to build a chip that can handle physical attacks, such as those making use of Focus Ion Beam microscopes as mentioned in [Intel SGX Explained] (section 3.4.3)? One could argue that it's not possible in the classical setting, but may be possible in the quantum setting. Some argue that PUFs (Physical Unclonable Functions) cannot be broken and would therefore be a solution. However, there's plenty of research that focuses of breaking PUFs, and there's also active research in developping more secure PUFs. Hence, it seems reasonable to assume that PUFs are not an ultimate solution to chip attacks, although they do seem to be a major improvement. (See [Root of Trust with PUFs](#Root-of-Trust-with-PUFs).)
+Is it even possible to build a chip that can handle physical attacks, such as those making use of Focus Ion Beam microscopes as mentioned in [Intel SGX Explained] (section 3.4.3), and [Breaking and entering through the silicon]? One could argue that it's not possible in the classical setting, but may be possible in the quantum setting. Some argue that PUFs (Physical Unclonable Functions) cannot be broken and would therefore be a solution. However, there's plenty of research that focuses of breaking PUFs, and there's also active research in developping more secure PUFs. Hence, it seems reasonable to assume that PUFs are not an ultimate solution to chip attacks, although they do seem to be a major improvement. (See [Root of Trust with PUFs](#Root-of-Trust-with-PUFs).)
 
 ## Do we really need TEEs?
 **Why can't we do it all with FHE, ZKP, and MPC?**
 
-Not sure. :smile: Besides the performance limitations of FHE, ZKP and MPC, the problem of proof-of-deletion or certified deletion may be the most mentioned one. The intuition is simple: "How do you prove that you completely forgot what some secret data was deleted?" You could show that your harddisk has been completely wiped out, but perhaps you copied it elsewhere. Hence, certified deletion appears to not be possible in the classical setting but it apparently is if one is willing to step one foot (or two), into the quantum setting (e.g.: [High-Dimensional Quantum Certified Deletion] by _Hufnagel et al_, [Quantum Proofs of Deletion for Learning with Errors] by _Poremba_). If we are confined to the classical setting though, then TEEs may be useful. If the program generating and/or handling secrets is executed in a TEE then the program can be written such that it will delete the secrets once it's done with the task. As an alternative to TEEs, there's the idea of traceable secret sharing as presented in [Traceable Secret Sharing: Strong Security and Efficient Constructions] by _Boneh et al_.
+Not sure. :smile: Besides the performance limitations of FHE, ZKP and MPC, the problem of proof-of-deletion or certified deletion may be the most mentioned one. The intuition is simple: "How do you prove that you completely forgot what some secret data was deleted?" You could show that your harddisk has been completely wiped out, but perhaps you copied it elsewhere. Hence, certified deletion appears to not be possible in the classical setting but it apparently is if one is willing to step one foot (or two), into the quantum setting (e.g.: [High-Dimensional Quantum Certified Deletion] by _Hufnagel et al_, [Quantum Proofs of Deletion for Learning with Errors] by _Poremba_, [Software with Certified Deletion](https://link.springer.com/chapter/10.1007/978-3-031-58737-5_4) by _Bartusek et al_). If we are confined to the classical setting though, then TEEs may be useful. If the program generating and/or handling secrets is executed in a TEE then the program can be written such that it will delete the secrets once it's done with the task. As an alternative to TEEs, there's the idea of traceable secret sharing as presented in [Traceable Secret Sharing: Strong Security and Efficient Constructions] by _Boneh et al_.
 
 ## Motivation
 :::info
 **Moving from security-through-economics towards security-through-physics.**
 :::
 
-According to [SoK: Hardware-supported TEEs] and [Intel SGX Explained], current chips that implement TEEs cannot protect against physical attacks such as chip delayering, which would allow an attacker to extract the so-called root of trust, meaning hardware embedded secret keys upon which the entire security of the TEE depends. The only current known defense against chip attacks is trying to make the cost of a chip attack as high as possible. To make things worst, it's not even clear what the cost of a chip attack is; perhaps one million dollar (see [TEE Chip Attacks: What does it take?](#Appendix-Chip-Attacks-–-What-does-it-take?))? So, at the very least, one would hope we would know what the cost of a chip attack is, such that protocol designers could [design mechanisms][mechanism design] that would eliminate economic incentives to attack the chip, because the cost of the attack would not be worth what could be extracted out of the attack. It's very important to note here that a protocol relying on TEEs may also be targeted for attacks for reasons other than financial, and it's probably best to avoid using TEEs for such cases (e.g. privacy preserving application used by political dissidents).
+According to [SoK: Hardware-supported TEEs] and [Intel SGX Explained], current chips that implement TEEs cannot protect against physical attacks such as chip delayering, which would allow an attacker to extract the so-called root of trust, meaning hardware embedded secret keys upon which the entire security of the TEE depends. The only current known defense against chip attacks is trying to make the cost of a chip attack as high as possible. To make things worst, it's not even clear what the cost of a chip attack is; perhaps one million dollar (see [Physical Attacks on Chips](#Physical-Attacks-on-Chips))? So, at the very least, one would hope we would know what the cost of a chip attack is, such that protocol designers could [design mechanisms][mechanism design] that would eliminate economic incentives to attack the chip, because the cost of the attack would not be worth what could be extracted out of the attack. It's very important to note here that a protocol relying on TEEs may also be targeted for attacks for reasons other than financial, and it's probably best to avoid using TEEs for such cases (e.g. privacy preserving application used by political dissidents).
 
 Aside from being vulnerable to chip attacks the current popular TEEs, such as Intel SGX, are closed source, meaning that their hardware designs are not public, which in turn makes it very difficult to know whether a chip is implemented as claimed. Even with an open source hardware design we would need to figure out how to verify that the chip was implemented as per the open source design, and that secrets generated and embedded into the hardware at the time of manufacturing were not leaked.
 
@@ -652,7 +652,12 @@ Not sure if that is still relevant with DCAP.
 :::
 
 
-### Physical Attacks -- What does it take?
+### Physical Attacks on Chips
+:::warning
+:construction: :construction_worker: :construction:
+Needs re-work.
+Use more detailed references such as [Breaking and Entering through the Silicon]. Perhaps, present the type of equipment required (SEM, PEM, X-Ray, etc), and the concepts behind the different types of physical attacks, to clearly show that they are indeed feasible.
+:::
 
 #### Power Analysis Attacks
 
@@ -780,3 +785,4 @@ You should also be able to make comments on this document.
 [On the Physical Security of Physically Unclonable Functions]: https://link.springer.com/book/10.1007/978-3-319-75820-6
 [A Formalization of the Security Features of Physical Functions]: https://ieeexplore.ieee.org/document/5958042
 [Silicon Physical Random Functions]: https://dl.acm.org/doi/pdf/10.1145/586110.586132
+[Breaking and entering through the silicon]: https://dl.acm.org/doi/10.1145/2508859.2516717
