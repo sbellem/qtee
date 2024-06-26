@@ -288,13 +288,13 @@ _Nanofactories, nanomanufacturing, atomically precise manufacturing, etc._
 
 ### Root of Trust with PUFs
 :::warning
-:construction: :construction_worker: :construction: _This section needs some work._ Maybe organize in 3 main sections: 1) What's a PUF? History, types of PUFs, etc 2) Security of PUFs (especially physical attacks) 3) How PUFs fit into the context of a TEE & which PUF is best for TEEs
+:construction: :construction_worker: :construction: _This section needs some work._ Maybe organize in 3 main sections: 1) What's a PUF? History, types of PUFs, etc 2) Security of PUFs (especially physical attacks) 3) How PUFs fit into the context of a TEE & which PUF is best for TEEs.
 
 For a somewhat formal definition of an ideal PUF and its properties see section 2.1 in [On the Physical Security of Physically Unclonable Functions] _by Shahin Tajik_ or
 [A Formalization of the Security Features of Physical Functions] _by Armknecht et al._
 :::
 
-[Physically Unclonable Functions](https://www.nature.com/articles/s41928-020-0372-5) are arguably the current best hope to protect against physical attacks aimed at extracting secret keys (root of trust). That being said, PUFs are an active area of research where new PUF designs are proposed and existing designs are broken. Hence, active research is vital to better understand the benefits and limitations of PUFs in the context of TEEs.
+[Physically Unclonable Functions](https://www.nature.com/articles/s41928-020-0372-5) are arguably the current best hope to _practically_[^6] protect against physical attacks aimed at extracting secret keys (root of trust). That being said, PUFs are an active area of research where new PUF designs are proposed and existing designs are broken. Hence, active research is vital to better understand the benefits and limitations of PUFs in the context of TEEs.
 
 The first PUF was presented in the PhD thesis titled
 [Physical One-Way Functions](https://dspace.mit.edu/handle/1721.1/45499), by Ravikanth Srinivasa Pappu, and in a follow up article, (with the same name) [Physical One-Way Functions](https://www.science.org/doi/10.1126/science.1074376), by Pappu, Recht, Taylor, and Gershenfeld.
@@ -756,6 +756,8 @@ You should also be able to make comments on this document.
 [^3]: See for instance [RFC 9334](https://www.rfc-editor.org/rfc/rfc9334.html#name-security-considerations) (section 12) for security considerations when treating the topic of remote attestation.
 [^4]: The reasoning is that design and implementation flaws can be fixed and can happen whether the design is open source or not, whether the supply chain is correct, etc. Hence, design and implementation bugs can be treated separately. It could be argued that an open source hardware design may benefit from a broader community and overtime will contain less bugs than a closed source design.
 [^5]: See also https://github.com/sbellem/qtee/issues/7
+[^6]: The word "_practically_" is emphasized and intentionally used here because according to in [Physically Unclonable Functions: A Study on the State of the Art and Future Research Directions]:
+"_Again, the hardness of cloning can be considered from a theoretical and a practical point of view. **Practically, cloning can be very hard or infeasible.** Demonstrating theoretical unclonability on the other hand is very difficult. **The only known systems which can be proven to be theoretically unclonable are based on quantum physics.**_"
 
 
 [Experimental relativistic zero-knowledge proofs]: https://www.nature.com/articles/s41586-021-03998-y
@@ -786,3 +788,4 @@ You should also be able to make comments on this document.
 [A Formalization of the Security Features of Physical Functions]: https://ieeexplore.ieee.org/document/5958042
 [Silicon Physical Random Functions]: https://dl.acm.org/doi/pdf/10.1145/586110.586132
 [Breaking and entering through the silicon]: https://dl.acm.org/doi/10.1145/2508859.2516717
+[Physically Unclonable Functions: A Study on the State of the Art and Future Research Directions]: https://link.springer.com/chapter/10.1007/978-3-642-14452-3_1
