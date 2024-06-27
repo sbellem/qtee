@@ -88,45 +88,20 @@ a hole in a punched card, a mark on paper, or some other equivalent._** _This ti
 
 ---
 
-<!-- .slide: style="font-size: 16px;" -->
+# Enter PUF Land
 
-# - External Root of Trust - | - Internal Root of Trust -
-
-![image](https://hackmd.io/_uploads/ryMqEkhS0.png)
-
-Image source: [Root of Trust](https://www.synopsys.com/dw/doc.php/wp/gsa-end-to-end-traceability-of-ip-wp.pdf), _by Vincent Van der Leest et al_
+<!--
+<img src="https://hackmd.io/_uploads/SkEQpG9UC.png" width="130">
+-->
 
 ---
 
-<!-- .slide: style="font-size: 16px;" -->
+## The Rise of CryptoPhysics
 
-<img src="https://hackmd.io/_uploads/r1d9Ol3BA.png" />
-
-slide by [Ulrich Rührmair](https://youtu.be/oditVzrFa34?si=w92fUc1h7YNJBQYM)
-
----
-
-<!-- .slide: style="font-size: 16px;" -->
-
-<img src="https://hackmd.io/_uploads/S1NZ7xhBC.png" width="800"/>
-
-slide by [Ulrich Rührmair](https://youtu.be/oditVzrFa34?si=w92fUc1h7YNJBQYM)
-
----
-
-## Physical One-Way Functions
-
-![image](https://hackmd.io/_uploads/S1pmMxhH0.png)
-
-_[Pappu et al.](https://www.science.org/doi/full/10.1126/science.1074376)_
-
----
-
-## The Rise of Crypto-Physics
 **Physical One-Way Functions**
 -- [PhD thesis](https://dspace.mit.edu/handle/1721.1/45499) by Pappu
 
-> "Our work is philosophically inspired by the notion of Quantum Money, first proposed in 1983 by Wiesner in a paper titled [Conjugate Coding](https://dl.acm.org/doi/10.1145/1008908.1008920)".
+> "Our work is philosophically inspired by the notion of **Quantum Money**, first proposed in 1983 by Wiesner in a paper titled [Conjugate Coding](https://dl.acm.org/doi/10.1145/1008908.1008920)."
 
 
 <!-- In this paper, Wiesner presented two ideas. The first one was a verify-only memory, that, with high probability, cannot be read or copied by someone ignorant of its contents. The second idea was a scheme to multiplex two messages in such a way that, with high probability, either message could be recovered at the cost of irreversibly destroying the other.
@@ -135,6 +110,78 @@ _[Pappu et al.](https://www.science.org/doi/full/10.1126/science.1074376)_
 
 <!--
 <img src="https://hackmd.io/_uploads/H1bb_lhHC.png" />
+-->
+
+---
+
+## Physical One-Way Functions
+
+<!-- ![image](https://hackmd.io/_uploads/S1pmMxhH0.png) -->
+![image](https://hackmd.io/_uploads/HkiXMIc8R.png)
+
+_[Pappu et al.](https://www.science.org/doi/full/10.1126/science.1074376)_
+
+---
+
+<!-- .slide: style="font-size: 36px;" -->
+
+## Physical Unclonable Functions (PUFs)
+
+> "We wish to implement a PUF in silicon so we can **identify and authenticate** a given **integrated circuit** (IC). By exploiting **statistical variations** in the delays of devices and wires within the IC, we create a **manufacturer resistant** PUF."
+
+[Silicon Physical Random Functions](https://dl.acm.org/doi/10.1145/586110.586132) _by Gassend et al_
+
+
+---
+
+<!-- .slide: style="font-size: 16px;" -->
+
+# Arbiter PUF
+![image](https://hackmd.io/_uploads/SkwsDM9I0.png)
+source: [Physically Unclonable Functions: A Study on the State of the Art and Future Research Directions](https://link.springer.com/chapter/10.1007/978-3-642-14452-3_1) _by Maes & Verbauwhede_
+
+<!--
+![image](https://hackmd.io/_uploads/HyB9C1e8R.png)
+
+source: [Physical Characterization of Arbiter PUFs](https://eprint.iacr.org/2014/802)
+-->
+<!--
+* Vulnerable to semi-invasive attacks?
+* Serialized = 1 response at a time
+-->
+
+<!--
+<img src="https://hackmd.io/_uploads/BkPi4l3B0.png" width="700"/>
+
+
+slide by [Ulrich Rührmair](https://youtu.be/oditVzrFa34?si=w92fUc1h7YNJBQYM)
+-->
+
+---
+
+
+<!-- .slide: style="font-size: 16px;" -->
+
+# - Extrinsic Security - | - Intrinsic Security -
+
+![image](https://hackmd.io/_uploads/ryMqEkhS0.png)
+
+Image source: [Root of Trust](https://www.synopsys.com/dw/doc.php/wp/gsa-end-to-end-traceability-of-ip-wp.pdf), _by Vincent Van der Leest et al_
+
+
+<!--
+<img src="https://hackmd.io/_uploads/r1d9Ol3BA.png" />
+
+slide by [Ulrich Rührmair](https://youtu.be/oditVzrFa34?si=w92fUc1h7YNJBQYM)
+
+-->
+
+
+<!-- .slide: style="font-size: 16px;"
+
+<img src="https://hackmd.io/_uploads/S1NZ7xhBC.png" width="800"/>
+
+slide by [Ulrich Rührmair](https://youtu.be/oditVzrFa34?si=w92fUc1h7YNJBQYM)
 -->
 
 ---
@@ -152,22 +199,7 @@ source: [Physical Unclonable Functions and Applications: A Tutorial](https://iee
 
 ---
 
-## Arbiter PUF
-![image](https://hackmd.io/_uploads/HyB9C1e8R.png)
-
-source: [Physical Characterization of Arbiter PUFs](https://eprint.iacr.org/2014/802)
-
-* Vulnerable to semi-invasive attacks?
-* Serialized = 1 response at a time
-
-<!--
-<img src="https://hackmd.io/_uploads/BkPi4l3B0.png" width="700"/>
-
-
-slide by [Ulrich Rührmair](https://youtu.be/oditVzrFa34?si=w92fUc1h7YNJBQYM)
--->
-
----
+<!-- .slide: style="font-size: 40px;" -->
 
 # `zeepuf`
 * TEE based on [Keystone Enclave](https://github.com/keystone-enclave/keystone) and [SIMPL PUF](https://eprint.iacr.org/2009/255.pdf)
@@ -189,9 +221,11 @@ Image source: [Keystone Enclave Documentation](https://docs.keystone-enclave.org
 
 <!-- .slide: style="font-size: 16px;" -->
 
-<img src="https://hackmd.io/_uploads/BkyCBxnrR.png" width="800"/>
+<img src="https://hackmd.io/_uploads/BkyCBxnrR.png" width="750"/>
 
 slide by [Ulrich Rührmair](https://youtu.be/oditVzrFa34?si=w92fUc1h7YNJBQYM)
+
+related readings: [Secure Physical Enclosures from Covers with Tamper-Resistance](https://tches.iacr.org/index.php/TCHES/article/view/7334), [Read-Proof Hardware from Protective Coatings](https://link.springer.com/chapter/10.1007/11894063_29)
 
 ---
 
