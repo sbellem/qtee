@@ -231,13 +231,16 @@ How do we know whether a given chip corresponds to a given design? At least two 
 ##### Post-Fabrication: Microscope Imaging
 See [Red Team vs. Blue Team: A Real-World Hardware Trojan Detection Case Study Across Four Modern CMOS Technology Generations](https://eprint.iacr.org/2022/1720.pdf) _by Puschner et al._ in which SEM imaging was used to detect hardware trojan insertions in chips.
 
-> [!Important]
-> Some imaging techniques (invasive) destroy the chip in the process meanwhile others (non-invasive) do not. Invasive analysis would need to be combined with a Cut-and-Choose protocol as proposed by Miller in https://github.com/sbellem/qtee/issues/2#issuecomment-1464600086.
->
-> It's important to point out that there seems to be newer techniques that are non-invasive, based on X-ray ptychography or Photonic Emission Analysis/Microscopy (PEM).
-> 
-> TODO:
-> Add references to different imaging techniques.
+Some imaging techniques (invasive) destroy the chip in the process meanwhile others (non-invasive) do not. Invasive analysis would need to be combined with a Cut-and-Choose protocol as proposed by Miller in https://github.com/sbellem/qtee/issues/2#issuecomment-1464600086.
+
+It's important to point out that there seems to be newer techniques that are non-invasive, based on X-ray ptychography or Photonic Emission Analysis/Microscopy (PEM).
+
+_Puschner et al_ mention:
+
+> "_New non-invasive scanning methods based on X-Rays [[17]](https://www.nature.com/articles/s41928-019-0309-z) seem more promising for the future than the lengthy process of delayering and imaging the chip. These non-invasive techniques are potentially able to scan all metal layers and provide a 3D-image of the entire routing without destroying the device, but the research on this subject is still at an early stage._"
+
+##### Imaging techniques
+[Three-dimensional imaging of integrated circuits with macro- to nanoscale zoom](https://www.nature.com/articles/s41928-019-0309-z)
 
 ___
 
@@ -294,7 +297,7 @@ For a somewhat formal definition of an ideal PUF and its properties see section 
 [A Formalization of the Security Features of Physical Functions] _by Armknecht et al._
 :::
 
-[Physically Unclonable Functions](https://www.nature.com/articles/s41928-020-0372-5) are arguably the current best hope to _practically_[^6] protect against physical attacks aimed at extracting secret keys (root of trust). That being said, PUFs are an active area of research where new PUF designs are proposed and existing designs are broken. Hence, active research is vital to better understand the benefits and limitations of PUFs in the context of TEEs.
+[Physically Unclonable Functions](https://www.nature.com/articles/s41928-020-0372-5) are arguably the current best hope to _practically_[^6] protect against physical attacks aimed at extracting secret keys (root of trust). That being said, PUFs are an active area of research where new PUF designs are proposed and existing designs are broken. Hence, active research is vital to better understand the benefits and limitations of PUFs in the context of TEEs. 
 
 The first PUF was presented in the PhD thesis titled
 [Physical One-Way Functions](https://dspace.mit.edu/handle/1721.1/45499), by Ravikanth Srinivasa Pappu, and in a follow up article, (with the same name) [Physical One-Way Functions](https://www.science.org/doi/10.1126/science.1074376), by Pappu, Recht, Taylor, and Gershenfeld.
@@ -576,6 +579,7 @@ A brief look into the work of [Rolf Landauer](https://www.nature.com/articles/23
 * [Computing study refutes famous claim that "information is physical"](
 https://phys.org/news/2016-07-refutes-famous-physical.html)
 * [Information is non-physical: The rules connecting representation and meaning do not obey the laws of physics](https://journals.sagepub.com/doi/full/10.1177/01655515221141040)
+* https://scottaaronson.blog/?p=3327
 
 
 
@@ -656,7 +660,8 @@ Not sure if that is still relevant with DCAP.
 :::warning
 :construction: :construction_worker: :construction:
 Needs re-work.
-Use more detailed references such as [Breaking and Entering through the Silicon]. Perhaps, present the type of equipment required (SEM, PEM, X-Ray, etc), and the concepts behind the different types of physical attacks, to clearly show that they are indeed feasible.
+Use more detailed references such as [Breaking and Entering through the Silicon], [Leakage Resilient Cryptography in Practice
+](https://link.springer.com/chapter/10.1007/978-3-642-14452-3_5), and [Provable Security for Physical Cryptography](https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=3a9dac307830f7d3f2cead3ab1c49514b9e6e517). Perhaps, present the type of equipment required (SEM, PEM, X-Ray, etc), and the concepts behind the different types of physical attacks, to clearly show that they are indeed feasible.
 :::
 
 #### Power Analysis Attacks
@@ -734,7 +739,7 @@ Now, with this background in mind, it seems that it would be extremely useful to
 [SoK: Hardware-supported TEEs]: https://arxiv.org/abs/2205.12742
 
 ## Acknowledgements
-Thanks to Thorben Moos for providing valuable feedback and pointers.
+Thanks to Thorben Moos and François-Xavier Standaert from [UCLouvain Crypto Group](https://www-crypto.elen.ucl.ac.be/crypto/) for providing valuable feedback and pointers.
 
 ## Contributing to this Document 
 You can make edits and pull requests for [qtee.md](https://github.com/sbellem/qtee/blob/main/qtee.md) which should be a mirror of this document.
@@ -756,8 +761,8 @@ You should also be able to make comments on this document.
 [^3]: See for instance [RFC 9334](https://www.rfc-editor.org/rfc/rfc9334.html#name-security-considerations) (section 12) for security considerations when treating the topic of remote attestation.
 [^4]: The reasoning is that design and implementation flaws can be fixed and can happen whether the design is open source or not, whether the supply chain is correct, etc. Hence, design and implementation bugs can be treated separately. It could be argued that an open source hardware design may benefit from a broader community and overtime will contain less bugs than a closed source design.
 [^5]: See also https://github.com/sbellem/qtee/issues/7
-[^6]: The word "_practically_" is emphasized and intentionally used here because according to in [Physically Unclonable Functions: A Study on the State of the Art and Future Research Directions]:
-"_Again, the hardness of cloning can be considered from a theoretical and a practical point of view. **Practically, cloning can be very hard or infeasible.** Demonstrating theoretical unclonability on the other hand is very difficult. **The only known systems which can be proven to be theoretically unclonable are based on quantum physics.**_"
+[^6]: The word "practically" is emphasized and intentionally used here because according to in [Physically Unclonable Functions: A Study on the State of the Art and Future Research Directions]: 
+"_Again, the hardness of cloning can be considered from a theoretical and a practical point of view. Practically, cloning can be very hard or infeasible. Demonstrating theoretical unclonability on the other hand is very difficult. The only known systems which can be proven to be theoretically unclonable are based on quantum physics._"
 
 
 [Experimental relativistic zero-knowledge proofs]: https://www.nature.com/articles/s41586-021-03998-y
