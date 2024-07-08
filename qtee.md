@@ -73,7 +73,7 @@ TEEs are an attempt to solve the _secure remote computation_ problem. Quoting [I
 > _Secure remote computation is the problem of executing software on a remote computer owned and maintained by an untrusted party, with some integrity and confidentiality guarantees._
 :::
 
-Note that the remote computer is said to be owned and maintained by an _untrusted_ party. Yet, current TEEs, cannot handle physical attacks such as chip attacks (see [Physical Attacks on Chips](#Physical-Attacks-on-Chip)), which would allow an attacker to retrieve the root of trust (secret keys encoded in the hardware). Once an attacker knows the secret keys, it can emulate a TEE, and go through the attestation process unnoticed (e.g. see Appendix A. Emulated Guard eXtensions in https://sgx.fail/ paper).
+Note that the remote computer is said to be owned and maintained by an _untrusted_ party. Yet, current TEEs, cannot handle physical attacks such as chip attacks (see [Physical Attacks on Chips](#Physical-Attacks-on-Chips)), which would allow an attacker to retrieve the root of trust (secret keys encoded in the hardware). Once an attacker knows the secret keys, it can emulate a TEE, and go through the attestation process unnoticed (e.g. see Appendix A. Emulated Guard eXtensions in https://sgx.fail/ paper).
 
 Is it even possible to build a chip that can handle physical attacks, such as those making use of Focus Ion Beam microscopes as mentioned in [Intel SGX Explained] (section 3.4.3), and [Breaking and entering through the silicon]? One could argue that it's not possible in the classical setting, but may be possible in the quantum setting. Some argue that PUFs (Physical Unclonable Functions) cannot be broken and would therefore be a solution. However, there's plenty of research that focuses of breaking PUFs, and there's also active research in developping more secure PUFs. Hence, it seems reasonable to assume that PUFs are not an ultimate solution to chip attacks, although they do seem to be a major improvement. (See [Root of Trust with PUFs](#Root-of-Trust-with-PUFs).)
 
@@ -661,7 +661,8 @@ Not sure if that is still relevant with DCAP.
 :construction: :construction_worker: :construction:
 Needs re-work.
 Use more detailed references such as [Breaking and Entering through the Silicon], [Leakage Resilient Cryptography in Practice
-](https://link.springer.com/chapter/10.1007/978-3-642-14452-3_5), and [Provable Security for Physical Cryptography](https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=3a9dac307830f7d3f2cead3ab1c49514b9e6e517). Perhaps, present the type of equipment required (SEM, PEM, X-Ray, etc), and the concepts behind the different types of physical attacks, to clearly show that they are indeed feasible.
+](https://link.springer.com/chapter/10.1007/978-3-642-14452-3_5), and [Provable Security for Physical Cryptography](https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=3a9dac307830f7d3f2cead3ab1c49514b9e6e517). Perhaps, present the type of equipment required (SEM, PEM, X-Ray, etc), and the concepts behind the different types of physical attacks, to clearly show that they are indeed feasible. [Application of Attack Potential to Hardware Devices
+with Security Boxes ](https://www.sogis.eu/documents/cc/domains/hardware_devices/JIL-Application-of-Attack-Potential-to-Hardware-Devices-with-Security-Boxes-v3.1.pdf) seems to be a very thorough and good example of what is needed to better understand the current physical security of chips.
 :::
 
 #### Power Analysis Attacks
