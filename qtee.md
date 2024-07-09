@@ -257,6 +257,10 @@ More generally speaking, learning what [OpenTitan](https://opentitan.org/book/do
 
 
 ### Marching Towards DAMOs
+:::info
+See the brief discussion of "Manufacturer Resistance" in Gassend's Master thesis (add link)
+:::
+
 **DAMO: Decentralized Autonomous Manufacturing Organization**
 How can we be certain that the manufacturing process did not leak the secret keys (root of trust)? Could the supply chain somehow produce a proof of non-leakage of secret keys?
 
@@ -290,8 +294,16 @@ _Nanofactories, nanomanufacturing, atomically precise manufacturing, etc._
 
 
 ### Root of Trust with PUFs
-:::warning
-:construction: :construction_worker: :construction: _This section needs some work._ Maybe organize in 3 main sections: 1) What's a PUF? History, types of PUFs, etc 2) Security of PUFs (especially physical attacks) 3) How PUFs fit into the context of a TEE & which PUF is best for TEEs.
+:::info
+:construction: :construction_worker: :construction: _This section needs some work._ Maybe organize in 3 main sections: 
+
+1. What's a PUF? History, types of PUFs, etc
+2. Security of PUFs (especially physical attacks)
+3. How PUFs fit into the context of a TEE & which PUF is best for TEEs
+
+For the history of PUFs see Pappu's PhD thesis and Gassend's Master thesis. (add links)
+
+See [A Theoretical Framework for the Analysis of Physical Unclonable Function Interfaces and its Relation to the Random Oracle Model](https://link.springer.com/article/10.1007/s00145-023-09475-1) ([eprint](https://eprint.iacr.org/2022/1069)) _by Marten van Dijk and Chenglu Jin_
 
 For a somewhat formal definition of an ideal PUF and its properties see section 2.1 in [On the Physical Security of Physically Unclonable Functions] _by Shahin Tajik_ or
 [A Formalization of the Security Features of Physical Functions] _by Armknecht et al._
@@ -519,7 +531,15 @@ The pufpunks may be going into a different direction than caliptra, as it seems 
 
 
 ### Decentralized Remote Attestation
+:::info
 :construction: TODO :construction:
+
+Rework. Study the following works:
+
+* [Secure Remote Attestation with Strong Key Insulation Guarantees](https://ieeexplore.ieee.org/document/10168259) _by Deniz Gurevin et al_
+* [Autonomous Secure Remote Attestation even when all Used and to be Used Digital Keys Leak](https://eprint.iacr.org/2021/602) _by Marten van Dijk et al_
+* [A Theoretical Framework for the Analysis of Physical Unclonable Function Interfaces and its Relation to the Random Oracle Model](https://link.springer.com/article/10.1007/s00145-023-09475-1) ([eprint](https://eprint.iacr.org/2022/1069)) _by Marten van Dijk and Chenglu Jin_
+:::
 
 Not sure how this could be achieved. Conceptually speaking, a device should be able to proof what it claims to be with respect to both its hardware and software, without relying on a trusted third party such as the manufacturer. [RFC 9334 - Remote Attestation procedureS (RATS) Architecture](https://rfc-editor.org/rfc/rfc9334.html) may be useful to review in the context of our [threat model](#Threat-Model).
 
