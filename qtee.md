@@ -141,6 +141,12 @@ For some reason, the hardware world does not embrace open source like the softwa
 
 
 ## Threat Model
+:::info
+Rework. Potentially reference [Application of Attack Potential to Hardware Devices
+with Security Boxes](https://www.sogis.eu/documents/cc/domains/hardware_devices/JIL-Application-of-Attack-Potential-to-Hardware-Devices-with-Security-Boxes-v3.1.pdf). Mention that we're looking to defend against the highest score of "attack potential".
+
+Also perhaps mention the concept of Manufacturer Resistance as described in Gassend's master thesis.
+:::
 **The worst.**
 
 * Attackers with physical access to the chip, with unlimited resources and funds **MUST** be considered
@@ -539,6 +545,10 @@ Rework. Study the following works:
 * [Secure Remote Attestation with Strong Key Insulation Guarantees](https://ieeexplore.ieee.org/document/10168259) _by Deniz Gurevin et al_
 * [Autonomous Secure Remote Attestation even when all Used and to be Used Digital Keys Leak](https://eprint.iacr.org/2021/602) _by Marten van Dijk et al_
 * [A Theoretical Framework for the Analysis of Physical Unclonable Function Interfaces and its Relation to the Random Oracle Model](https://link.springer.com/article/10.1007/s00145-023-09475-1) ([eprint](https://eprint.iacr.org/2022/1069)) _by Marten van Dijk and Chenglu Jin_
+
+Also see:
+
+
 :::
 
 Not sure how this could be achieved. Conceptually speaking, a device should be able to proof what it claims to be with respect to both its hardware and software, without relying on a trusted third party such as the manufacturer. [RFC 9334 - Remote Attestation procedureS (RATS) Architecture](https://rfc-editor.org/rfc/rfc9334.html) may be useful to review in the context of our [threat model](#Threat-Model).
