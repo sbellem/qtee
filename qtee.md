@@ -546,8 +546,9 @@ Rework. Study the following works:
 * [Autonomous Secure Remote Attestation even when all Used and to be Used Digital Keys Leak](https://eprint.iacr.org/2021/602) _by Marten van Dijk et al_
 * [A Theoretical Framework for the Analysis of Physical Unclonable Function Interfaces and its Relation to the Random Oracle Model](https://link.springer.com/article/10.1007/s00145-023-09475-1) ([eprint](https://eprint.iacr.org/2022/1069)) _by Marten van Dijk and Chenglu Jin_
 
+<!--
 Also see:
-
+-->
 
 :::
 
@@ -622,6 +623,10 @@ A brief look into the pioneering work, [Quantum Cryptography, or Unforgeable Sub
 
 ### Physical One-Way Functions
 A brief look into the pioneering work by Ravikanth Pappu on physical one-way functions in his [PhD Thesis](https://dspace.mit.edu/handle/1721.1/45499).
+
+### PUFs as Random Oracles
+A survey of PUF-as-a-random-oracle based protocols that implement cryptographic protocols like key exchange, bit commitment, and multi-party computation.
+
 
 ### Equivalence Relations between High Energy Physics and Cryptography
 [Black-Hole Radiation Decoding is Quantum Cryptography](https://arxiv.org/abs/2211.05491)
