@@ -8,9 +8,8 @@
 :::
 
 ![image](https://hackmd.io/_uploads/S1umV5NL0.png)
-
-
-# qTEE: Moving Towards Open Source and Verifiable Secure-through-Physics TEE Chips
+# Here Come The Pufpunks
+## qTEE: Moving Towards Open Source and Verifiable Secure-through-Physics TEE Chips
 
 > **_Information is not a disembodied abstract entity; it is always tied to a physical representation. It is represented by engraving on a stone tablet, a spin, a charge,
 a hole in a punched card, a mark on paper, or some other equivalent._** _This ties the handling of information to all the possibilities and restrictions of our real physical word, its laws of physics and its storehouse of available parts._
@@ -22,7 +21,7 @@ This is an initiative to spark research to explore how we could develop a secure
 
 To put this vision into context, current TEEs such as Intel SGX, face the following challenges:
 
-:::danger
+:::warning
 ## Four Core Challenges for TEEs
 1. :radioactive_sign: **NO proof of manufacturing** according to a known open source chip design specification
 2. :radioactive_sign: **NO proof of non-leakage of secret bits** -- how can we know that the secret bits (root of trust) encoded into the chip were not leaked during manufacturing
@@ -39,8 +38,9 @@ The intent of this document is to work on addressing the four fundamental core c
 ## Related Work
 For a shorter introduction, readers are highly encouraged to read [Flashbots' call to action](https://collective.flashbots.net/t/project-t-tee-from-trusted-to-trustless-execution-environments/3541) to write a position paper "_to communicate the problem and its importance to the broader hardware research community_".
 
-For a broader presentation of the various challenges involved in making fully secure TEEs, readers are highly encouraged to read the [Autonomous TEE Manifesto](https://notes.poeticte.ch/s/KA7fPN6-O) by the
-[Poetic Technologies UG](https://poeticte.ch/) team.
+For a broader presentation of the various challenges involved in making fully secure TEEs, readers are highly encouraged to read the [Autonomous TEE Manifesto](https://poeticte.ch/posts/autonomous-TEEs-manifesto.html) by the [Poetic Technologies UG](https://poeticte.ch/) team.
+
+Last but not least, [The Secure Cryptographic Implementation Association](https://www.simple-crypto.org) is actively working on developing open hardware that can withstand physical attacks such as side-channel and fault attacks. Their [vision](https://www.simple-crypto.org/about/vision/) is that an "open approach to security can lead to a better evaluation of the worst-case security level that is targeted by cryptographic designs".
 
 
 ## Overview
@@ -87,9 +87,9 @@ Not sure. :smile: Besides the performance limitations of FHE, ZKP and MPC, the p
 **Moving from security-through-economics towards security-through-physics.**
 :::
 
-According to [SoK: Hardware-supported TEEs] and [Intel SGX Explained], current chips that implement TEEs cannot protect against physical attacks such as chip delayering, which would allow an attacker to extract the so-called root of trust, meaning hardware embedded secret keys upon which the entire security of the TEE depends. The only current known defense against chip attacks is trying to make the cost of a chip attack as high as possible. To make things worst, it's not even clear what the cost of a chip attack is; perhaps one million dollar (see [Physical Attacks on Chips](#Physical-Attacks-on-Chips))? So, at the very least, one would hope we would know what the cost of a chip attack is, such that protocol designers could [design mechanisms][mechanism design] that would eliminate economic incentives to attack the chip, because the cost of the attack would not be worth what could be extracted out of the attack. It's very important to note here that a protocol relying on TEEs may also be targeted for attacks for reasons other than financial, and it's probably best to avoid using TEEs for such cases (e.g. privacy preserving application used by political dissidents).
+According to [SoK: Hardware-supported TEEs] and [Intel SGX Explained], current chips that implement TEEs cannot protect against physical attacks such as chip delayering, which would allow an attacker to extract the so-called root of trust, meaning hardware embedded secret keys upon which the entire security of the TEE depends. The only current known defense against chip attacks is trying to make the cost of a chip attack as high as possible. To make things worst, it's not even clear what the cost of a chip attack is; perhaps one million dollar, or perhaps much less; (see [Physical Attacks on Chips](#Physical-Attacks-on-Chips))? So, at the very least, one would hope we would know what the cost of a chip attack is, such that protocol designers could [design mechanisms][mechanism design] that would eliminate economic incentives to attack the chip, because the cost of the attack would not be worth what could be extracted out of the attack. It's very important to note here that a protocol relying on TEEs may also be targeted for attacks for reasons other than financial, and it's probably best to avoid using TEEs for such cases (e.g. privacy preserving application used by political dissidents).
 
-Aside from being vulnerable to chip attacks the current popular TEEs, such as Intel SGX, are closed source, meaning that their hardware designs are not public, which in turn makes it very difficult to know whether a chip is implemented as claimed. Even with an open source hardware design we would need to figure out how to verify that the chip was implemented as per the open source design, and that secrets generated and embedded into the hardware at the time of manufacturing were not leaked.
+Aside from being vulnerable to chip attacks the current popular TEEs, such as Intel SGX, are closed source, meaning that their hardware designs are not public, which in turn makes it very difficult to know whether a chip is implemented as claimed. Even with an open source hardware design we would need to figure out how to verify that the chip was implemented as per the open source design, and that secrets (root-of-trust) generated and embedded into the hardware at the time of manufacturing were not leaked.
 
 ### References
 See [On the Physical Security of Physically Unclonable Functions] (1.1.2 Physical Attacks) by Shahin Tajik.
@@ -123,7 +123,7 @@ roughly translated to:
 
 > **_It must not require secrecy, and it must be capable without inconvenience to fall into the enemy's hand_**
 
-(Perhaps, one may point out that Kerckhoffs was assuming that the private key would be held secretly and not be part of an open design. The need to secure a private key in an open design begs for physics to enter the arena(e.g. PUFs).
+(Perhaps, one may point out that Kerckhoffs was assuming that the private key would be held secretly and not be part of an open design. The need to secure a private key in an open design begs for physics to enter the arena (e.g. PUFs).
 
 For example, the Secure Cryptographic Implementation Association (SIMPLE-Crypto Association) aims to apply
 Kerckhoffs's Principle to hardware and lays out their vision at https://www.simple-crypto.org/about/vision/:
@@ -131,7 +131,7 @@ Kerckhoffs's Principle to hardware and lays out their vision at https://www.simp
 > **[...] our vision is that as research advances, the security by obscurity paradigm becomes less justified and its benefits are outweighted by its drawbacks.** That is, while a closed source approach can limit the adversary's understanding of the target implementations as long as their specifications remain opaque, it also limits the public understanding of the mechanims on which security relies, and therefore the possibility to optimize them. By contrast, an open approach to security can lead to a better evaluation of the worst-case security level that is targeted by cryptographic designs.
 :::
 
-:::danger
+:::warning
 For some reason, the hardware world does not embrace open source like the software world. Moreover, it is common practice to use [security through obscurity](https://en.wikipedia.org/wiki/Security_through_obscurity) as a core design principle to secure hardware. Simply said, for whatever reason, the current hardware industry appears to be dominated by the belief that it's best to hide the design and inner workings of a chip by adding unnecessary elements to the design, just to confuse a potential attacker, in the hope that the attacker will not be able to understand the design, and thus reverse engineer it.
 :::
 
@@ -160,7 +160,7 @@ Also perhaps mention the concept of Manufacturer Resistance as described in Gass
 _Perhaps_ the only thing that may be out-of-bound is remote civilizations or state actors with access to new physics that is not yet known by the general public (e.g. academia/universities). For instance, imagine another planet where beings would know how to go faster than the speed of light.
 
 ### Relevant Readings
-:::danger
+:::info
 [The battle for Ring Zero] _by Cory Doctorow_.
 > _But how can we trust those sealed, low-level controllers? What if manufacturers – like, say, Microsoft, a convicted criminal monopolist – decides to use its low-level controllers to block free and open OSes that compete with it? What if a government secretly (or openly) orders a company to block privacy tools so that it can spy on its population? What if the designers of the secure co-processor make a mistake that allows criminals to hijack our devices and run code on them that, by design, we cannot detect, inspect, or terminate?_
 >
@@ -186,6 +186,12 @@ In the context of a secure chip, the motto **"Don't Trust, Verify"** calls for a
 Having an open source hardware design is perhaps the most reasonable place to start. Verifying that a physical chip does implement the intended open source hardware design is perhaps more difficult, and we can try to tackle this in a second step. Hence, we'll first start by exploring how we could have a TEE chip with an open source hardware design.
 
 #### Open Source Hardware
+:::info
+[The Secure Cryptographic Implementation Association](www.simple-crypto.org) has already established a very good foundation for what is needed, and already did a hardware implementation of the AES with a strong side-channel security countermeasure, which is currently under public evaluation. See the outline of their vision at
+https://www.simple-crypto.org/about/vision/ and a detailed description of how they operate at
+https://www.simple-crypto.org/about/organization/.
+:::
+
 Yes. It's possible. This is not a new idea. See the wikipedia entry on [Open Source Hardware](https://en.wikipedia.org/wiki/Open-source_hardware).
 
 The [story](https://web.archive.org/web/20120701165927/http://public.web.cern.ch/Press/PressReleases/Releases2011/PR08.11E.html) behind [CERN Open Hardware License](https://ohwr.org/project/cernohl) is noteworthy:
