@@ -13,7 +13,9 @@
 
 <span style="font-weight: bold; font-size: 36pt; color:yellow">PUF-based TEEs<!-- .element: class="fragment" data-fragment-index="4" --></span>
 
-<a href="https://lu.ma/tee.salon"><span style="font-weight: bold; font-size: 24pt; color:orange">TEE.Salon @ EthCC Brussels 2024<!-- .element: class="fragment" data-fragment-index="5" --></span></a>
+<a href="https://lu.ma/tee.salon"><span style="font-weight: bold; font-size: 24pt; color:orange">Flashbots TEE.Salon @ EthCC Brussels 2024<!-- .element: class="fragment" data-fragment-index="5" --></span></a>
+
+<a href="https://www.initc3.org/"><span style="font-weight: bold; font-size: 24pt; color:green">Sylvain Bellemare, IC3 (Cornell)<!-- .element: class="fragment" data-fragment-index="6" --></span></a>
 
 <!--
 ![image](https://hackmd.io/_uploads/BkI36S6wC.png)
@@ -209,11 +211,11 @@ Image source: [Root of Trust](https://www.synopsys.com/dw/doc.php/wp/gsa-end-to-
 
 ## [With A Little Help From My Friends](https://youtu.be/6waXtxosJ4A?si=4ACOpW-UylJJ7VHz)
 
-[Thorben Moos](https://www.thorbenmoos.de/), [UCLouvain Crypto Group](https://www-crypto.elen.ucl.ac.be/crypto/)
-[François-Xavier Standaert](https://www-crypto.elen.ucl.ac.be/crypto/author/francois-xavier-standaert/), [UCLouvain Crypto Group](https://www-crypto.elen.ucl.ac.be/crypto/)
-[Poetic Technologies UG](https://poeticte.ch/)
-[Flashbots](https://www.flashbots.net/)
-[Initiative for Cryptocurrencies and Contracts](https://initc3.org)
+[Thorben](https://www.thorbenmoos.de/), [UCLouvain Crypto Group](https://www-crypto.elen.ucl.ac.be/crypto/)
+[François-Xavier](https://www-crypto.elen.ucl.ac.be/crypto/author/francois-xavier-standaert/), [UCLouvain Crypto Group](https://www-crypto.elen.ucl.ac.be/crypto/)
+[Davie]() & [Julio](https://x.com/Julio_Linares_), [Poetic Technologies UG](https://poeticte.ch/)
+[Tina](https://x.com/tzhen), [Flashbots](https://www.flashbots.net/)
+[Andrew](https://x.com/socrates1024), [Initiative for Cryptocurrencies and Contracts](https://initc3.org)
 
 <a href="https://www-crypto.elen.ucl.ac.be/crypto/">
     <img src="https://hackmd.io/_uploads/S1GOSNW_R.png"
