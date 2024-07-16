@@ -40,7 +40,7 @@ For a shorter introduction, readers are highly encouraged to read [Flashbots' ca
 
 For a broader presentation of the various challenges involved in making fully secure TEEs, readers are highly encouraged to read the [Autonomous TEE Manifesto](https://poeticte.ch/posts/autonomous-TEEs-manifesto.html) by the [Poetic Technologies UG](https://poeticte.ch/) team.
 
-Last but not least, [The Secure Cryptographic Implementation Association](https://www.simple-crypto.org) is actively working on developing open hardware that can withstand physical attacks such as side-channel and fault attacks. Their [vision](https://www.simple-crypto.org/about/vision/) is that an "open approach to security can lead to a better evaluation of the worst-case security level that is targeted by cryptographic designs".
+Last but not least, [The Secure Cryptographic Implementation Association](https://www.simple-crypto.org) needs not to be convinced as it is already actively working on developing open hardware that can withstand physical attacks such as side-channel and fault attacks. Their [vision](https://www.simple-crypto.org/about/vision/) is that an _"open approach to security can lead to a better evaluation of the worst-case security level that is targeted by cryptographic designs"_.
 
 
 ## Overview
@@ -97,9 +97,9 @@ See [On the Physical Security of Physically Unclonable Functions] (1.1.2 Physica
 
 
 ### Don't Trust, Verify ... Or use TEEs?
-In the crypto world, the motto "Don't Trust, Verify" is frequently used to emphasize the verifiability feature of the various protocols, which allows any user to verify for themselves the validity of a transaction or claim. It may be said that the backbone of the reverred verifiability is cryptography and distributed systems, which involves trusting mathematics and trusting an honest majority, respectively. Consensus protocols, and many multi-party computation (MPC) protocols require to trust that the majority of the validators are honest. The majority may range from 51% to 75% depending on the protocol. So on one hand the world of crypto is secured through a combination of mathematics and trust in an "honest majority". So what about TEEs? Where do they fit in this picture?
+In the crypto world, the motto "Don't Trust, Verify" is frequently used to emphasize the verifiability feature of the various protocols, which allows any user to verify for themselves the validity of a transaction or claim. It may be said that the backbone of the reverred verifiability is cryptography and distributed systems, which involves trusting mathematics and trusting an honest majority, respectively. Consensus protocols, and many multi-party computation (MPC) protocols require to trust that the majority of the validators are honest. The majority may range from 51% to 75% depending on the protocol. Most protocol rely on economic incentives to keep the majority honest. On one hand the world of crypto is secured through mathematics and on the other hand through game theory which incentivizes the majority to follow a prescribed distributed system protocol. So what about TEEs? Where do they fit in this picture?
 
-The so-called web3 world (aka as crypto space) increasingly makes use of TEEs (mostly Intel SGX) in applications where substantial amounts of money may flow, and where TEEs help secure the confidentiality of its users. It's therefore important to properly understand what it means to trust TEEs. For a strange reason, it seems complicated to answer the question of "What does it mean to trust TEEs?" If you ask different people, you may find a spectrum of different answers ranging from the likes of: "You have to trust the chip maker! But you already trust them anyways." to "Intel SGX is broken every month, I don't understand why people use them!"
+The so-called web3 world (aka crypto space) increasingly makes use of TEEs (mostly Intel SGX) in applications where substantial amounts of money may flow, and where TEEs help secure the confidentiality of its users. It's therefore important to properly understand what it means to trust TEEs. For a strange reason, it seems complicated to answer the question of "What does it mean to trust TEEs?" If you ask different people, you may find a spectrum of different answers ranging from the likes of: "You have to trust the chip maker! But you already trust them anyways." to "Intel SGX is broken every month, I don't understand why people use them!"
 
 :::warning
 In general, it may be fair to say that trusting a TEE means the following:
@@ -157,7 +157,7 @@ Also perhaps mention the concept of Manufacturer Resistance as described in Gass
 
 **Just think the worst of the worst.**
 
-_Perhaps_ the only thing that may be out-of-bound is remote civilizations or state actors with access to new physics that is not yet known by the general public (e.g. academia/universities). For instance, imagine another planet where beings would know how to go faster than the speed of light.
+_Perhaps_ the only thing that may be out-of-bound is remote civilizations or state actors with access to new physics that is not yet known by the general public (e.g. academia/universities). For instance, imagine another planet where beings would know how to go faster than the speed of light. 
 
 ### Relevant Readings
 :::info
@@ -177,7 +177,7 @@ In the context of a secure chip, the motto **"Don't Trust, Verify"** calls for a
 1. **Proof of manufacturing** according to a known open source chip design specification
 2. **Proof of non-leakage of secret bits** to verify that the root of trust wasn't leaked during manufacturing
 3. **Proof of hidden-forever secret bits** -- the root of trust must be proven to be unbreakable
-4. **Decentralized Remote Attestation** -- :grin: a device should be able to provide a proof that it is what it claims to be, without relyng on any external validation, such as a chip manufacturer, or even a k-of-N validator set. In other words, using the word "autonomous" as in the [Autonomous TEE Manifesto](https://notes.poeticte.ch/s/KA7fPN6-O) a device should be fully autonomous when it comes down to proving what it is, and the state it is in.
+4. **Decentralized Remote Attestation** -- :grin: a device should be able to provide a proof that it is what it claims to be, without relyng on any external validation, such as a chip manufacturer, or even a k-of-N validator set. In other words, using the word "autonomous" as in the [Autonomous TEE Manifesto](https://poeticte.ch/posts/autonomous-TEEs-manifesto.html) a device should be fully autonomous when it comes down to proving what it is, and the state it is in.
 :::
 
 
@@ -191,12 +191,14 @@ Having an open source hardware design is perhaps the most reasonable place to st
 https://www.simple-crypto.org/about/vision/ and a detailed description of how they operate at
 https://www.simple-crypto.org/about/organization/.
 :::
-
 Yes. It's possible. This is not a new idea. See the wikipedia entry on [Open Source Hardware](https://en.wikipedia.org/wiki/Open-source_hardware).
 
 The [story](https://web.archive.org/web/20120701165927/http://public.web.cern.ch/Press/PressReleases/Releases2011/PR08.11E.html) behind [CERN Open Hardware License](https://ohwr.org/project/cernohl) is noteworthy:
 
 > "For us, the drive towards open hardware was largely motivated by well-intentioned envy of our colleagues who develop Linux device-drivers," said Javier Serrano, an engineer at CERN's Beams Department and the founder of the OHR. "They are part of a very large community of designers who share their knowledge and time in order to come up with the best possible operating system. We felt that there was no intrinsic reason why hardware development should be any different."
+
+Open source electronic design automation (EDA) sofware such as https://theopenroadproject.org/ can be used to design chips and be sent for tapeout at foundries, such as Google Skywater, that support open sourcing the design.
+
 
 It may be useful to survey current and past efforts such as:
 
@@ -238,6 +240,7 @@ How do we know whether a given chip corresponds to a given design? At least two 
 * [Inter-Lock: Logic Encryption for Processor Cores Beyond Module Boundaries](https://www.ice.rwth-aachen.de/publications/publication/sisejkovicETS2019/)
 * [A Critical Evaluation of the Paradigm Shift in the Design of Logic Encryption Algorithms](https://www.ice.rwth-aachen.de/publications/publication/sisejkovicVLSIDAT2019/)
 * [A Unifying Logic Encryption Security Metric](https://www.ice.rwth-aachen.de/publications/publication/sisejkovicSAMOS2018/)
+* [The Key is Left under the Mat: On the Inappropriate Security Assumption of Logic Locking Schemes](https://ieeexplore.ieee.org/abstract/document/9300258)
 
 
 ##### Post-Fabrication: Microscope Imaging
@@ -328,6 +331,29 @@ The first PUF was presented in the PhD thesis titled
 
 One possible place to start learning about PUFs, is [Physically Unclonable Functions: A Study on the State of the Art and Future Research Directions](https://link.springer.com/chapter/10.1007/978-3-642-14452-3_1) _by Roel Maes & Ingrid Verbauwhede_.
 
+The core idea behind a PUF is that entropy is obtained out of a stimulated physical structure, which cannot be replicated physically nor mathematically. Current semiconductor manufacturing techniques are not precise enough to make chips atom by atom, and consequently chips made from the exact same design will differ at the atomic level, and will behave differently when powered up. As far as we know, there's currently no technique that is capable to characterize a PUF in order to derive a mathematical model that would be precise enough to simulate a PUF when it is powered up. Moreover, trying to probe a PUF to observe its response will change the entropy and will cause the PUF to yield a different response then when unobserved. <!--It is quite crucial to stress that if poorly designed a PUF may be vulnerable to non-invasive attacks such as demonstrated in (add ref).-->
+
+
+<!-- [ref](https://arxiv.org/abs/1907.05494)
+-->
+
+#### Authentication (aka Strong) PUFs versus Key (aka Weak) PUFs
+Multiple researchers consider Strong PUFs infeasible. There does not seem to be an impossibility result though, and consequently both industry and academics continue to develop, research, and attack strong PUFs. TODO: Add much more stuff here, along with multiple citations.
+
+<!---
+#### Research & Development of Non-Invasive Imaging Techniques 
+Given that the development of a new chip is likely to take ~2-3 years, it seems reasonable to encourage research and development of non-invasive (aka non-destructive) imaging techniques and tooling. As mentioned in Red Team vs. Blue Team: A Real-World Hardware Trojan Detection Case Study Across Four Modern CMOS Technology Generations by Puschner et al:
+
+ “New non-invasive scanning methods based on X-Rays [[17]](https://www.nature.com/articles/s41928-019-0309-z) seem more promising for the future than the lengthy process of delayering and imaging the chip. These non-invasive techniques are potentially able to scan all metal layers and provide a 3D-image of the entire routing without destroying the device, but the research on this subject is still at an early stage.”
+
+The relevant communities in both the industry and academia need to be reached and encouraged to work on such R&D.
+
+#### Research & Development of Novel Attacks on PUFs
+Since we cannot assume that PUFs are theoretically secure (unclonable), it is imperative that we have a thorough understanding of the possible attacks on them, and also that we encourage research and development of novel attacks. We should obviously focus on the PUFs that we plan to use. In the context of TEEs, we currently should focus on weak PUFs aka key generation PUFs, and perhaps even on a narrower category, such as delay PUFs (as opposed to SRAM PUFs for instance), which is what has been suggested so far by some hardware researchers (Thorben Moos and François-Xavier Standaert).
+
+An important category of attacks on weak PUFs, target the fuzzy extractors. According to François-Xavier Standaert, the tamper resistance mentioned in the early papers on PUFs is not enough. Tamper resistance and passive/active attacks must be considered jointly and there aren’t convincing papers on the topic so far. For instance, many works on fuzzy extraction ignore the risk of leakage when performing the extraction process, and also don’t consider fault attacks. (We should consult with François-Xavier again on this topic, and also with other experts.)
+
+-->
 
 
 <!--
@@ -352,6 +378,8 @@ https://www.science.org/doi/full/10.1126/science.1074376
 
 Also at https://nbviewer.org/github/rpappu/pdf-publications/blob/master/Pappu-Science-2002.pdf
 -->
+
+<!-- #### True Random Number Generation -->
 
 #### Taxonomy of PUFs
 Main reference: https://pubs.aip.org/aip/apr/article/6/1/011303/571003/A-PUF-taxonomy
